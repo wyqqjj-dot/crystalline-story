@@ -40,39 +40,39 @@ export function Seal({ onOpen }: { onOpen: () => void }) {
   return (
     <AnimatePresence>
       {!gone && (
-        <motion.div key="seal" className="fixed inset-0 z-[900]" exit={{ opacity: 0 }}>
+        <motion.div key="seal" className="fixed inset-0 z-[900] bg-background" exit={{ opacity: 0 }}>
+          {/* label face */}
+          <motion.div
+            className="absolute inset-0"
+            animate={breaking ? { opacity: 0, scale: 1.04, filter: "blur(6px)" } : { opacity: 1 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <SealFace />
+          </motion.div>
+
           {/* shatter grid */}
-          <div className="absolute inset-0">
+          <div className="pointer-events-none absolute inset-0">
             {cells.map((s) => (
               <motion.div
                 key={s.i}
-                className="absolute overflow-hidden bg-background"
+                className="absolute border border-white/20 bg-gradient-to-br from-white/25 to-white/[0.02] backdrop-blur-[1px]"
                 style={{
                   width: `${100 / COLS}%`,
                   height: `${100 / ROWS}%`,
                   left: `${(s.c * 100) / COLS}%`,
                   top: `${(s.r * 100) / ROWS}%`,
                 }}
+                initial={{ opacity: 0 }}
                 animate={
                   breaking
-                    ? { x: s.dx, y: s.dy, rotate: s.rot, opacity: 0, scale: 0.85 }
-                    : { x: 0, y: 0, rotate: 0, opacity: 1, scale: 1 }
+                    ? { x: s.dx, y: s.dy, rotate: s.rot, opacity: [0, 1, 0], scale: 0.85 }
+                    : { opacity: 0 }
                 }
-                transition={{ duration: 1.1, delay: s.delay, ease: [0.22, 1, 0.36, 1] }}
-              >
-                <div
-                  className="absolute inset-0 border border-foreground/[0.06]"
-                  style={{
-                    transform: `translate(${(-s.c * 100) / COLS}%, ${(-s.r * 100) / ROWS}%)`,
-                    width: `${COLS * 100}%`,
-                    height: `${ROWS * 100}%`,
-                  }}
-                >
-                  <SealFace />
-                </div>
-              </motion.div>
+                transition={{ duration: 1.15, delay: s.delay, ease: [0.22, 1, 0.36, 1] }}
+              />
             ))}
           </div>
+
 
           {/* click layer */}
           <button
