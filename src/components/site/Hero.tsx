@@ -29,6 +29,14 @@ export function Hero() {
         <div className="orb-glass animate-orb h-[78vw] w-[78vw] rounded-full blur-[2px] md:h-[46vw] md:w-[46vw]" />
       </div>
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_45%,#000_92%)]" />
+      <div
+        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100"
+        style={{
+          background: `radial-gradient(600px circle at ${spot.x}px ${spot.y}px, rgba(184,216,232,0.18), transparent 50%)`,
+          opacity: spot.active ? 1 : 0,
+        }}
+        aria-hidden="true"
+      />
 
       <div className="relative z-10 px-6 text-center">
         <motion.p
