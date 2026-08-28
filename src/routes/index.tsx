@@ -4,7 +4,6 @@ import { lazy, Suspense } from "react";
 
 import { Nav } from "@/components/experience/Nav";
 import { Content } from "@/components/experience/Content";
-import { IntroOverlay } from "@/components/experience/IntroOverlay";
 
 const Experience = lazy(() =>
   import("@/components/experience/Experience").then((m) => ({ default: m.Experience })),
@@ -34,7 +33,6 @@ function Index() {
       <Nav />
       <ClientOnly fallback={<div className="h-screen" />}>
         <Suspense fallback={<div className="h-screen" />}>
-          <IntroOverlay />
           <Experience />
         </Suspense>
       </ClientOnly>

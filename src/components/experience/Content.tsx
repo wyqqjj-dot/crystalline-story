@@ -1,5 +1,9 @@
+import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import type { ReactNode } from "react";
+
+import { Scenes } from "./Scenes";
+import { CATALOG } from "@/lib/catalog";
 
 function Reveal({ children, delay = 0 }: { children: ReactNode; delay?: number }) {
   return (
@@ -88,6 +92,42 @@ export function Content() {
           </div>
         </div>
       </section>
+
+      <Scenes />
+
+      {/* catalogue */}
+      <section id="catalogue" className="border-t border-white/10 px-6 py-28 md:px-14 md:py-40">
+        <Reveal>
+          <p className="text-[10px] tracking-[0.5em] text-accent uppercase">Catalogue</p>
+          <h2 className="mt-8 max-w-2xl text-4xl leading-[1.05] font-light tracking-tight md:text-6xl">
+            Open a range and see every reference.
+          </h2>
+        </Reveal>
+        <div className="mt-16 grid gap-8 md:grid-cols-3">
+          {CATALOG.map((c, i) => (
+            <Reveal key={c.slug} delay={i * 0.06}>
+              <Link
+                to="/catalog/$category"
+                params={{ category: c.slug }}
+                className="group block border border-white/10 p-8 transition-colors duration-500 hover:border-accent/60"
+              >
+                <span className="text-[10px] tracking-[0.4em] text-muted-foreground uppercase">
+                  {c.items.length} references
+                </span>
+                <h3 className="mt-5 text-3xl font-light transition-colors duration-500 group-hover:text-accent">
+                  {c.title}
+                </h3>
+                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{c.lead}</p>
+                <span className="mt-8 inline-block text-[10px] tracking-[0.34em] text-accent uppercase">
+                  View range →
+                </span>
+              </Link>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+
 
       {/* capabilities */}
       <section id="capabilities" className="border-t border-white/10 px-6 py-28 md:px-14 md:py-40">
