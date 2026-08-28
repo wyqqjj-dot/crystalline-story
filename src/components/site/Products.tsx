@@ -35,8 +35,12 @@ function ProductCard({ p }: { p: (typeof products)[number] }) {
         style={{
           transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale(${tilt.x || tilt.y ? 1.03 : 1})`,
         }}
-        className="surface-glass group h-full rounded-lg p-3 transition-[box-shadow,transform] duration-300 ease-out will-change-transform hover:glow-ring"
+        className="group relative h-full overflow-hidden rounded-[20px] border border-white/10 bg-white/5 p-3 transition-[box-shadow,transform] duration-300 ease-out will-change-transform hover:shadow-[0_0_40px_-10px_rgba(184,216,232,0.4)]"
       >
+        <div
+          className="pointer-events-none absolute -top-1/3 -left-1/3 h-[140%] w-[140%] rounded-full bg-[radial-gradient(circle_at_center,rgba(232,244,253,0.14)_0%,rgba(184,216,232,0.06)_35%,transparent_70%)] opacity-60 mix-blend-screen"
+          aria-hidden="true"
+        />
         <div className="overflow-hidden rounded-md bg-background/40">
           <img
             src={p.img}

@@ -1,12 +1,28 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 
 const brand = "VITRÉA".split("");
 
 export function Hero() {
+  const [spot, setSpot] = useState({ x: 0, y: 0, active: false });
+
+  const onMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setSpot({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+      active: true,
+    });
+  };
+
+  const onMouseLeave = () => setSpot((s) => ({ ...s, active: false }));
+
   return (
     <section
       id="top"
-      className="relative flex min-h-[100svh] items-center justify-center overflow-hidden bg-background"
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
+      className="group relative flex min-h-[100svh] items-center justify-center overflow-hidden bg-background"
     >
       {/* Rotating glass orb, simulated with radial gradients */}
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center">

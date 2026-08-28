@@ -13,7 +13,7 @@ export function Nav() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => setScrolled(window.scrollY > 100);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -25,7 +25,9 @@ export function Nav() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.9, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-        scrolled ? "surface-glass" : "border-b border-transparent bg-transparent"
+        scrolled
+          ? "bg-black/80 backdrop-blur-[10px]"
+          : "border-b border-transparent bg-transparent"
       }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-10">
