@@ -229,3 +229,30 @@ html {
 @utility animate-orb {
   animation: orb-spin 44s linear infinite;
 }
+
+/* ---- silencio-style motion & cursor ---- */
+@keyframes marquee-x {
+  from { transform: translateX(0); }
+  to { transform: translateX(-33.333%); }
+}
+
+@utility animate-marquee {
+  animation: marquee-x 26s linear infinite;
+}
+
+@utility animate-marquee-reverse {
+  animation: marquee-x 26s linear infinite reverse;
+}
+
+html.has-custom-cursor,
+html.has-custom-cursor * {
+  cursor: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-marquee-reverse,
+  .animate-orb {
+    animation: none;
+  }
+}
