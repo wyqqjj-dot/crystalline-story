@@ -29,12 +29,14 @@ const captions: { n: string; label: string }[] = [
 
 function Shard({
   spread,
+  fade,
   s,
 }: {
   spread: MotionValue<number>;
+  fade: MotionValue<number>;
   s: (typeof shards)[number];
 }) {
-  const opacity = useTransform(spread, [0, 0.15, 1], [0, 1, 0.9]);
+  const opacity = fade;
   const x = useTransform(spread, (v) => `${s.x * v}vmin`);
   const y = useTransform(spread, (v) => `${s.y * v}vmin`);
   const rotate = useTransform(spread, (v) => s.rot * v);
@@ -91,10 +93,11 @@ export function Ritual() {
   const boxed = useStage(p, 0.84, 0.98);
 
   const shardSpread = useTransform(p, [0.14, 0.3, 0.44], [0, 1, 0.05]);
+  const shardFade = useTransform(p, [0.13, 0.18, 0.33, 0.4], [0, 1, 0.9, 0]);
   const glassScale = useTransform(p, [0, 0.14], [0.7, 1.1]);
   const rotate = useTransform(p, [0, 1], [0, 220]);
   const bottleY = useTransform(p, [0.34, 0.5], [40, 0]);
-  const capY = useTransform(p, [0.54, 0.8], [-160, -96]);
+  const capY = useTransform(p, [0.54, 0.68, 0.82], ["-2vmin", "-2vmin", "-19vmin"]);
   const boxLid = useTransform(p, [0.84, 0.96], [-120, 0]);
   const unionScale = useTransform(p, [0.68, 0.98], [1, 0.72]);
   const stageIndex = useTransform(p, (v) => Math.min(5, Math.floor(v / 0.166)));
@@ -127,7 +130,7 @@ export function Ritual() {
           {/* II. detonation */}
           <div className="absolute inset-0">
             {shards.map((s, i) => (
-              <Shard key={i} spread={shardSpread} s={s} />
+              <Shard key={i} spread={shardSpread} fade={shardFade} s={s} />
             ))}
           </div>
 
@@ -158,7 +161,7 @@ export function Ritual() {
             style={{ opacity: capOpacity, y: capY, scale: unionScale }}
             className="absolute top-1/2 left-1/2 -translate-x-1/2"
           >
-            <div className="surface-glass h-[7vmin] w-[9vmin] rounded-[4px] shadow-[0_0_40px_-6px_rgba(184,216,232,0.6)]" />
+            <div className="surface-glass h-[6vmin] w-[7.5vmin] rounded-[3px] shadow-[0_0_40px_-6px_rgba(184,216,232,0.6)]" />
           </motion.div>
 
           {/* VI. box */}
@@ -169,7 +172,7 @@ export function Ritual() {
             <div className="surface-glass absolute inset-0 rounded-[6px] border-white/20" />
             <motion.div
               style={{ y: boxLid }}
-              className="surface-glass absolute -top-4 -left-2 h-[8vmin] w-[38vmin] rounded-[6px] border-white/25"
+              className="surface-glass absolute -top-5 left-1/2 h-[8vmin] w-[38vmin] -translate-x-1/2 rounded-[6px] border-white/25"
             />
           </motion.div>
         </div>
