@@ -2,12 +2,14 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Nav } from "@/components/site/Nav";
 import { Hero } from "@/components/site/Hero";
 import { Philosophy } from "@/components/site/Philosophy";
-import { Products } from "@/components/site/Products";
+import { Exhibits } from "@/components/site/Exhibits";
+import { Ritual } from "@/components/site/Ritual";
 import { Craft } from "@/components/site/Craft";
 import { Contact } from "@/components/site/Contact";
 import { Intro } from "@/components/site/Intro";
 import { Cursor } from "@/components/site/Cursor";
 import { Marquee } from "@/components/site/Marquee";
+import { Atmosphere } from "@/components/site/Atmosphere";
 
 const title = "VITRÉA · 高端手工玻璃制品与艺术玻璃工作室";
 const description =
@@ -32,7 +34,8 @@ function Index() {
     <>
       <Intro />
       <Cursor />
-      <main className="bg-background text-foreground">
+      <Atmosphere />
+      <main className="relative z-10 bg-transparent text-foreground">
         <Nav />
         <Hero />
         <Marquee
@@ -43,12 +46,13 @@ function Index() {
             "No moulds · no copies",
           ]}
         />
+        <Ritual />
         <Philosophy />
         <Marquee
           reverse
           items={["Collections 2026", "限量单件", "Art Glass ®", "光与玻璃的对话"]}
         />
-        <Products />
+        <Exhibits />
         <Craft />
         <Contact />
       </main>
