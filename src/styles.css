@@ -168,12 +168,12 @@
   --secondary-foreground: oklch(1 0 0);
   --muted: oklch(0.2 0 0);
   --muted-foreground: oklch(0.72 0.012 230);
-  --accent: oklch(0.882 0.036 228.5);
+  --accent: oklch(0.83 0.145 88);
   --accent-foreground: oklch(0 0 0);
-  --border: oklch(1 0 0 / 12%);
-  --input: oklch(1 0 0 / 16%);
-  --ring: oklch(0.882 0.036 228.5);
-  --gradient-glass: linear-gradient(135deg, #e8f4fd 0%, #b8d8e8 100%);
+  --border: oklch(1 0 0 / 18%);
+  --input: oklch(1 0 0 / 20%);
+  --ring: oklch(0.83 0.145 88);
+  --gradient-glass: linear-gradient(135deg, #ffffff 0%, #d9b25f 100%);
   --shadow-glow: 0 0 0 1px color-mix(in oklab, var(--accent) 45%, transparent),
     0 18px 60px -18px color-mix(in oklab, var(--accent) 55%, transparent);
 }
