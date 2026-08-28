@@ -5,8 +5,9 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --font-display: "Playfair Display", Georgia, serif;
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Archivo Black", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-sans: "JetBrains Mono", ui-monospace, monospace;
   --color-glass-100: oklch(0.968 0.014 232.5);
   --color-glass-300: oklch(0.882 0.036 228.5);
   --color-glass-500: oklch(0.79 0.052 226);
@@ -167,12 +168,12 @@
   --secondary-foreground: oklch(1 0 0);
   --muted: oklch(0.2 0 0);
   --muted-foreground: oklch(0.72 0.012 230);
-  --accent: oklch(0.882 0.036 228.5);
+  --accent: oklch(0.83 0.145 88);
   --accent-foreground: oklch(0 0 0);
-  --border: oklch(1 0 0 / 12%);
-  --input: oklch(1 0 0 / 16%);
-  --ring: oklch(0.882 0.036 228.5);
-  --gradient-glass: linear-gradient(135deg, #e8f4fd 0%, #b8d8e8 100%);
+  --border: oklch(1 0 0 / 18%);
+  --input: oklch(1 0 0 / 20%);
+  --ring: oklch(0.83 0.145 88);
+  --gradient-glass: linear-gradient(135deg, #ffffff 0%, #d9b25f 100%);
   --shadow-glow: 0 0 0 1px color-mix(in oklab, var(--accent) 45%, transparent),
     0 18px 60px -18px color-mix(in oklab, var(--accent) 55%, transparent);
 }
@@ -188,6 +189,7 @@ html {
   }
   h1, h2, h3, blockquote {
     font-family: var(--font-display);
+    font-weight: 400;
   }
   ::selection {
     background: var(--accent);
