@@ -2,8 +2,6 @@ import { forwardRef } from "react";
 import * as THREE from "three";
 import { useTexture } from "@react-three/drei";
 
-import bottleAsset from "@/assets/bottle.jpg.asset.json";
-import capAsset from "@/assets/cap.jpg.asset.json";
 import boxAsset from "@/assets/box.jpg.asset.json";
 
 /**
@@ -25,7 +23,7 @@ export const GLASS = {
   roughness: 0,
   ior: 1.5,
   thickness: 0.5,
-  envMapIntensity: 1,
+  envMapIntensity: 1.8,
   color: "#eef6f8",
 } as const;
 
@@ -35,21 +33,13 @@ export const Bottle = forwardRef<THREE.Group, { opacity?: number }>(function Bot
   { opacity = 1 },
   ref,
 ) {
-  const map = useTexture(bottleAsset.url);
-  map.colorSpace = THREE.SRGBColorSpace;
   const transparent = opacity < 1;
 
   return (
     <group ref={ref}>
       <mesh castShadow position={[0, 0, 0]}>
         <cylinderGeometry args={[0.42, 0.42, 1.7, 64, 1]} />
-        <meshPhysicalMaterial
-          {...GLASS}
-          map={map}
-          transmission={0.92}
-          transparent={transparent}
-          opacity={opacity}
-        />
+        <meshPhysicalMaterial {...GLASS} transparent={transparent} opacity={opacity} />
       </mesh>
       {/* shoulder + neck */}
       <mesh position={[0, 0.95, 0]}>
@@ -70,8 +60,6 @@ export const Stopper = forwardRef<THREE.Group, { opacity?: number }>(function St
   { opacity = 1 },
   ref,
 ) {
-  const map = useTexture(capAsset.url);
-  map.colorSpace = THREE.SRGBColorSpace;
   const transparent = opacity < 1;
 
   return (
@@ -79,13 +67,7 @@ export const Stopper = forwardRef<THREE.Group, { opacity?: number }>(function St
       {/* faceted glass head */}
       <mesh castShadow position={[0, 0.18, 0]}>
         <cylinderGeometry args={[0.26, 0.22, 0.22, 8]} />
-        <meshPhysicalMaterial
-          {...GLASS}
-          map={map}
-          transmission={0.9}
-          transparent={transparent}
-          opacity={opacity}
-        />
+        <meshPhysicalMaterial {...GLASS} transparent={transparent} opacity={opacity} />
       </mesh>
       <mesh position={[0, 0.35, 0]}>
         <octahedronGeometry args={[0.14, 0]} />
