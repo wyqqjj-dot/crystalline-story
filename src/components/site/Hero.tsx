@@ -89,7 +89,7 @@ export function Hero() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: [0, 1, 0.2, 1] }}
-        transition={{ delay: 2, duration: 3, repeat: Infinity }}
+        transition={{ delay: 2, duration: 3, repeat: Infinity, times: [0, 0.3, 0.7, 1] }}
         className="absolute bottom-8 left-1/2 h-10 w-px -translate-x-1/2 bg-gradient-to-b from-transparent to-accent"
       />
     </section>
