@@ -12,7 +12,7 @@ export function Hero() {
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
         <div className="orb-glass animate-orb h-[78vw] w-[78vw] rounded-full blur-[2px] md:h-[46vw] md:w-[46vw]" />
       </div>
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_35%,#000_82%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_45%,#000_92%)]" />
 
       <div className="relative z-10 px-6 text-center">
         <motion.p
