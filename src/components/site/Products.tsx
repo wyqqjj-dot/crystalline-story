@@ -111,9 +111,7 @@ export function Products() {
         </RevealGroup>
       </div>
 
-      <RevealGroup
-        className="mt-14 flex snap-x snap-mandatory gap-6 overflow-x-auto px-5 pb-6 md:px-10 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-      >
+      <RevealGroup className="mt-14">
         <div
           ref={track}
           data-cursor="grow"
@@ -121,7 +119,7 @@ export function Products() {
           onMouseMove={onMove}
           onMouseUp={stop}
           onMouseLeave={stop}
-          className="flex cursor-grab gap-6 active:cursor-grabbing"
+          className="flex cursor-grab snap-x snap-mandatory gap-6 overflow-x-auto px-5 pb-6 active:cursor-grabbing md:px-10 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {products.map((p, i) => (
             <ProductCard key={p.name} p={p} index={i} />

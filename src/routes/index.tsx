@@ -5,6 +5,9 @@ import { Philosophy } from "@/components/site/Philosophy";
 import { Products } from "@/components/site/Products";
 import { Craft } from "@/components/site/Craft";
 import { Contact } from "@/components/site/Contact";
+import { Intro } from "@/components/site/Intro";
+import { Cursor } from "@/components/site/Cursor";
+import { Marquee } from "@/components/site/Marquee";
 
 const title = "VITRÉA · 高端手工玻璃制品与艺术玻璃工作室";
 const description =
@@ -26,13 +29,29 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <main className="bg-background text-foreground">
-      <Nav />
-      <Hero />
-      <Philosophy />
-      <Products />
-      <Craft />
-      <Contact />
-    </main>
+    <>
+      <Intro />
+      <Cursor />
+      <main className="bg-background text-foreground">
+        <Nav />
+        <Hero />
+        <Marquee
+          items={[
+            "Handcrafted in Shanghai",
+            "One breath · one piece",
+            "1200°C 液态光",
+            "No moulds · no copies",
+          ]}
+        />
+        <Philosophy />
+        <Marquee
+          reverse
+          items={["Collections 2026", "限量单件", "Art Glass ®", "光与玻璃的对话"]}
+        />
+        <Products />
+        <Craft />
+        <Contact />
+      </main>
+    </>
   );
 }
