@@ -16,15 +16,8 @@ export function Intro() {
 
   useEffect(() => {
     const id = window.setInterval(() => {
-      setProgress((p) => {
-        const next = p + Math.random() * 14 + 4;
-        if (next >= 100) {
-          window.clearInterval(id);
-          return 100;
-        }
-        return next;
-      });
-    }, 120);
+      setProgress((p) => Math.min(100, p + 9));
+    }, 110);
     return () => window.clearInterval(id);
   }, []);
 
