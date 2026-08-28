@@ -27,6 +27,45 @@ const captions = [
   ["VI", "装入盒中 / Enshrined"],
 ];
 
+function Shard({
+  spread,
+  s,
+}: {
+  spread: MotionValue<number>;
+  s: (typeof shards)[number];
+}) {
+  const opacity = useTransform(spread, [0, 0.15, 1], [0, 1, 0.9]);
+  const x = useTransform(spread, (v) => `${s.x * v}vmin`);
+  const y = useTransform(spread, (v) => `${s.y * v}vmin`);
+  const rotate = useTransform(spread, (v) => s.rot * v);
+  return (
+    <motion.span
+      style={{ opacity, x, y, rotate, width: s.size, height: s.size * 1.6 }}
+      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border border-white/25 bg-gradient-to-br from-white/40 to-glass-500/10 backdrop-blur-[2px]"
+    />
+  );
+}
+
+function Caption({
+  stage,
+  index,
+  numeral,
+  label,
+}: {
+  stage: MotionValue<number>;
+  index: number;
+  numeral: string;
+  label: string;
+}) {
+  const opacity = useTransform(stage, (v) => (v === index ? 1 : 0));
+  return (
+    <motion.div style={{ opacity }} className="absolute inset-x-0">
+      <p className="font-display text-6xl leading-none text-white/10 md:text-[9vw]">{numeral}</p>
+      <p className="font-mono mt-2 text-[10px] tracking-[0.45em] text-accent uppercase">{label}</p>
+    </motion.div>
+  );
+}
+
 function useStage(p: MotionValue<number>, from: number, to: number) {
   const fade = 0.06;
   return useTransform(p, [from - fade, from, to, to + fade], [0, 1, 1, 0], {
@@ -56,6 +95,12 @@ export function Ritual() {
   const boxLid = useTransform(p, [0.84, 0.96], [-120, 0]);
   const unionScale = useTransform(p, [0.68, 0.98], [1, 0.72]);
   const stageIndex = useTransform(p, (v) => Math.min(5, Math.floor(v / 0.166)));
+  const bottleOpacity = useTransform([bottle, union, boxed], ([a, b, c]: number[]) =>
+    Math.max(a, b, c),
+  );
+  const capOpacity = useTransform([cap, union, boxed], ([a, b, c]: number[]) =>
+    Math.max(a, b, c),
+  );
 
   return (
     <section id="ritual" ref={wrap} className="relative h-[620vh]">
@@ -83,25 +128,14 @@ export function Ritual() {
           {/* II. detonation */}
           <div className="absolute inset-0">
             {shards.map((s, i) => (
-              <motion.span
-                key={i}
-                style={{
-                  opacity: useTransform(shardSpread, [0, 0.15, 1], [0, 1, 0.9]),
-                  x: useTransform(shardSpread, (v) => `${s.x * v}vmin`),
-                  y: useTransform(shardSpread, (v) => `${s.y * v}vmin`),
-                  rotate: useTransform(shardSpread, (v) => s.rot * v),
-                  width: s.size,
-                  height: s.size * 1.6,
-                }}
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border border-white/25 bg-gradient-to-br from-white/40 to-glass-500/10 backdrop-blur-[2px]"
-              />
+              <Shard key={i} spread={shardSpread} s={s} />
             ))}
           </div>
 
           {/* III / V. bottle */}
           <motion.svg
             viewBox="0 0 200 320"
-            style={{ opacity: useTransform([bottle, union, boxed], ([a, b, c]: number[]) => Math.max(a, b, c)), y: bottleY, scale: unionScale }}
+            style={{ opacity: bottleOpacity, y: bottleY, scale: unionScale }}
             className="absolute inset-0 h-full w-full"
           >
             <defs>
@@ -122,7 +156,7 @@ export function Ritual() {
 
           {/* IV / V. cap */}
           <motion.div
-            style={{ opacity: useTransform([cap, union, boxed], ([a, b, c]: number[]) => Math.max(a, b, c)), y: capY, scale: unionScale }}
+            style={{ opacity: capOpacity, y: capY, scale: unionScale }}
             className="absolute top-1/2 left-1/2 -translate-x-1/2"
           >
             <div className="surface-glass h-[7vmin] w-[9vmin] rounded-[4px] shadow-[0_0_40px_-6px_rgba(184,216,232,0.6)]" />
@@ -144,16 +178,7 @@ export function Ritual() {
         {/* caption */}
         <div className="pointer-events-none absolute inset-x-0 bottom-16 px-5 text-center md:px-10">
           {captions.map(([n, label], i) => (
-            <motion.div
-              key={n}
-              style={{ opacity: useTransform(stageIndex, (v) => (v === i ? 1 : 0)) }}
-              className="absolute inset-x-0"
-            >
-              <p className="font-display text-6xl leading-none text-white/10 md:text-[9vw]">{n}</p>
-              <p className="font-mono mt-2 text-[10px] tracking-[0.45em] text-accent uppercase">
-                {label}
-              </p>
-            </motion.div>
+            <Caption key={n} stage={stageIndex} index={i} numeral={n} label={label} />
           ))}
         </div>
       </div>
