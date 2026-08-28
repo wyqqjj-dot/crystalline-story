@@ -63,7 +63,7 @@ export function Seal({ onOpen }: { onOpen: () => void }) {
                 <div
                   className="absolute inset-0 border border-foreground/[0.06]"
                   style={{
-                    transform: `translate(${-s.c * 100}%, ${-s.r * 100}%)`,
+                    transform: `translate(${(-s.c * 100) / COLS}%, ${(-s.r * 100) / ROWS}%)`,
                     width: `${COLS * 100}%`,
                     height: `${ROWS * 100}%`,
                   }}
