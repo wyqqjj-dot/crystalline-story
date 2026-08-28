@@ -5,9 +5,9 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --font-display: "Archivo Black", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
-  --font-sans: "JetBrains Mono", ui-monospace, monospace;
+  --font-display: "Poppins", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --color-glass-100: oklch(0.968 0.014 232.5);
   --color-glass-300: oklch(0.882 0.036 228.5);
   --color-glass-500: oklch(0.79 0.052 226);
@@ -153,11 +153,11 @@
   }
 }
 
-/* ---- Vitrea brand tokens (pure black / white / glass blue) ---- */
+/* ---- Chunqiu tokens: minimal dark + gold ---- */
 :root {
   --radius: 0.25rem;
-  --background: oklch(0 0 0);
-  --foreground: oklch(1 0 0);
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.97 0 0);
   --card: oklch(0.16 0 0);
   --card-foreground: oklch(1 0 0);
   --popover: oklch(0.16 0 0);
@@ -167,13 +167,13 @@
   --secondary: oklch(0.22 0 0);
   --secondary-foreground: oklch(1 0 0);
   --muted: oklch(0.2 0 0);
-  --muted-foreground: oklch(0.72 0.012 230);
-  --accent: oklch(0.83 0.145 88);
+  --muted-foreground: oklch(0.68 0.004 240);
+  --accent: oklch(0.745 0.062 78);
   --accent-foreground: oklch(0 0 0);
   --border: oklch(1 0 0 / 18%);
   --input: oklch(1 0 0 / 20%);
-  --ring: oklch(0.83 0.145 88);
-  --gradient-glass: linear-gradient(135deg, #ffffff 0%, #d9b25f 100%);
+  --ring: oklch(0.745 0.062 78);
+  --gradient-glass: linear-gradient(135deg, #ffffff 0%, #c5a572 100%);
   --shadow-glow: 0 0 0 1px color-mix(in oklab, var(--accent) 45%, transparent),
     0 18px 60px -18px color-mix(in oklab, var(--accent) 55%, transparent);
 }
