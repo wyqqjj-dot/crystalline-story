@@ -117,12 +117,12 @@ export function Forge({ tRef }: { tRef: { current: number } }) {
       const g = ref.current;
       if (!g) continue;
       g.visible = t > 0.4 && open < 0.98;
-      g.position.set(MOLD.x + dir * (0.42 + (1 - moldIn) * 1.6 + open * 1.9), MOLD.y, 0);
+      g.position.set(MOLD.x + dir * (0.34 + (1 - moldIn) * 1.6 + open * 2.1), MOLD.y, 0);
       g.rotation.z = dir * open * 0.28;
       g.children.forEach((c) => {
         const m = (c as THREE.Mesh).material as THREE.MeshStandardMaterial;
         m.opacity = moldIn * (1 - open);
-        m.emissiveIntensity = heat * 0.6 + range(t, 0.6, 0.8) * 1.2 * (1 - open);
+        m.emissiveIntensity = (heat * 0.12 + range(t, 0.6, 0.8) * 0.3) * (1 - open);
       });
     }
 
@@ -197,22 +197,22 @@ export function Forge({ tRef }: { tRef: { current: number } }) {
         <mesh>
           <torusGeometry args={[0.62, 0.07, 12, 40]} />
           <meshStandardMaterial
-            color="#2a2a2a"
+            color="#242424"
             roughness={0.5}
             metalness={0.8}
             emissive="#ff6a1e"
-            emissiveIntensity={0.6}
+            emissiveIntensity={0.22}
           />
         </mesh>
         <mesh position={[0, -0.34, 0]}>
           <cylinderGeometry args={[0.6, 0.36, 0.6, 32, 1, true]} />
           <meshStandardMaterial
-            color="#1b1b1b"
+            color="#181818"
             roughness={0.6}
             metalness={0.7}
             side={THREE.DoubleSide}
             emissive="#ff5a12"
-            emissiveIntensity={0.35}
+            emissiveIntensity={0.18}
           />
         </mesh>
         <pointLight ref={glow} color="#ff7a2a" distance={7} intensity={0} />
@@ -239,7 +239,7 @@ export function Forge({ tRef }: { tRef: { current: number } }) {
       {[moldL, moldR].map((ref, i) => (
         <group key={i} ref={ref}>
           <mesh>
-            <boxGeometry args={[0.5, 2.5, 1.1]} />
+            <boxGeometry args={[0.4, 2.2, 0.95]} />
             <meshStandardMaterial
               color="#232323"
               roughness={0.45}
