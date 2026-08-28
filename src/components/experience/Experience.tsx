@@ -4,35 +4,89 @@ import { AnimatePresence, motion } from "framer-motion";
 
 import { Scene } from "./Scene";
 import { Panel } from "./Panel";
+import { IntroGate } from "./IntroGate";
 import { journey, stationFor, type Station } from "@/lib/journey";
 
-const INTRO_MS = 5200;
+/** how much upward wheel/touch travel (in px) completes the forge ritual */
+const RITUAL_TRAVEL = 2600;
 
 export function Experience() {
   const track = useRef<HTMLDivElement>(null);
   const introRef = useRef(0);
+  const introTarget = useRef(0);
   const [station, setStation] = useState<Station>("bottle");
   const [progress, setProgress] = useState(0);
+  const [introProgress, setIntroProgress] = useState(0);
   const [introDone, setIntroDone] = useState(false);
 
-  /* ---- opening sequence: the only auto-played animation on the site ---- */
+  /* ---- the opening is driven by the user pushing upward, never by a timer ---- */
   useEffect(() => {
     let raf = 0;
-    const start = performance.now();
-    const tick = (now: number) => {
-      const t = Math.min(1, (now - start) / INTRO_MS);
-      introRef.current = t;
-      if (t >= 1) setIntroDone(true);
-      else raf = requestAnimationFrame(tick);
+    let last = performance.now();
+    let done = false;
+
+    const push = (px: number) => {
+      if (done) return;
+      introTarget.current = Math.min(1, Math.max(0, introTarget.current + px / RITUAL_TRAVEL));
     };
-    raf = requestAnimationFrame(tick);
+
+    const loop = (now: number) => {
+      const dt = Math.min((now - last) / 1000, 0.05);
+      last = now;
+      // critically damped follow: smooth even with coarse wheel steps
+      introRef.current += (introTarget.current - introRef.current) * (1 - Math.exp(-7 * dt));
+      const shown = Math.round(introRef.current * 100) / 100;
+      setIntroProgress((p) => (p === shown ? p : shown));
+      if (!done && introRef.current > 0.995) {
+        done = true;
+        introRef.current = 1;
+        setIntroDone(true);
+        document.body.style.overflow = "";
+        window.scrollTo({ top: 0 });
+      }
+      raf = requestAnimationFrame(loop);
+    };
+    raf = requestAnimationFrame(loop);
+
+    const onWheel = (e: WheelEvent) => {
+      if (done) return;
+      e.preventDefault();
+      const dy = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? 100 : 1);
+      push(-dy); // scrolling up (negative deltaY) advances the ritual
+    };
+
+    let touchY: number | null = null;
+    const onTouchStart = (e: TouchEvent) => {
+      touchY = e.touches[0]?.clientY ?? null;
+    };
+    const onTouchMove = (e: TouchEvent) => {
+      if (done) return;
+      const y = e.touches[0]?.clientY;
+      if (y == null || touchY == null) return;
+      e.preventDefault();
+      push((touchY - y) * 2.2); // swiping up
+      touchY = y;
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (done) return;
+      if (e.key === "ArrowUp" || e.key === "PageUp" || e.key === " ") {
+        e.preventDefault();
+        push(360);
+      }
+    };
+
     document.body.style.overflow = "hidden";
-    const unlock = window.setTimeout(() => {
-      document.body.style.overflow = "";
-    }, INTRO_MS);
+    window.addEventListener("wheel", onWheel, { passive: false });
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchmove", onTouchMove, { passive: false });
+    window.addEventListener("keydown", onKey);
+
     return () => {
       cancelAnimationFrame(raf);
-      window.clearTimeout(unlock);
+      window.removeEventListener("wheel", onWheel);
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
     };
   }, []);
@@ -45,7 +99,7 @@ export function Experience() {
       const span = el.offsetHeight - window.innerHeight;
       const p = span > 0 ? Math.min(1, Math.max(0, (window.scrollY - el.offsetTop) / span)) : 0;
       journey.target = p;
-      setProgress(p);
+      setProgress((prev) => (Math.abs(prev - p) < 0.002 ? prev : p));
       setStation(stationFor(p));
     };
     onScroll();
@@ -90,19 +144,21 @@ export function Experience() {
       {/* fixed WebGL stage */}
       <div className="fixed inset-0 z-0">
         <Canvas
-          shadows
-          dpr={[1, 2]}
+          shadows="basic"
+          dpr={[1, 1.6]}
           camera={{ position: [0, 0, 6.2], fov: 42 }}
-          gl={{ antialias: true }}
+          gl={{ antialias: true, powerPreference: "high-performance" }}
         >
           <color attach="background" args={["#0a0a0a"]} />
           <Scene introRef={introRef} />
         </Canvas>
       </div>
 
+      <IntroGate progress={introProgress} done={introDone} />
+
       {/* scroll track: 1 : 1 mapping between page scroll and camera path */}
       <div ref={track} className="relative h-[760vh]">
-        <Panel station={station} />
+        {introDone && <Panel station={station} />}
 
         <AnimatePresence>
           {introDone && progress < 0.02 && (

@@ -4,7 +4,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { ContactShadows, Environment, Lightformer } from "@react-three/drei";
 
 import { Bottle, GiftBox, Stopper } from "./models";
-import { Genesis } from "./Genesis";
+import { Forge } from "./Forge";
 import { advanceJourney, bump, clamp01, ease, journey, lerp, overshoot, range } from "@/lib/journey";
 
 const HOME_X = -1.85; // left third of the screen
@@ -66,7 +66,7 @@ export function Scene({ introRef }: { introRef: { current: number } }) {
     if (bottleGroup.current) {
       bottleGroup.current.position.set(bx, by, bz);
       bottleGroup.current.scale.setScalar(bs);
-      bottleGroup.current.visible = intro > 0.7 && !(p > 0.26 && p < 0.33);
+      bottleGroup.current.visible = intro > 0.9 && !(p > 0.26 && p < 0.33);
     }
     if (bottleSpin.current) bottleSpin.current.rotation.y = rot;
 
@@ -184,7 +184,7 @@ export function Scene({ introRef }: { introRef: { current: number } }) {
         </group>
       </Suspense>
 
-      <Genesis tRef={introRef} />
+      <Forge tRef={introRef} />
 
       <ContactShadows
         position={[0, -1.25, 0]}
