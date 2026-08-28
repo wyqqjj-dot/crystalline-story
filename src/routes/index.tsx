@@ -1,19 +1,24 @@
+import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { Nav } from "@/components/site/Nav";
-import { Hero } from "@/components/site/Hero";
-import { Philosophy } from "@/components/site/Philosophy";
-import { Exhibits } from "@/components/site/Exhibits";
-import { Ritual } from "@/components/site/Ritual";
-import { Craft } from "@/components/site/Craft";
-import { Contact } from "@/components/site/Contact";
-import { Intro } from "@/components/site/Intro";
+import { Seal } from "@/components/site/Seal";
+import { NavBar } from "@/components/site/NavBar";
+import { Ticker } from "@/components/site/Ticker";
+import { SpecSheet } from "@/components/site/SpecSheet";
+import { Assembly } from "@/components/site/Assembly";
+import { Boxing } from "@/components/site/Boxing";
+import { Ingredients } from "@/components/site/Ingredients";
+import { Inquiry } from "@/components/site/Inquiry";
+import { FinePrint } from "@/components/site/FinePrint";
+import { Barcode } from "@/components/site/Barcode";
 import { Cursor } from "@/components/site/Cursor";
-import { Marquee } from "@/components/site/Marquee";
 import { Atmosphere } from "@/components/site/Atmosphere";
+import bottleAsset from "@/assets/bottle.jpg.asset.json";
+import capAsset from "@/assets/cap.jpg.asset.json";
+import boxAsset from "@/assets/box.jpg.asset.json";
 
-const title = "VITRÉA · 高端手工玻璃制品与艺术玻璃工作室";
+const title = "Chunqiu Glass — Premium Glass Bottles, Caps & Export Packaging";
 const description =
-  "VITRÉA 是一间手工吹制玻璃工作室，专注艺术玻璃器皿、灯具与空间装置的设计与定制。光与玻璃的对话。";
+  "Jining Chunqiu Import & Export Co., Ltd. manufactures ultra-clear glass bottles, airtight caps and export-standard gift packaging. A digital product experience.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -30,31 +35,118 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const [opened, setOpened] = useState(false);
+  const [shipped, setShipped] = useState(false);
+
   return (
     <>
-      <Intro />
+      <Seal onOpen={() => setOpened(true)} />
       <Cursor />
       <Atmosphere />
-      <main className="relative z-10 bg-transparent text-foreground">
-        <Nav />
-        <Hero />
-        <Marquee
+      <NavBar show={opened && shipped} />
+
+      <main id="top" className="relative z-10 text-foreground">
+        <Ticker
           items={[
-            "Handcrafted in Shanghai",
-            "One breath · one piece",
-            "1200°C 液态光",
-            "No moulds · no copies",
+            "Digital brand experience",
+            "Premium glassware",
+            "Handle with care",
+            "Made in Jining, China",
           ]}
+          size="lg"
         />
-        <Ritual />
-        <Philosophy />
-        <Marquee
+
+        <section className="border-b-2 border-foreground px-5 py-28 md:px-12 md:py-40">
+          <div className="font-mono flex items-center justify-between text-[10px] tracking-[0.5em] text-muted-foreground uppercase">
+            <span>Product no. CQ-2026</span>
+            <span>Contents: 3 ingredients</span>
+          </div>
+          <h1 className="font-display mt-16 text-[18vw] leading-[0.76] tracking-tighter uppercase md:text-[12vw]">
+            Chunqiu
+            <span className="block text-accent">Glass</span>
+          </h1>
+          <div className="mt-16 grid gap-12 md:mt-24 md:grid-cols-3">
+            <p className="font-mono max-w-[34ch] text-[11px] leading-loose tracking-[0.3em] uppercase md:col-span-2">
+              A glassware factory, packaged as a digital product. Scroll to unbox the bottle, the
+              cap, the assembly and the export carton — one continuous specification sheet.
+            </p>
+            <Barcode label="CQ 2026 GLASS 001" className="md:justify-self-end" />
+          </div>
+        </section>
+
+        <SpecSheet
+          id="bottle"
+          ref="REF: GLASS-BODY-001"
+          index="01"
+          title="The Bottle"
+          subtitle="Furnace-formed flint glass body · 750 ml · Screw finish"
+          image={bottleAsset.url}
+          alt="Ultra-clear cylindrical glass spirit bottle with screw neck finish"
+          specs={[
+            { k: "Purity", v: "99.9%" },
+            { k: "Clarity", v: "Ultra-Clear" },
+            { k: "Origin", v: "Premium Sand" },
+            { k: "Capacity", v: "750 ml / 500 ml" },
+            { k: "Finish", v: "GPI 28-400 Screw" },
+          ]}
+          note="Warning: handle with care — fragile"
+        />
+
+        <Ticker
           reverse
-          items={["Collections 2026", "限量单件", "Art Glass ®", "光与玻璃的对话"]}
+          accent
+          items={["Ingredient 02 — the cap", "Airtight", "Food-grade safe", "Matte / Glossy"]}
         />
-        <Exhibits />
-        <Craft />
-        <Contact />
+
+        <SpecSheet
+          id="cap"
+          ref="REF: CAP-SEAL-002"
+          index="02"
+          title="The Cap"
+          subtitle="Anodised aluminium screw cap with sealing liner"
+          image={capAsset.url}
+          alt="Gold ribbed anodised aluminium screw cap for spirit bottles"
+          specs={[
+            { k: "Material", v: "Food-Grade Safe" },
+            { k: "Seal", v: "Airtight" },
+            { k: "Finish", v: "Matte / Glossy" },
+            { k: "Torque", v: "12–18 in·lb" },
+            { k: "Colours", v: "Gold / Black / Custom" },
+          ]}
+          note="Do not over-torque · Test batch approved"
+          flip
+        />
+
+        <Assembly />
+
+        <SpecSheet
+          id="box"
+          ref="REF: PACK-BOX-003"
+          index="03"
+          title="The Box"
+          subtitle="Rigid presentation box with EVA insert and magnet closure"
+          image={boxAsset.url}
+          alt="Matte black rigid presentation gift box for a glass spirit bottle"
+          specs={[
+            { k: "Type", v: "Export Standard" },
+            { k: "Protection", v: "Shock-Absorbing" },
+            { k: "Board", v: "1200 gsm Rigid" },
+            { k: "Print", v: "Hot Foil / Emboss" },
+            { k: "Drop Test", v: "Passed 1.2 m" },
+          ]}
+          note="This side up · Keep dry"
+        />
+
+        <Boxing onComplete={() => setShipped(true)} />
+
+        <Ticker
+          items={["Now shipping worldwide", "OEM & ODM", "FOB Qingdao", "Samples available"]}
+          size="lg"
+        />
+
+        <Ingredients />
+        <Inquiry />
+        <FinePrint />
       </main>
     </>
   );
