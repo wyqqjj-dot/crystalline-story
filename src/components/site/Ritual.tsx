@@ -18,13 +18,13 @@ const shards = Array.from({ length: 26 }, (_, i) => {
   };
 });
 
-const captions = [
-  ["I", "熔融的玻璃 / Molten Glass"],
-  ["II", "炸开 / Detonation"],
-  ["III", "凝成瓶身 / Fused Into Form"],
-  ["IV", "溶解成盖 / Dissolved Into Cap"],
-  ["V", "二合一 / Union"],
-  ["VI", "装入盒中 / Enshrined"],
+const captions: { n: string; label: string }[] = [
+  { n: "I", label: "熔融的玻璃 / Molten Glass" },
+  { n: "II", label: "炸开 / Detonation" },
+  { n: "III", label: "凝成瓶身 / Fused Into Form" },
+  { n: "IV", label: "溶解成盖 / Dissolved Into Cap" },
+  { n: "V", label: "二合一 / Union" },
+  { n: "VI", label: "装入盒中 / Enshrined" },
 ];
 
 function Shard({
@@ -67,10 +67,13 @@ function Caption({
 }
 
 function useStage(p: MotionValue<number>, from: number, to: number) {
-  const fade = 0.06;
-  return useTransform(p, [from - fade, from, to, to + fade], [0, 1, 1, 0], {
-    clamp: true,
-  });
+  const fade = 0.05;
+  return useTransform(
+    p,
+    [Math.max(0, from - fade), from, to, Math.min(1, to + fade)],
+    [0, 1, 1, 0],
+    { clamp: true },
+  );
 }
 
 export function Ritual() {
@@ -95,12 +98,8 @@ export function Ritual() {
   const boxLid = useTransform(p, [0.84, 0.96], [-120, 0]);
   const unionScale = useTransform(p, [0.68, 0.98], [1, 0.72]);
   const stageIndex = useTransform(p, (v) => Math.min(5, Math.floor(v / 0.166)));
-  const bottleOpacity = useTransform([bottle, union, boxed], ([a, b, c]: number[]) =>
-    Math.max(a, b, c),
-  );
-  const capOpacity = useTransform([cap, union, boxed], ([a, b, c]: number[]) =>
-    Math.max(a, b, c),
-  );
+  const bottleOpacity = useTransform([bottle, union, boxed], (v: number[]) => Math.max(...v));
+  const capOpacity = useTransform([cap, union, boxed], (v: number[]) => Math.max(...v));
 
   return (
     <section id="ritual" ref={wrap} className="relative h-[620vh]">
@@ -177,8 +176,8 @@ export function Ritual() {
 
         {/* caption */}
         <div className="pointer-events-none absolute inset-x-0 bottom-16 px-5 text-center md:px-10">
-          {captions.map(([n, label], i) => (
-            <Caption key={n} stage={stageIndex} index={i} numeral={n} label={label} />
+          {captions.map((c, i) => (
+            <Caption key={c.n} stage={stageIndex} index={i} numeral={c.n} label={c.label} />
           ))}
         </div>
       </div>
