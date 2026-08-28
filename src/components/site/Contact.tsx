@@ -45,8 +45,8 @@ export function Contact() {
         </RevealGroup>
 
         <RevealGroup>
-          <motion.form
-            variants={revealItem}
+          <motion.div variants={revealItem}>
+          <form
             onSubmit={(e) => {
               e.preventDefault();
               setSent(true);
@@ -75,7 +75,8 @@ export function Contact() {
                 我们会在两个工作日内联系您。
               </p>
             )}
-          </motion.form>
+          </form>
+          </motion.div>
         </RevealGroup>
       </div>
 
