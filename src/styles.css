@@ -189,6 +189,7 @@ html {
   }
   h1, h2, h3, blockquote {
     font-family: var(--font-display);
+    font-weight: 400;
   }
   ::selection {
     background: var(--accent);
