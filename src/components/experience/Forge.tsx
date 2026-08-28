@@ -99,7 +99,7 @@ export function Forge({ tRef }: { tRef: { current: number } }) {
       furnace.current.scale.setScalar(wob);
     }
     if (glow.current) {
-      glow.current.intensity = heat * (14 + Math.sin(time * 9) * 4);
+      glow.current.intensity = heat * (3.4 + Math.sin(time * 9) * 1.1);
     }
     if (pipe.current) {
       const flow = range(t, 0.4, 0.5) * (1 - range(t, 0.8, 0.9));
@@ -215,7 +215,7 @@ export function Forge({ tRef }: { tRef: { current: number } }) {
             emissiveIntensity={0.18}
           />
         </mesh>
-        <pointLight ref={glow} color="#ff7a2a" distance={7} intensity={0} />
+        <pointLight ref={glow} color="#ff7a2a" distance={4.2} decay={2} intensity={0} />
       </group>
 
       {/* delivery pipe */}
