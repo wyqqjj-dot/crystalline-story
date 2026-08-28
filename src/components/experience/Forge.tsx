@@ -6,7 +6,7 @@ import { clamp01, ease, lerp, range } from "@/lib/journey";
 
 const COUNT = 1100;
 
-const FURNACE = new THREE.Vector3(0.95, 1.5, 0);
+const FURNACE = new THREE.Vector3(1.15, 1.55, 0);
 const MOLD = new THREE.Vector3(-1.85, 0, 0);
 const MID = new THREE.Vector3(0.2, 0.85, 0.1);
 
@@ -95,7 +95,7 @@ export function Forge({ tRef }: { tRef: { current: number } }) {
     const heat = range(t, 0.2, 0.34) * (1 - range(t, 0.72, 0.86));
     if (furnace.current) {
       furnace.current.visible = t > 0.08 && t < 0.9;
-      const wob = 0.66 * (1 + Math.sin(time * 2.4) * 0.015 * heat);
+      const wob = 0.46 * (1 + Math.sin(time * 2.4) * 0.015 * heat);
       furnace.current.scale.setScalar(wob);
     }
     if (glow.current) {
@@ -122,7 +122,7 @@ export function Forge({ tRef }: { tRef: { current: number } }) {
       g.children.forEach((c) => {
         const m = (c as THREE.Mesh).material as THREE.MeshStandardMaterial;
         m.opacity = moldIn * (1 - open);
-        m.emissiveIntensity = (heat * 0.12 + range(t, 0.6, 0.8) * 0.3) * (1 - open);
+        m.emissiveIntensity = (heat * 0.05 + range(t, 0.6, 0.8) * 0.1) * (1 - open);
       });
     }
 
@@ -239,9 +239,9 @@ export function Forge({ tRef }: { tRef: { current: number } }) {
       {[moldL, moldR].map((ref, i) => (
         <group key={i} ref={ref}>
           <mesh>
-            <boxGeometry args={[0.4, 2.2, 0.95]} />
+            <boxGeometry args={[0.34, 2.0, 0.8]} />
             <meshStandardMaterial
-              color="#232323"
+              color="#1a1a1a"
               roughness={0.45}
               metalness={0.85}
               emissive="#ff5a12"
