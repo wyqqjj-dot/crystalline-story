@@ -1,18 +1,42 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 
 const brand = "VITRÉA".split("");
 
 export function Hero() {
+  const [spot, setSpot] = useState({ x: 0, y: 0, active: false });
+
+  const onMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setSpot({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+      active: true,
+    });
+  };
+
+  const onMouseLeave = () => setSpot((s) => ({ ...s, active: false }));
+
   return (
     <section
       id="top"
-      className="relative flex min-h-[100svh] items-center justify-center overflow-hidden bg-background"
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
+      className="group relative flex min-h-[100svh] items-center justify-center overflow-hidden bg-background"
     >
       {/* Rotating glass orb, simulated with radial gradients */}
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
         <div className="orb-glass animate-orb h-[78vw] w-[78vw] rounded-full blur-[2px] md:h-[46vw] md:w-[46vw]" />
       </div>
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_45%,#000_92%)]" />
+      <div
+        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100"
+        style={{
+          background: `radial-gradient(600px circle at ${spot.x}px ${spot.y}px, rgba(184,216,232,0.18), transparent 50%)`,
+          opacity: spot.active ? 1 : 0,
+        }}
+        aria-hidden="true"
+      />
 
       <div className="relative z-10 px-6 text-center">
         <motion.p
