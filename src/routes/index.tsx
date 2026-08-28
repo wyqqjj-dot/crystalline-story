@@ -46,7 +46,7 @@ function Index() {
             "No moulds · no copies",
           ]}
         />
-        <Ritual />
+        {/* <Ritual /> */}
         <Philosophy />
         <Marquee
           reverse
