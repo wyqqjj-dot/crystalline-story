@@ -125,9 +125,9 @@ export function Content() {
             </Reveal>
           </div>
 
-          <Reveal delay={0.1}>
+          <div className="md:col-span-7">
             <form
-              className="grid gap-6 md:col-span-7"
+              className="grid gap-6"
               onSubmit={(e) => {
                 e.preventDefault();
               }}
@@ -174,7 +174,7 @@ export function Content() {
                 Send inquiry
               </button>
             </form>
-          </Reveal>
+          </div>
         </div>
       </section>
 
