@@ -81,7 +81,6 @@ export const Bottle = forwardRef<THREE.Group, { opacity?: number }>(function Bot
             attenuationDistance={2.4}
             attenuationColor="#dff0f6"
             color="#f2fafc"
-            背面={undefined as never}
             backside
             backsideThickness={0.35}
             transparent={opacity < 1}
