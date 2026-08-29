@@ -64,7 +64,7 @@ export const CATALOG: CatalogCategory[] = [
       ["Hip flask", "200 ml · flint · screw"],
       ["Miniature", "50 ml · flint · cork"],
       ["Heavy punt", "750 ml · extra-flint"],
-    ]),
+    ], DOCS.product, 2),
   },
   {
     slug: "closures",
@@ -81,7 +81,7 @@ export const CATALOG: CatalogCategory[] = [
       ["Aluminium screw", "28-400 · pilfer-proof"],
       ["Pourer insert", "PE + cork"],
       ["Wax dip ready", "Cork · wax compatible"],
-    ]),
+    ], DOCS.product, 12),
   },
   {
     slug: "cases",
@@ -98,7 +98,7 @@ export const CATALOG: CatalogCategory[] = [
       ["Tube case", "Kraft · foam insert"],
       ["Drawer case", "Rigid board · ribbon"],
       ["Shipper carton", "5-ply · partitioned"],
-    ]),
+    ], DOCS.box, 1),
   },
 ];
 
