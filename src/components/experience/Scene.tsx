@@ -116,6 +116,7 @@ export function Scene({ introRef }: { introRef: { current: number } }) {
     if (bottleGroup.current) {
       bottleGroup.current.position.set(bx, by, bz);
       bottleGroup.current.scale.setScalar(bs);
+      bottleGroup.current.rotation.z = p < 0.3 ? d.tilt : 0;
       bottleGroup.current.visible = intro > 0.9 && !(p > 0.26 && p < 0.33);
     }
     if (bottleSpin.current) bottleSpin.current.rotation.y = rot;
