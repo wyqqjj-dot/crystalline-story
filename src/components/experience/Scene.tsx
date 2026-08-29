@@ -25,6 +25,17 @@ export function Scene({ introRef }: { introRef: { current: number } }) {
   const spin = useRef(0);
   const { camera } = useThree();
 
+  /** rigid-body state for the bottle released by the opening mould */
+  const drop = useRef({
+    y: 0,
+    v: 0,
+    tilt: 0,
+    tiltV: 0,
+    started: false,
+    active: false,
+    hits: 0,
+  });
+
   useFrame((_, delta) => {
     const dt = Math.min(delta, 0.05);
     advanceJourney(dt);
@@ -32,6 +43,44 @@ export function Scene({ introRef }: { introRef: { current: number } }) {
     const intro = clamp01(introRef.current);
     spin.current += dt * AUTO_SPIN;
     const rot = spin.current + journey.drag;
+
+    /* -------------------- physics: the mould releases the bottle ------------- */
+    const d = drop.current;
+    if (!d.started && intro > 0.955) {
+      d.started = true;
+      d.active = true;
+      d.y = 2.35;
+      d.v = -0.4;
+      d.tilt = 0.14;
+      d.tiltV = -1.6;
+    }
+    if (d.active) {
+      // gravity + substeps so the contact never tunnels
+      const steps = 3;
+      const h = dt / steps;
+      for (let s = 0; s < steps; s++) {
+        d.v -= 17 * h;
+        d.y += d.v * h;
+        if (d.y <= 0 && d.v < 0) {
+          d.y = 0;
+          d.hits += 1;
+          d.v = -d.v * 0.36; // restitution — glass on steel, mostly dead
+          // impact torque, alternating so the bottle rocks then settles
+          d.tiltV += (d.hits % 2 === 0 ? 1 : -1) * Math.min(0.9, Math.abs(d.v)) * 2.6;
+          if (Math.abs(d.v) < 0.45 && d.hits > 2) {
+            d.v = 0;
+            d.active = false;
+          }
+        }
+      }
+    }
+    // rocking spring with inertia, damps to perfectly upright
+    d.tiltV += (-78 * d.tilt - 7.5 * d.tiltV) * dt;
+    d.tilt += d.tiltV * dt;
+    if (!d.active && Math.abs(d.tilt) < 0.0008 && Math.abs(d.tiltV) < 0.004) {
+      d.tilt = 0;
+      d.tiltV = 0;
+    }
 
     /* ------------------------------- bottle ------------------------------- */
     // station 1 -> slides left & back -> returns for the assembly -> exits ->
