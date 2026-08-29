@@ -1,6 +1,7 @@
+import { useEffect, useState } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 
-import { CATALOG, categoryBySlug } from "@/lib/catalog";
+import { CATALOG, categoryBySlug, type CatalogItem } from "@/lib/catalog";
 
 export const Route = createFileRoute("/catalog/$category")({
   loader: ({ params }) => {
