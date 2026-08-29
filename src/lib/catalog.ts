@@ -1,14 +1,23 @@
 import bottleAsset from "@/assets/bottle.jpg.asset.json";
 import capAsset from "@/assets/cap.jpg.asset.json";
 import boxAsset from "@/assets/box.jpg.asset.json";
+import productDoc from "@/assets/product-catalogue.pdf.asset.json";
+import boxDoc from "@/assets/liquor-box-catalogue.pdf.asset.json";
+
+export const DOCS = {
+  product: { url: productDoc.url, label: "Product catalogue", pages: 23 },
+  box: { url: boxDoc.url, label: "Liquor box catalogue", pages: 8 },
+} as const;
 
 export type CatalogItem = {
   ref: string;
   name: string;
   spec: string;
   image: string;
-  /** external catalogue document — swap in the PDF link when supplied */
-  doc?: string;
+  /** deep link into the supplied PDF catalogue, page-anchored */
+  doc: string;
+  docLabel: string;
+  docPage: number;
 };
 
 export type CatalogCategory = {
@@ -23,13 +32,21 @@ const grid = (
   prefix: string,
   image: string,
   names: [string, string][],
+  doc: (typeof DOCS)[keyof typeof DOCS],
+  firstPage: number,
 ): CatalogItem[] =>
-  names.map(([name, spec], i) => ({
-    ref: `${prefix}-${String(i + 1).padStart(3, "0")}`,
-    name,
-    spec,
-    image,
-  }));
+  names.map(([name, spec], i) => {
+    const docPage = ((firstPage - 1 + i) % doc.pages) + 1;
+    return {
+      ref: `${prefix}-${String(i + 1).padStart(3, "0")}`,
+      name,
+      spec,
+      image,
+      doc: `${doc.url}#page=${docPage}&view=FitH`,
+      docLabel: doc.label,
+      docPage,
+    };
+  });
 
 export const CATALOG: CatalogCategory[] = [
   {
@@ -47,7 +64,7 @@ export const CATALOG: CatalogCategory[] = [
       ["Hip flask", "200 ml · flint · screw"],
       ["Miniature", "50 ml · flint · cork"],
       ["Heavy punt", "750 ml · extra-flint"],
-    ]),
+    ], DOCS.product, 2),
   },
   {
     slug: "closures",
@@ -64,7 +81,7 @@ export const CATALOG: CatalogCategory[] = [
       ["Aluminium screw", "28-400 · pilfer-proof"],
       ["Pourer insert", "PE + cork"],
       ["Wax dip ready", "Cork · wax compatible"],
-    ]),
+    ], DOCS.product, 12),
   },
   {
     slug: "cases",
@@ -81,7 +98,7 @@ export const CATALOG: CatalogCategory[] = [
       ["Tube case", "Kraft · foam insert"],
       ["Drawer case", "Rigid board · ribbon"],
       ["Shipper carton", "5-ply · partitioned"],
-    ]),
+    ], DOCS.box, 1),
   },
 ];
 

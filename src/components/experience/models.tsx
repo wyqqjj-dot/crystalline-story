@@ -1,84 +1,147 @@
-import { forwardRef } from "react";
+import { forwardRef, useMemo } from "react";
 import * as THREE from "three";
-import { useTexture } from "@react-three/drei";
+import { MeshTransmissionMaterial, useGLTF, useTexture } from "@react-three/drei";
 
 import boxAsset from "@/assets/box.jpg.asset.json";
+import bottleModel from "@/assets/bottle-cq100.glb.asset.json";
 
 /**
- * MODEL REPLACEMENT INTERFACE
+ * MODEL INTERFACE
  * ---------------------------------------------------------------
- * Each product below is a self-contained group built from placeholder
- * primitives + a photo texture. To swap in a real .glb later, replace the
- * inner JSX of the matching component with:
+ * The bottle is the client's own CAD geometry (STL -> GLB, crease-smoothed).
+ * The closure is lathed from a hand-tuned profile so it reads as turned glass
+ * and real cork rather than faceted primitives.
  *
- *   const { scene } = useGLTF("/models/cq-100.glb");
- *   return <primitive object={scene} />;
- *
- * Keep the outer <group ref={ref}> untouched: every animation, camera move
- * and transition drives that group, so nothing else has to change.
+ * Every animation drives the OUTER <group ref={ref}>, so swapping the inner
+ * geometry never touches the choreography.
  */
 
+/** shared physical-glass tuning for the simple (non-refractive) parts */
 export const GLASS = {
   transmission: 1,
-  roughness: 0,
+  roughness: 0.02,
   ior: 1.5,
-  thickness: 0.5,
-  envMapIntensity: 1.8,
+  thickness: 0.45,
+  clearcoat: 1,
+  clearcoatRoughness: 0.04,
+  envMapIntensity: 2.4,
   color: "#eef6f8",
 } as const;
 
+/** smooth lathe helper: sample a profile as a rounded curve */
+function lathe(points: [number, number][], segments = 96) {
+  const curve = new THREE.CatmullRomCurve3(
+    points.map(([x, y]) => new THREE.Vector3(x, y, 0)),
+    false,
+    "catmullrom",
+    0.4,
+  );
+  const pts = curve.getPoints(48).map((p) => new THREE.Vector2(Math.max(p.x, 0.0001), p.y));
+  return new THREE.LatheGeometry(pts, segments);
+}
+
 /* ---------------------------------- bottle --------------------------------- */
-/** CQ-100 — straight-sided glass bottle */
+/** CQ-100 — client CAD geometry, super-flint glass */
 export const Bottle = forwardRef<THREE.Group, { opacity?: number }>(function Bottle(
   { opacity = 1 },
   ref,
 ) {
-  const transparent = opacity < 1;
+  const gltf = useGLTF(bottleModel.url);
+
+  const geometry = useMemo(() => {
+    let found: THREE.BufferGeometry | null = null;
+    gltf.scene.traverse((o) => {
+      const m = o as THREE.Mesh;
+      if (!found && m.isMesh && m.geometry) found = m.geometry;
+    });
+    return found;
+  }, [gltf]);
+
+  if (!geometry) return <group ref={ref} />;
 
   return (
     <group ref={ref}>
-      <mesh castShadow position={[0, 0, 0]}>
-        <cylinderGeometry args={[0.42, 0.42, 1.7, 64, 1]} />
-        <meshPhysicalMaterial {...GLASS} transparent={transparent} opacity={opacity} />
-      </mesh>
-      {/* shoulder + neck */}
-      <mesh position={[0, 0.95, 0]}>
-        <cylinderGeometry args={[0.17, 0.42, 0.24, 48]} />
-        <meshPhysicalMaterial {...GLASS} transparent={transparent} opacity={opacity} />
-      </mesh>
-      <mesh position={[0, 1.24, 0]}>
-        <cylinderGeometry args={[0.16, 0.16, 0.34, 48]} />
-        <meshPhysicalMaterial {...GLASS} transparent={transparent} opacity={opacity} />
-      </mesh>
+      {/* model is normalised to height 1 with its base at y = 0 */}
+      <group scale={2.3} position={[0, -0.85, 0]}>
+        <mesh geometry={geometry} castShadow>
+          <MeshTransmissionMaterial
+            samples={6}
+            resolution={256}
+            transmission={1}
+            thickness={0.32}
+            ior={1.52}
+            chromaticAberration={0.06}
+            anisotropicBlur={0.12}
+            distortion={0.16}
+            distortionScale={0.35}
+            temporalDistortion={0.08}
+            roughness={0.02}
+            clearcoat={1}
+            clearcoatRoughness={0.03}
+            attenuationDistance={6}
+            attenuationColor="#dff0f6"
+            color="#f2fafc"
+            backside
+            backsideThickness={0.18}
+            transparent={opacity < 1}
+            opacity={opacity}
+            envMapIntensity={3.4}
+          />
+        </mesh>
+      </group>
     </group>
   );
 });
 
+useGLTF.preload(bottleModel.url);
+
 /* --------------------------------- stopper --------------------------------- */
-/** CQ-193 — faceted glass head + cork plug */
+/** CQ-193 — turned glass head + natural cork plug */
 export const Stopper = forwardRef<THREE.Group, { opacity?: number }>(function Stopper(
   { opacity = 1 },
   ref,
 ) {
   const transparent = opacity < 1;
 
+  const head = useMemo(
+    () =>
+      lathe([
+        [0.001, 0.52],
+        [0.09, 0.5],
+        [0.17, 0.44],
+        [0.225, 0.34],
+        [0.25, 0.22],
+        [0.245, 0.1],
+        [0.215, 0.02],
+        [0.18, -0.02],
+        [0.001, -0.03],
+      ]),
+    [],
+  );
+
+  const cork = useMemo(
+    () =>
+      lathe([
+        [0.001, 0.02],
+        [0.15, 0.0],
+        [0.158, -0.06],
+        [0.152, -0.16],
+        [0.142, -0.26],
+        [0.12, -0.31],
+        [0.001, -0.33],
+      ]),
+    [],
+  );
+
   return (
     <group ref={ref}>
-      {/* faceted glass head */}
-      <mesh castShadow position={[0, 0.18, 0]}>
-        <cylinderGeometry args={[0.26, 0.22, 0.22, 8]} />
+      <mesh geometry={head} castShadow>
         <meshPhysicalMaterial {...GLASS} transparent={transparent} opacity={opacity} />
       </mesh>
-      <mesh position={[0, 0.35, 0]}>
-        <octahedronGeometry args={[0.14, 0]} />
-        <meshPhysicalMaterial {...GLASS} transparent={transparent} opacity={opacity} />
-      </mesh>
-      {/* cork plug */}
-      <mesh castShadow position={[0, -0.09, 0]}>
-        <cylinderGeometry args={[0.155, 0.145, 0.32, 40]} />
+      <mesh geometry={cork} castShadow>
         <meshStandardMaterial
-          color="#b98a58"
-          roughness={0.85}
+          color="#c1936a"
+          roughness={0.92}
           metalness={0}
           transparent={transparent}
           opacity={opacity}
