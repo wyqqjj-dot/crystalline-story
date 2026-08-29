@@ -201,6 +201,16 @@ export function Scene({ introRef }: { introRef: { current: number } }) {
       <directionalLight position={[4.5, 1.5, 3]} intensity={1.1} />
       <directionalLight position={[0, 3.5, -5]} intensity={2.2} color="#dbeaf2" />
       <pointLight ref={pulse} color="#c5a572" distance={5} intensity={0} />
+      {/* travelling key light — drives the glass caustics / specular sweep */}
+      <spotLight
+        ref={sweep}
+        angle={0.7}
+        penumbra={0.9}
+        intensity={38}
+        distance={16}
+        decay={2}
+        color="#eaf6ff"
+      />
 
       <Environment resolution={256}>
         <Lightformer intensity={2.2} position={[0, 5, 2]} scale={[10, 10, 1]} />
