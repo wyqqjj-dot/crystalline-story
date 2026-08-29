@@ -118,22 +118,34 @@ function CatalogPage() {
       <div className="mt-16 grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
         {category.items.map((item) => (
           <article key={item.ref} className="group">
-            <div className="overflow-hidden border border-white/10 bg-white/[0.03]">
-              <img
-                src={item.image}
-                alt={`${item.name} — ${item.spec}`}
-                loading="lazy"
-                width={800}
-                height={800}
-                className="aspect-square w-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-[1.04] group-hover:opacity-100"
-              />
-            </div>
-            <p className="mt-5 text-[10px] tracking-[0.4em] text-accent uppercase">{item.ref}</p>
-            <h2 className="mt-3 text-xl font-light">{item.name}</h2>
-            <p className="mt-2 text-sm text-muted-foreground">{item.spec}</p>
+            <button
+              type="button"
+              onClick={() => setOpen(item)}
+              className="block w-full cursor-pointer text-left"
+              aria-label={`${item.ref} ${item.name} — open catalogue page ${item.docPage}`}
+            >
+              <div className="overflow-hidden border border-white/10 bg-white/[0.03] transition-colors duration-500 group-hover:border-accent/50">
+                <img
+                  src={item.image}
+                  alt={`${item.name} — ${item.spec}`}
+                  loading="lazy"
+                  width={800}
+                  height={800}
+                  className="aspect-square w-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-[1.04] group-hover:opacity-100"
+                />
+              </div>
+              <p className="mt-5 text-[10px] tracking-[0.4em] text-accent uppercase">{item.ref}</p>
+              <h2 className="mt-3 text-xl font-light">{item.name}</h2>
+              <p className="mt-2 text-sm text-muted-foreground">{item.spec}</p>
+              <p className="mt-4 text-[10px] tracking-[0.34em] text-muted-foreground uppercase transition-colors duration-500 group-hover:text-accent">
+                {item.docLabel} · p.{item.docPage} →
+              </p>
+            </button>
           </article>
         ))}
       </div>
+
+      {open && <DocViewer item={open} onClose={() => setOpen(null)} />}
 
       <div className="mt-24 border-t border-white/10 pt-10">
         <a
