@@ -22,6 +22,7 @@ export function Scene({ introRef }: { introRef: { current: number } }) {
   const leftDoor = useRef<THREE.Group>(null);
   const rightDoor = useRef<THREE.Group>(null);
   const pulse = useRef<THREE.PointLight>(null);
+  const sweep = useRef<THREE.SpotLight>(null);
   const spin = useRef(0);
   const { camera } = useThree();
 
