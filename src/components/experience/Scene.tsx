@@ -98,6 +98,7 @@ export function Scene({ introRef }: { introRef: { current: number } }) {
     if (p < 0.3) {
       bx = HOME_X - exit1 * 5.6;
       bz = -exit1 * 3.2;
+      by = d.y * (1 - exit1); // the released bottle falls, bounces, settles
     } else if (p < 0.62) {
       bx = lerp(7, HOME_X, back1);
       bz = lerp(-2.4, 0, clamp01(back1));
