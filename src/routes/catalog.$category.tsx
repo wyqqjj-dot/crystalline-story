@@ -31,8 +31,57 @@ export const Route = createFileRoute("/catalog/$category")({
   component: CatalogPage,
 });
 
+function DocViewer({ item, onClose }: { item: CatalogItem; onClose: () => void }) {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    window.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [onClose]);
+
+  return (
+    <div className="fixed inset-0 z-50 flex flex-col bg-black/90 backdrop-blur-md">
+      <div className="flex items-center justify-between gap-6 border-b border-white/10 px-6 py-5">
+        <div>
+          <p className="text-[10px] tracking-[0.4em] text-accent uppercase">{item.ref}</p>
+          <p className="mt-2 text-sm text-muted-foreground">
+            {item.docLabel} · page {item.docPage}
+          </p>
+        </div>
+        <div className="flex items-center gap-4">
+          <a
+            href={item.doc}
+            target="_blank"
+            rel="noreferrer"
+            className="border border-accent/60 px-5 py-3 text-[10px] tracking-[0.3em] text-accent uppercase transition-colors hover:bg-accent hover:text-accent-foreground"
+          >
+            Open PDF
+          </a>
+          <button
+            type="button"
+            onClick={onClose}
+            className="border border-white/20 px-5 py-3 text-[10px] tracking-[0.3em] text-muted-foreground uppercase transition-colors hover:border-white/50 hover:text-foreground"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+      <iframe
+        key={item.doc}
+        src={item.doc}
+        title={`${item.name} — ${item.docLabel}`}
+        className="min-h-0 flex-1 bg-black"
+      />
+    </div>
+  );
+}
+
 function CatalogPage() {
   const { category } = Route.useLoaderData();
+  const [open, setOpen] = useState<CatalogItem | null>(null);
 
   return (
     <div className="min-h-screen bg-background px-6 pt-28 pb-28 text-foreground md:px-14 md:pt-36">
