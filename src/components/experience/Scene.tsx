@@ -214,16 +214,16 @@ export function Scene({ introRef }: { introRef: { current: number } }) {
       />
 
       <Environment resolution={256}>
-        <Lightformer intensity={2.2} position={[0, 5, 2]} scale={[10, 10, 1]} />
+        <Lightformer intensity={3.6} position={[0, 5, 2]} scale={[10, 10, 1]} />
         <Lightformer
-          intensity={1.1}
+          intensity={2.2}
           color="#9fc4d6"
           position={[-6, 1, -2]}
           rotation-y={Math.PI / 2}
           scale={[18, 3, 1]}
         />
         <Lightformer
-          intensity={0.9}
+          intensity={1.6}
           color="#c5a572"
           position={[6, 0, 1]}
           rotation-y={-Math.PI / 2}

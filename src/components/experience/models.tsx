@@ -68,7 +68,7 @@ export const Bottle = forwardRef<THREE.Group, { opacity?: number }>(function Bot
             samples={6}
             resolution={256}
             transmission={1}
-            thickness={0.55}
+            thickness={0.32}
             ior={1.52}
             chromaticAberration={0.06}
             anisotropicBlur={0.12}
@@ -78,14 +78,14 @@ export const Bottle = forwardRef<THREE.Group, { opacity?: number }>(function Bot
             roughness={0.02}
             clearcoat={1}
             clearcoatRoughness={0.03}
-            attenuationDistance={2.4}
+            attenuationDistance={6}
             attenuationColor="#dff0f6"
             color="#f2fafc"
             backside
-            backsideThickness={0.35}
+            backsideThickness={0.18}
             transparent={opacity < 1}
             opacity={opacity}
-            envMapIntensity={2.6}
+            envMapIntensity={3.4}
           />
         </mesh>
       </group>
