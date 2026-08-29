@@ -1,14 +1,23 @@
 import bottleAsset from "@/assets/bottle.jpg.asset.json";
 import capAsset from "@/assets/cap.jpg.asset.json";
 import boxAsset from "@/assets/box.jpg.asset.json";
+import productDoc from "@/assets/product-catalogue.pdf.asset.json";
+import boxDoc from "@/assets/liquor-box-catalogue.pdf.asset.json";
+
+export const DOCS = {
+  product: { url: productDoc.url, label: "Product catalogue", pages: 23 },
+  box: { url: boxDoc.url, label: "Liquor box catalogue", pages: 8 },
+} as const;
 
 export type CatalogItem = {
   ref: string;
   name: string;
   spec: string;
   image: string;
-  /** external catalogue document — swap in the PDF link when supplied */
-  doc?: string;
+  /** deep link into the supplied PDF catalogue, page-anchored */
+  doc: string;
+  docLabel: string;
+  docPage: number;
 };
 
 export type CatalogCategory = {
