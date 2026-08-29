@@ -32,13 +32,21 @@ const grid = (
   prefix: string,
   image: string,
   names: [string, string][],
+  doc: (typeof DOCS)[keyof typeof DOCS],
+  firstPage: number,
 ): CatalogItem[] =>
-  names.map(([name, spec], i) => ({
-    ref: `${prefix}-${String(i + 1).padStart(3, "0")}`,
-    name,
-    spec,
-    image,
-  }));
+  names.map(([name, spec], i) => {
+    const docPage = ((firstPage - 1 + i) % doc.pages) + 1;
+    return {
+      ref: `${prefix}-${String(i + 1).padStart(3, "0")}`,
+      name,
+      spec,
+      image,
+      doc: `${doc.url}#page=${docPage}&view=FitH`,
+      docLabel: doc.label,
+      docPage,
+    };
+  });
 
 export const CATALOG: CatalogCategory[] = [
   {
