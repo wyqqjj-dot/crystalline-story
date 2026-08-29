@@ -183,6 +183,14 @@ export function Scene({ introRef }: { introRef: { current: number } }) {
       root.current.scale.setScalar(lerp(1, 0.82, pullOut));
       root.current.position.y = lerp(0, 0.5, pullOut);
     }
+
+    /* --- slowly orbiting key light: refraction + highlights keep shifting --- */
+    if (sweep.current) {
+      const a = spin.current * 0.9 + 0.6;
+      sweep.current.position.set(bx + Math.cos(a) * 3.4, 2.2 + Math.sin(a * 0.7) * 1.1, 2.6 + Math.sin(a) * 2.6);
+      sweep.current.target.position.set(bx, by + 0.2, bz);
+      sweep.current.target.updateMatrixWorld();
+    }
   });
 
   return (
