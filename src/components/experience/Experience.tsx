@@ -176,28 +176,18 @@ export function Experience() {
           )}
         </AnimatePresence>
 
-        {/* final frame */}
-        <motion.div
-          animate={{ opacity: progress > 0.97 ? 1 : 0 }}
-          transition={{ duration: 0.6 }}
-          className="pointer-events-none fixed inset-x-0 bottom-[12vh] z-20 text-center"
-        >
-          <h2 className="text-4xl font-light tracking-tight md:text-6xl">Ready for the world.</h2>
-          <p className="mt-4 text-[11px] tracking-[0.5em] text-muted-foreground uppercase">
-            Jining Chunqiu Import &amp; Export Co., Ltd.
-          </p>
-        </motion.div>
-
-        {/* progress rail */}
-        <div className="pointer-events-none fixed top-1/2 left-5 z-20 hidden h-40 w-px -translate-y-1/2 bg-white/12 md:block">
+        {/* closing frame — sits at the end of the track, it never follows the scroll */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 flex h-screen items-end justify-center pb-[14vh] text-center">
           <motion.div
-            className="w-px bg-accent"
-            style={{ height: `${Math.max(2, progress * 100)}%` }}
-          />
+            animate={{ opacity: progress > 0.95 ? 1 : 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-3xl font-light tracking-tight md:text-6xl">Ready for the world.</h2>
+            <p className="mt-4 text-[10px] tracking-[0.42em] text-muted-foreground uppercase md:text-[11px] md:tracking-[0.5em]">
+              Jining Chunqiu Import &amp; Export Co., Ltd.
+            </p>
+          </motion.div>
         </div>
-        <span className="pointer-events-none fixed bottom-8 left-5 z-20 hidden text-[10px] tracking-[0.4em] text-muted-foreground uppercase md:block">
-          {inTrack ? String(Math.round(progress * 100)).padStart(2, "0") : "00"} / 100
-        </span>
       </div>
     </>
   );
