@@ -262,13 +262,13 @@ html.has-custom-cursor * {
 
 /* ---- ambient veils / grain / invert micro-interaction ---- */
 @utility veil-a {
-  background: radial-gradient(circle at 40% 40%, rgba(232, 244, 253, 0.14), rgba(184, 216, 232, 0.05) 45%, transparent 72%);
+  background: radial-gradient(circle at 40% 40%, rgba(197, 165, 114, 0.14), rgba(197, 165, 114, 0.05) 45%, transparent 72%);
 }
 @utility veil-b {
-  background: radial-gradient(circle at 55% 45%, rgba(184, 216, 232, 0.12), rgba(232, 244, 253, 0.04) 48%, transparent 74%);
+  background: radial-gradient(circle at 55% 45%, rgba(255, 255, 255, 0.1), rgba(197, 165, 114, 0.04) 48%, transparent 74%);
 }
 @utility veil-c {
-  background: radial-gradient(circle at 50% 55%, rgba(255, 255, 255, 0.07), rgba(184, 216, 232, 0.05) 42%, transparent 70%);
+  background: radial-gradient(circle at 50% 55%, rgba(255, 255, 255, 0.07), rgba(197, 165, 114, 0.05) 42%, transparent 70%);
 }
 
 @utility grain {

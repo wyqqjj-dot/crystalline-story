@@ -58,15 +58,17 @@ export function Genesis({ tRef, lite = false }: { tRef: { current: number }; lit
     const arr = attr.array as Float32Array;
     for (let i = 0; i < count; i++) {
       const i3 = i * 3;
+      const sx = scatter[i3] ?? 0;
+      const sy = scatter[i3 + 1] ?? 0;
+      const sz = scatter[i3 + 2] ?? 0;
+      const tx = target[i3] ?? 0;
+      const ty = target[i3 + 1] ?? 0;
+      const tz = target[i3 + 2] ?? 0;
       const drift = Math.sin(clock.current * 0.35 + i * 0.7) * 0.22 * (1 - pull);
-      arr[i3] = lerp(scatter[i3]! + drift, target[i3]!, pull);
-      arr[i3 + 1] = lerp(
-        scatter[i3 + 1]! + Math.cos(clock.current * 0.3 + i) * 0.28 * (1 - pull),
-        target[i3 + 1]!,
-        pull,
-      );
-      arr[i3 + 2] = lerp(scatter[i3 + 2]! - drift, target[i3 + 2]!, pull);
-    }
+      arr[i3] = lerp(sx + drift, tx, pull);
+      arr[i3 + 1] = lerp(sy + Math.cos(clock.current * 0.3 + i) * 0.28 * (1 - pull), ty, pull);
+      arr[i3 + 2] = lerp(sz - drift, tz, pull);
+   
     attr.needsUpdate = true;
 
     if (points.current) {
