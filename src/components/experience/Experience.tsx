@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Scene } from "./Scene";
 import { Panel } from "./Panel";
 import { IntroGate } from "./IntroGate";
+import { ForgeFilm } from "./ForgeFilm";
 import { journey, stationFor, type Station } from "@/lib/journey";
 
 /** how much upward wheel/touch travel (in px) completes the forge ritual */
