@@ -4,13 +4,12 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { ContactShadows, Environment, Lightformer } from "@react-three/drei";
 
 import { Bottle, GiftBox, Stopper } from "./models";
-import { Forge } from "./Forge";
 import { advanceJourney, bump, clamp01, ease, journey, lerp, overshoot, range } from "@/lib/journey";
 
 const HOME_X = -1.85; // left third of the screen
 const AUTO_SPIN = (Math.PI * 2) / 18; // one turn ≈ 18s
 
-export function Scene({ introRef }: { introRef: { current: number } }) {
+export function Scene({ introRef, lite = false }: { introRef: { current: number }; lite?: boolean }) {
   const root = useRef<THREE.Group>(null);
   const bottleGroup = useRef<THREE.Group>(null);
   const bottleSpin = useRef<THREE.Group>(null);
@@ -57,7 +56,7 @@ export function Scene({ introRef }: { introRef: { current: number } }) {
     }
     if (d.active) {
       // gravity + substeps so the contact never tunnels
-      const steps = 3;
+      const steps = lite ? 2 : 3;
       const h = dt / steps;
       for (let s = 0; s < steps; s++) {
         d.v -= 17 * h;
@@ -213,7 +212,7 @@ export function Scene({ introRef }: { introRef: { current: number } }) {
         color="#eaf6ff"
       />
 
-      <Environment resolution={256}>
+      <Environment resolution={lite ? 128 : 256}>
         <Lightformer intensity={3.6} position={[0, 5, 2]} scale={[10, 10, 1]} />
         <Lightformer
           intensity={2.2}
@@ -254,13 +253,12 @@ export function Scene({ introRef }: { introRef: { current: number } }) {
         </group>
       </Suspense>
 
-      <Forge tRef={introRef} />
-
       <ContactShadows
+        frames={lite ? 1 : Infinity}
         position={[0, -1.25, 0]}
         opacity={0.5}
         scale={14}
-        blur={3.2}
+        blur={lite ? 2.2 : 3.2}
         far={4}
         color="#000000"
       />
