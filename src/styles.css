@@ -8,9 +8,9 @@
   --font-display: "Poppins", "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --color-glass-100: oklch(0.968 0.014 232.5);
-  --color-glass-300: oklch(0.882 0.036 228.5);
-  --color-glass-500: oklch(0.79 0.052 226);
+  --color-glass-100: oklch(0.97 0 0);
+  --color-glass-300: oklch(0.82 0 0);
+  --color-glass-500: oklch(0.68 0.04 78);
 }
 
 
