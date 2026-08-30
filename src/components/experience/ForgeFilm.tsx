@@ -50,7 +50,7 @@ export function ForgeFilm({ tRef, done }: { tRef: { current: number }; done: boo
     >
       <video
         ref={video}
-        src={small ? FORGE.sd : FORGE.hd}
+        key={small ? "sd" : "hd"}
         poster={FORGE.poster}
         muted
         playsInline
@@ -58,7 +58,10 @@ export function ForgeFilm({ tRef, done }: { tRef: { current: number }; done: boo
         onLoadedData={() => setReady(true)}
         className="h-full w-full object-cover"
         style={{ opacity: ready ? 1 : 0, transition: "opacity 700ms" }}
-      />
+      >
+        <source src={small ? FORGE.sd : FORGE.hd} type="video/mp4" />
+        <source src={small ? FORGE.sdWebm : FORGE.hdWebm} type="video/webm" />
+      </video>
       {/* vignette so the overlay type stays legible over the pour */}
       <div className="absolute inset-0 bg-[radial-gradient(120%_90%_at_50%_45%,transparent_35%,rgba(0,0,0,0.72)_100%)]" />
     </div>
