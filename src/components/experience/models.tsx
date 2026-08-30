@@ -125,7 +125,7 @@ export const Stopper = forwardRef<THREE.Group, { opacity?: number }>(function St
   return (
     <group ref={ref}>
       {/* model is normalised to height 1 and centred on the origin */}
-      <group scale={0.62} position={[0, 0.16, 0]}>
+      <group scale={0.55} position={[0, 0.14, 0]}>
         <mesh geometry={geometry} castShadow>
           <meshPhysicalMaterial
             {...GLASS}

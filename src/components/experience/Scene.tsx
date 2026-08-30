@@ -196,7 +196,7 @@ export function Scene({ introRef, lite = false }: { introRef: { current: number 
   return (
     <group ref={root}>
       {/* three-point product lighting */}
-      <ambientLight intensity={0.25} />
+      <ambientLight intensity={0.42} />
       <directionalLight position={[-4, 5, 4]} intensity={2.6} castShadow />
       <directionalLight position={[4.5, 1.5, 3]} intensity={1.1} />
       <directionalLight position={[0, 3.5, -5]} intensity={2.2} color="#dbeaf2" />
@@ -213,16 +213,16 @@ export function Scene({ introRef, lite = false }: { introRef: { current: number 
       />
 
       <Environment resolution={lite ? 128 : 256}>
-        <Lightformer intensity={3.6} position={[0, 5, 2]} scale={[10, 10, 1]} />
+        <Lightformer intensity={5} position={[0, 5, 2]} scale={[12, 12, 1]} />
         <Lightformer
-          intensity={2.2}
-          color="#9fc4d6"
+          intensity={3}
+          color="#cfe4ee"
           position={[-6, 1, -2]}
           rotation-y={Math.PI / 2}
           scale={[18, 3, 1]}
         />
         <Lightformer
-          intensity={1.6}
+          intensity={0.7}
           color="#c5a572"
           position={[6, 0, 1]}
           rotation-y={-Math.PI / 2}
