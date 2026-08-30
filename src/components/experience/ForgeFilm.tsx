@@ -12,6 +12,7 @@ import { clamp01 } from "@/lib/journey";
  */
 export function ForgeFilm({ tRef, done }: { tRef: { current: number }; done: boolean }) {
   const video = useRef<HTMLVideoElement>(null);
+  const wrap = useRef<HTMLDivElement>(null);
   const [ready, setReady] = useState(false);
   const [small, setSmall] = useState(false);
 
@@ -22,18 +23,29 @@ export function ForgeFilm({ tRef, done }: { tRef: { current: number }; done: boo
   useEffect(() => {
     let raf = 0;
     let shownT = -1;
+    let shownO = -1;
     const loop = () => {
+      const t = clamp01(tRef.current);
       const el = video.current;
       if (el && el.duration > 0) {
-        // leave the last frames for the hand-off into the 3D bottle
-        const t = clamp01(tRef.current) * el.duration * 0.985;
-        if (Math.abs(t - shownT) > 0.012) {
-          shownT = t;
+        // the film owns the melt -> pipe -> mould section of the ritual
+        const u = clamp01((t - 0.38) / 0.62);
+        const time = u * el.duration * 0.985;
+        if (Math.abs(time - shownT) > 0.012) {
+          shownT = time;
           try {
-            el.currentTime = t;
+            el.currentTime = time;
           } catch {
             /* seeking not ready yet */
           }
+        }
+      }
+      if (wrap.current) {
+        // cross-fade in from the crystal stage
+        const o = clamp01((t - 0.3) / 0.14);
+        if (Math.abs(o - shownO) > 0.01) {
+          shownO = o;
+          wrap.current.style.opacity = String(o);
         }
       }
       raf = requestAnimationFrame(loop);
@@ -48,6 +60,8 @@ export function ForgeFilm({ tRef, done }: { tRef: { current: number }; done: boo
       style={{ opacity: done ? 0 : 1 }}
       aria-hidden
     >
+      <div ref={wrap} className="h-full w-full" style={{ opacity: 0 }}>
+
       <video
         ref={video}
         key={small ? "sd" : "hd"}
