@@ -68,7 +68,7 @@ export function Genesis({ tRef, lite = false }: { tRef: { current: number }; lit
       arr[i3] = lerp(sx + drift, tx, pull);
       arr[i3 + 1] = lerp(sy + Math.cos(clock.current * 0.3 + i) * 0.28 * (1 - pull), ty, pull);
       arr[i3 + 2] = lerp(sz - drift, tz, pull);
-   
+    }
     attr.needsUpdate = true;
 
     if (points.current) {
