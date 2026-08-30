@@ -137,22 +137,23 @@ export function Experience() {
     };
   }, []);
 
-  const inTrack = progress > 0 && progress < 1;
-
   return (
     <>
       {/* fixed WebGL stage */}
       <div className="fixed inset-0 z-0">
         <Canvas
           shadows="basic"
-          dpr={[1, 1.6]}
+          dpr={[1, mobile ? 1.15 : 1.6]}
           camera={{ position: [0, 0, 6.2], fov: 42 }}
-          gl={{ antialias: true, powerPreference: "high-performance" }}
+          gl={{ antialias: !mobile, powerPreference: "high-performance" }}
         >
           <color attach="background" args={["#0a0a0a"]} />
-          <Scene introRef={introRef} />
+          <Scene introRef={introRef} lite={mobile} />
         </Canvas>
       </div>
+
+      {/* scroll-scrubbed forge film — crystal, molten pour, mould, bottle */}
+      <ForgeFilm tRef={introRef} done={introDone} />
 
       <IntroGate progress={introProgress} done={introDone} />
 
