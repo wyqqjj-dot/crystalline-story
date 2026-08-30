@@ -158,8 +158,10 @@ export function Experience() {
           camera={{ position: [0, 0, 6.2], fov: 42 }}
           gl={{ antialias: !mobile, powerPreference: "high-performance" }}
         >
-          <color attach="background" args={["#0a0a0a"]} />
+          <color attach="background" args={["#000000"]} />
+          {!introDone && <Genesis tRef={introRef} lite={mobile} />}
           <Scene introRef={introRef} lite={mobile} />
+
         </Canvas>
       </div>
 
