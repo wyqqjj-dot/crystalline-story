@@ -1,23 +1,17 @@
-import bottleAsset from "@/assets/bottle.jpg.asset.json";
-import capAsset from "@/assets/cap.jpg.asset.json";
-import boxAsset from "@/assets/box.jpg.asset.json";
+import data from "./catalog-data.json";
+
 import productDoc from "@/assets/product-catalogue.pdf.asset.json";
 import boxDoc from "@/assets/liquor-box-catalogue.pdf.asset.json";
 
-export const DOCS = {
-  product: { url: productDoc.url, label: "Product catalogue", pages: 23 },
-  box: { url: boxDoc.url, label: "Liquor box catalogue", pages: 8 },
-} as const;
+export const FORGE = data.forge;
+export const CAP_MODEL = data.capModel;
 
 export type CatalogItem = {
   ref: string;
   name: string;
   spec: string;
+  note: string;
   image: string;
-  /** deep link into the supplied PDF catalogue, page-anchored */
-  doc: string;
-  docLabel: string;
-  docPage: number;
 };
 
 export type CatalogCategory = {
@@ -25,80 +19,39 @@ export type CatalogCategory = {
   label: string;
   title: string;
   lead: string;
+  /** full source catalogue, offered as a download rather than an embed */
+  docUrl: string;
+  docLabel: string;
   items: CatalogItem[];
 };
-
-const grid = (
-  prefix: string,
-  image: string,
-  names: [string, string][],
-  doc: (typeof DOCS)[keyof typeof DOCS],
-  firstPage: number,
-): CatalogItem[] =>
-  names.map(([name, spec], i) => {
-    const docPage = ((firstPage - 1 + i) % doc.pages) + 1;
-    return {
-      ref: `${prefix}-${String(i + 1).padStart(3, "0")}`,
-      name,
-      spec,
-      image,
-      doc: `${doc.url}#page=${docPage}&view=FitH`,
-      docLabel: doc.label,
-      docPage,
-    };
-  });
 
 export const CATALOG: CatalogCategory[] = [
   {
     slug: "bottles",
     label: "Bottles",
     title: "Glass bodies",
-    lead: "Super-flint bottles blown to custom moulds — spirits, liqueur, olive oil and fragrance formats from 50 ml to 1,500 ml.",
-    items: grid("CQ", bottleAsset.url, [
-      ["Straight decanter", "750 ml · flint · GPI 28-400"],
-      ["Tall shoulder", "700 ml · flint · cork finish"],
-      ["Faceted square", "500 ml · extra-flint"],
-      ["Round classic", "500 ml · flint · screw"],
-      ["Slim column", "375 ml · flint · cork"],
-      ["Wide base", "1,000 ml · flint · screw"],
-      ["Hip flask", "200 ml · flint · screw"],
-      ["Miniature", "50 ml · flint · cork"],
-      ["Heavy punt", "750 ml · extra-flint"],
-    ], DOCS.product, 2),
+    lead: "Super-flint and coloured glass bottles blown to custom moulds — spirits, liqueur, wine and fragrance formats from 50 ml to 1,500 ml. Every reference below is a mould we already run.",
+    docUrl: productDoc.url,
+    docLabel: "Product catalogue (PDF)",
+    items: data.bottles as CatalogItem[],
   },
   {
     slug: "closures",
     label: "Closures",
     title: "Caps & stoppers",
-    lead: "Glass, cork, timber and metal closures, pressure-tested against the matching neck finish.",
-    items: grid("CAP", capAsset.url, [
-      ["Faceted glass head", "Glass + natural cork"],
-      ["Domed glass head", "Glass + agglomerate cork"],
-      ["Timber top", "Oak + natural cork"],
-      ["Polished metal", "Zamak + T-cork"],
-      ["Gold plated", "Zamak · 24k finish"],
-      ["Matte black", "Zamak · soft-touch"],
-      ["Aluminium screw", "28-400 · pilfer-proof"],
-      ["Pourer insert", "PE + cork"],
-      ["Wax dip ready", "Cork · wax compatible"],
-    ], DOCS.product, 12),
+    lead: "Cork, glass, timber and metal closures, each matched to its neck finish and pressure-tested for an airtight seal.",
+    docUrl: productDoc.url,
+    docLabel: "Product catalogue (PDF)",
+    items: data.closures as CatalogItem[],
   },
   {
     slug: "cases",
-    label: "Cases",
+    label: "Packaging",
     title: "Presentation packaging",
-    lead: "Timber, leather-wrapped and rigid board cases with velvet or foam interiors, drop-tested for export.",
-    items: grid("PACK", boxAsset.url, [
-      ["Twin-door timber", "Solid timber · red velvet"],
-      ["Sliding lid timber", "Solid timber · foam"],
-      ["Hinged lid timber", "Pine · satin lining"],
-      ["Leather wrap", "PU leather · magnet"],
-      ["Rigid board", "Grey board · foil print"],
-      ["Two-bottle case", "Timber · twin cradle"],
-      ["Tube case", "Kraft · foam insert"],
-      ["Drawer case", "Rigid board · ribbon"],
-      ["Shipper carton", "5-ply · partitioned"],
-    ], DOCS.box, 1),
+    lead: "Timber, leather-wrapped, rigid board and kraft packaging with velvet or foam interiors, drop-tested for export transit.",
+    docUrl: boxDoc.url,
+    docLabel: "Liquor box catalogue (PDF)",
+    items: data.cases as CatalogItem[],
   },
 ];
 
