@@ -1,0 +1,2100 @@
+{
+"bottles": [
+{
+"ref": "CQ-001",
+"name": "Cognac Flask B1",
+"spec": "100 ml \u00b7 Extra-flint \u00b7 Cork finish 19 mm",
+"note": "Flat cognac body, tall neck",
+"image": "/__l5e/assets-v1/44030fd4-1b3c-499f-a23c-6cdd01252895/bottle-CQ-001.jpg"
+},
+{
+"ref": "CQ-002",
+"name": "Cognac Flask C2",
+"spec": "200 ml \u00b7 Flint \u00b7 Cork finish 21.5 mm",
+"note": "Flat cognac body, tall neck",
+"image": "/__l5e/assets-v1/64cdada7-158a-4b3d-a78c-63807c5307f8/bottle-CQ-002.jpg"
+},
+{
+"ref": "CQ-003",
+"name": "Cognac Flask D3",
+"spec": "375 ml \u00b7 Antique green \u00b7 ROPP 30\u00d760",
+"note": "Flat cognac body, tall neck",
+"image": "/__l5e/assets-v1/faadb76a-9b07-4077-8d0e-25249e9aac99/bottle-CQ-003.jpg"
+},
+{
+"ref": "CQ-004",
+"name": "Cognac Flask E4",
+"spec": "500 ml \u00b7 Amber \u00b7 Guala fitment",
+"note": "Flat cognac body, tall neck",
+"image": "/__l5e/assets-v1/b1ea4190-4efd-42ff-8238-c3dfb08666de/bottle-CQ-004.jpg"
+},
+{
+"ref": "CQ-005",
+"name": "Brandy Taper F5",
+"spec": "700 ml \u00b7 Super-flint \u00b7 T-cork finish",
+"note": "Tapered brandy body",
+"image": "/__l5e/assets-v1/b1ca1a0b-5650-4dd8-975c-251ca6a06175/bottle-CQ-005.jpg"
+},
+{
+"ref": "CQ-006",
+"name": "Brandy Taper A6",
+"spec": "750 ml \u00b7 Extra-flint \u00b7 GPI 28-400 screw",
+"note": "Tapered brandy body",
+"image": "/__l5e/assets-v1/8782253d-8286-4dbd-9666-eeca2fe822df/bottle-CQ-006.jpg"
+},
+{
+"ref": "CQ-007",
+"name": "Brandy Taper B7",
+"spec": "1,000 ml \u00b7 Flint \u00b7 Cork finish 19 mm",
+"note": "Tapered brandy body",
+"image": "/__l5e/assets-v1/1d110a2a-691d-436f-b2cc-01cb1f19f80f/bottle-CQ-007.jpg"
+},
+{
+"ref": "CQ-008",
+"name": "Brandy Taper C8",
+"spec": "1,500 ml \u00b7 Antique green \u00b7 Cork finish 21.5 mm",
+"note": "Tapered brandy body",
+"image": "/__l5e/assets-v1/5f0475b6-f7c8-4278-854e-db3f2db631f9/bottle-CQ-008.jpg"
+},
+{
+"ref": "CQ-009",
+"name": "Brandy Taper D9",
+"spec": "50 ml \u00b7 Amber \u00b7 ROPP 30\u00d760",
+"note": "Tapered brandy body",
+"image": "/__l5e/assets-v1/d5edd001-7309-4504-9b71-370f79b2e7ff/bottle-CQ-009.jpg"
+},
+{
+"ref": "CQ-010",
+"name": "Brandy Taper E0",
+"spec": "100 ml \u00b7 Super-flint \u00b7 Guala fitment",
+"note": "Tapered brandy body",
+"image": "/__l5e/assets-v1/0ea9fdf5-5215-4921-af42-b5a8ab5fcb22/bottle-CQ-010.jpg"
+},
+{
+"ref": "CQ-011",
+"name": "Spirit Column F1",
+"spec": "200 ml \u00b7 Extra-flint \u00b7 T-cork finish",
+"note": "Slim straight-wall column",
+"image": "/__l5e/assets-v1/15f48305-b383-4030-9e77-bb53a0eeece3/bottle-CQ-011.jpg"
+},
+{
+"ref": "CQ-012",
+"name": "Spirit Column A2",
+"spec": "375 ml \u00b7 Flint \u00b7 GPI 28-400 screw",
+"note": "Slim straight-wall column",
+"image": "/__l5e/assets-v1/aac6e118-c8bf-4ef7-950c-65246a65d9a3/bottle-CQ-012.jpg"
+},
+{
+"ref": "CQ-013",
+"name": "Spirit Column B3",
+"spec": "500 ml \u00b7 Antique green \u00b7 Cork finish 19 mm",
+"note": "Slim straight-wall column",
+"image": "/__l5e/assets-v1/d007e1b2-de4a-4a0b-b67c-22a098d4399f/bottle-CQ-013.jpg"
+},
+{
+"ref": "CQ-014",
+"name": "Spirit Column C4",
+"spec": "700 ml \u00b7 Amber \u00b7 Cork finish 21.5 mm",
+"note": "Slim straight-wall column",
+"image": "/__l5e/assets-v1/89730555-aa9c-4756-8f59-6184dbcfbdd3/bottle-CQ-014.jpg"
+},
+{
+"ref": "CQ-015",
+"name": "Spirit Column D5",
+"spec": "750 ml \u00b7 Super-flint \u00b7 ROPP 30\u00d760",
+"note": "Slim straight-wall column",
+"image": "/__l5e/assets-v1/7b07ce91-9ece-402e-ba20-24866551c428/bottle-CQ-015.jpg"
+},
+{
+"ref": "CQ-016",
+"name": "Spirit Column E6",
+"spec": "1,000 ml \u00b7 Extra-flint \u00b7 Guala fitment",
+"note": "Slim straight-wall column",
+"image": "/__l5e/assets-v1/d105f8d5-90a5-43ec-969a-cf7e9aea04fb/bottle-CQ-016.jpg"
+},
+{
+"ref": "CQ-017",
+"name": "Spirit Column F7",
+"spec": "1,500 ml \u00b7 Flint \u00b7 T-cork finish",
+"note": "Slim straight-wall column",
+"image": "/__l5e/assets-v1/62a935e7-69b4-46b4-901a-ced2ddbd7041/bottle-CQ-017.jpg"
+},
+{
+"ref": "CQ-018",
+"name": "Spirit Column A8",
+"spec": "50 ml \u00b7 Antique green \u00b7 GPI 28-400 screw",
+"note": "Slim straight-wall column",
+"image": "/__l5e/assets-v1/e98b3cef-9ff1-417e-93fe-c1ba976167d2/bottle-CQ-018.jpg"
+},
+{
+"ref": "CQ-019",
+"name": "Spirit Column B9",
+"spec": "100 ml \u00b7 Amber \u00b7 Cork finish 19 mm",
+"note": "Slim straight-wall column",
+"image": "/__l5e/assets-v1/623dadd4-0924-4a83-8301-1e5fb907da8f/bottle-CQ-019.jpg"
+},
+{
+"ref": "CQ-020",
+"name": "Spirit Column C0",
+"spec": "200 ml \u00b7 Super-flint \u00b7 Cork finish 21.5 mm",
+"note": "Slim straight-wall column",
+"image": "/__l5e/assets-v1/fad02368-bab6-415c-982a-78e2e6ea00f1/bottle-CQ-020.jpg"
+},
+{
+"ref": "CQ-021",
+"name": "Round Shoulder D1",
+"spec": "375 ml \u00b7 Extra-flint \u00b7 ROPP 30\u00d760",
+"note": "Round vodka / gin body",
+"image": "/__l5e/assets-v1/ee7b851c-2bf6-4eea-9027-23d4f8a17935/bottle-CQ-021.jpg"
+},
+{
+"ref": "CQ-022",
+"name": "Round Shoulder E2",
+"spec": "500 ml \u00b7 Flint \u00b7 Guala fitment",
+"note": "Round vodka / gin body",
+"image": "/__l5e/assets-v1/b1b9cae3-b596-482d-a682-4003cc7c68b3/bottle-CQ-022.jpg"
+},
+{
+"ref": "CQ-023",
+"name": "Round Shoulder F3",
+"spec": "700 ml \u00b7 Antique green \u00b7 T-cork finish",
+"note": "Round vodka / gin body",
+"image": "/__l5e/assets-v1/3693a40d-1056-4c88-9c30-5b0e37ed47a4/bottle-CQ-023.jpg"
+},
+{
+"ref": "CQ-024",
+"name": "Round Shoulder A4",
+"spec": "750 ml \u00b7 Amber \u00b7 GPI 28-400 screw",
+"note": "Round vodka / gin body",
+"image": "/__l5e/assets-v1/0c51e57c-14a7-48b5-9172-98689f8a72d6/bottle-CQ-024.jpg"
+},
+{
+"ref": "CQ-025",
+"name": "Round Shoulder B5",
+"spec": "1,000 ml \u00b7 Super-flint \u00b7 Cork finish 19 mm",
+"note": "Round vodka / gin body",
+"image": "/__l5e/assets-v1/2938c547-a051-4adf-97e9-2b4d6bdc9d26/bottle-CQ-025.jpg"
+},
+{
+"ref": "CQ-026",
+"name": "Round Shoulder C6",
+"spec": "1,500 ml \u00b7 Extra-flint \u00b7 Cork finish 21.5 mm",
+"note": "Round vodka / gin body",
+"image": "/__l5e/assets-v1/6f64cbcc-6b22-4cf9-b99a-950a6361440e/bottle-CQ-026.jpg"
+},
+{
+"ref": "CQ-027",
+"name": "Round Shoulder D7",
+"spec": "50 ml \u00b7 Flint \u00b7 ROPP 30\u00d760",
+"note": "Round vodka / gin body",
+"image": "/__l5e/assets-v1/037f3cd1-86b8-4ac7-a8c4-9b471d7b1221/bottle-CQ-027.jpg"
+},
+{
+"ref": "CQ-028",
+"name": "Round Shoulder E8",
+"spec": "100 ml \u00b7 Antique green \u00b7 Guala fitment",
+"note": "Round vodka / gin body",
+"image": "/__l5e/assets-v1/9e9333ce-b5ff-4f87-a3c3-80abb1229e55/bottle-CQ-028.jpg"
+},
+{
+"ref": "CQ-029",
+"name": "Round Shoulder F9",
+"spec": "200 ml \u00b7 Amber \u00b7 T-cork finish",
+"note": "Round vodka / gin body",
+"image": "/__l5e/assets-v1/26504bf9-b0da-4ef8-9171-e059648f588a/bottle-CQ-029.jpg"
+},
+{
+"ref": "CQ-030",
+"name": "Round Shoulder A0",
+"spec": "375 ml \u00b7 Super-flint \u00b7 GPI 28-400 screw",
+"note": "Round vodka / gin body",
+"image": "/__l5e/assets-v1/ff8d5899-9289-4e83-8db6-90374d469e3b/bottle-CQ-030.jpg"
+},
+{
+"ref": "CQ-031",
+"name": "Tall Shoulder B1",
+"spec": "500 ml \u00b7 Extra-flint \u00b7 Cork finish 19 mm",
+"note": "Tall sloped-shoulder body",
+"image": "/__l5e/assets-v1/0c3afbe8-1fde-48cb-92cb-137fdffb782d/bottle-CQ-031.jpg"
+},
+{
+"ref": "CQ-032",
+"name": "Tall Shoulder C2",
+"spec": "700 ml \u00b7 Flint \u00b7 Cork finish 21.5 mm",
+"note": "Tall sloped-shoulder body",
+"image": "/__l5e/assets-v1/cac3fb13-16ae-4913-8af4-72686581a3f6/bottle-CQ-032.jpg"
+},
+{
+"ref": "CQ-033",
+"name": "Tall Shoulder D3",
+"spec": "750 ml \u00b7 Antique green \u00b7 ROPP 30\u00d760",
+"note": "Tall sloped-shoulder body",
+"image": "/__l5e/assets-v1/5b8114df-7c0d-4059-98e6-1a22295a1610/bottle-CQ-033.jpg"
+},
+{
+"ref": "CQ-034",
+"name": "Tall Shoulder E4",
+"spec": "1,000 ml \u00b7 Amber \u00b7 Guala fitment",
+"note": "Tall sloped-shoulder body",
+"image": "/__l5e/assets-v1/14bb36d3-ce8d-49e0-aada-6b99ead30fff/bottle-CQ-034.jpg"
+},
+{
+"ref": "CQ-035",
+"name": "Tall Shoulder F5",
+"spec": "1,500 ml \u00b7 Super-flint \u00b7 T-cork finish",
+"note": "Tall sloped-shoulder body",
+"image": "/__l5e/assets-v1/6d7e49ff-b2a4-4d61-855c-57a88de05eca/bottle-CQ-035.jpg"
+},
+{
+"ref": "CQ-036",
+"name": "Tall Shoulder A6",
+"spec": "50 ml \u00b7 Extra-flint \u00b7 GPI 28-400 screw",
+"note": "Tall sloped-shoulder body",
+"image": "/__l5e/assets-v1/7f7c8236-ad30-4913-8469-10a8cf6e1d98/bottle-CQ-036.jpg"
+},
+{
+"ref": "CQ-037",
+"name": "Tall Shoulder B7",
+"spec": "100 ml \u00b7 Flint \u00b7 Cork finish 19 mm",
+"note": "Tall sloped-shoulder body",
+"image": "/__l5e/assets-v1/bd4dfad4-3ebe-4e2f-ad46-9b70d4cc3f16/bottle-CQ-037.jpg"
+},
+{
+"ref": "CQ-038",
+"name": "Tall Shoulder C8",
+"spec": "200 ml \u00b7 Antique green \u00b7 Cork finish 21.5 mm",
+"note": "Tall sloped-shoulder body",
+"image": "/__l5e/assets-v1/46214554-8aaa-477e-8afc-658109291527/bottle-CQ-038.jpg"
+},
+{
+"ref": "CQ-039",
+"name": "Tall Shoulder D9",
+"spec": "375 ml \u00b7 Amber \u00b7 ROPP 30\u00d760",
+"note": "Tall sloped-shoulder body",
+"image": "/__l5e/assets-v1/be65336a-8db5-4462-8a64-84d40cfad7bb/bottle-CQ-039.jpg"
+},
+{
+"ref": "CQ-040",
+"name": "Tall Shoulder E0",
+"spec": "500 ml \u00b7 Super-flint \u00b7 Guala fitment",
+"note": "Tall sloped-shoulder body",
+"image": "/__l5e/assets-v1/d3deee1c-c297-4556-8f2d-1fbd4bb7a5cc/bottle-CQ-040.jpg"
+},
+{
+"ref": "CQ-041",
+"name": "Square Facet F1",
+"spec": "700 ml \u00b7 Extra-flint \u00b7 T-cork finish",
+"note": "Squared, hard-edge body",
+"image": "/__l5e/assets-v1/6168f742-be47-49e8-83cc-c389a537b858/bottle-CQ-041.jpg"
+},
+{
+"ref": "CQ-042",
+"name": "Square Facet A2",
+"spec": "750 ml \u00b7 Flint \u00b7 GPI 28-400 screw",
+"note": "Squared, hard-edge body",
+"image": "/__l5e/assets-v1/bbe117e4-6d2e-4789-bfd0-478bfe18bd21/bottle-CQ-042.jpg"
+},
+{
+"ref": "CQ-043",
+"name": "Square Facet B3",
+"spec": "1,000 ml \u00b7 Antique green \u00b7 Cork finish 19 mm",
+"note": "Squared, hard-edge body",
+"image": "/__l5e/assets-v1/e0a6841e-afd3-47ce-a6fd-ab176f92d252/bottle-CQ-043.jpg"
+},
+{
+"ref": "CQ-044",
+"name": "Square Facet C4",
+"spec": "1,500 ml \u00b7 Amber \u00b7 Cork finish 21.5 mm",
+"note": "Squared, hard-edge body",
+"image": "/__l5e/assets-v1/a8603ff5-98e0-474a-a149-e0fe74ee0907/bottle-CQ-044.jpg"
+},
+{
+"ref": "CQ-045",
+"name": "Square Facet D5",
+"spec": "50 ml \u00b7 Super-flint \u00b7 ROPP 30\u00d760",
+"note": "Squared, hard-edge body",
+"image": "/__l5e/assets-v1/1464af1c-2425-46e5-8619-69c000c959bb/bottle-CQ-045.jpg"
+},
+{
+"ref": "CQ-046",
+"name": "Square Facet E6",
+"spec": "100 ml \u00b7 Extra-flint \u00b7 Guala fitment",
+"note": "Squared, hard-edge body",
+"image": "/__l5e/assets-v1/83e59836-189f-43ee-b3ca-9dba01f36d3c/bottle-CQ-046.jpg"
+},
+{
+"ref": "CQ-047",
+"name": "Square Facet F7",
+"spec": "200 ml \u00b7 Flint \u00b7 T-cork finish",
+"note": "Squared, hard-edge body",
+"image": "/__l5e/assets-v1/b6c6b702-b617-4539-89d5-b622a4073b55/bottle-CQ-047.jpg"
+},
+{
+"ref": "CQ-048",
+"name": "Square Facet A8",
+"spec": "375 ml \u00b7 Antique green \u00b7 GPI 28-400 screw",
+"note": "Squared, hard-edge body",
+"image": "/__l5e/assets-v1/bed8717a-d38a-479a-b026-a2cbec3150f1/bottle-CQ-048.jpg"
+},
+{
+"ref": "CQ-049",
+"name": "Square Facet B9",
+"spec": "500 ml \u00b7 Amber \u00b7 Cork finish 19 mm",
+"note": "Squared, hard-edge body",
+"image": "/__l5e/assets-v1/9dc36b4c-768a-490a-9e80-13e516e22489/bottle-CQ-049.jpg"
+},
+{
+"ref": "CQ-050",
+"name": "Square Facet C0",
+"spec": "700 ml \u00b7 Super-flint \u00b7 Cork finish 21.5 mm",
+"note": "Squared, hard-edge body",
+"image": "/__l5e/assets-v1/bdb1ba21-75b8-415d-8c8c-717a23533529/bottle-CQ-050.jpg"
+},
+{
+"ref": "CQ-051",
+"name": "Sculpted Decanter D1",
+"spec": "750 ml \u00b7 Extra-flint \u00b7 ROPP 30\u00d760",
+"note": "Sculpted, mould-blown decanter",
+"image": "/__l5e/assets-v1/8a44f321-18d5-44b1-8d92-42c479962bc0/bottle-CQ-051.jpg"
+},
+{
+"ref": "CQ-052",
+"name": "Sculpted Decanter E2",
+"spec": "1,000 ml \u00b7 Flint \u00b7 Guala fitment",
+"note": "Sculpted, mould-blown decanter",
+"image": "/__l5e/assets-v1/66c420af-8053-44f8-98ee-9928ae3fa5f5/bottle-CQ-052.jpg"
+},
+{
+"ref": "CQ-053",
+"name": "Sculpted Decanter F3",
+"spec": "1,500 ml \u00b7 Antique green \u00b7 T-cork finish",
+"note": "Sculpted, mould-blown decanter",
+"image": "/__l5e/assets-v1/09dc3db2-79e0-4921-9207-3778561dc313/bottle-CQ-053.jpg"
+},
+{
+"ref": "CQ-054",
+"name": "Sculpted Decanter A4",
+"spec": "50 ml \u00b7 Amber \u00b7 GPI 28-400 screw",
+"note": "Sculpted, mould-blown decanter",
+"image": "/__l5e/assets-v1/9dd067d0-7a2e-4607-a6c5-3bd485893e0e/bottle-CQ-054.jpg"
+},
+{
+"ref": "CQ-055",
+"name": "Sculpted Decanter B5",
+"spec": "100 ml \u00b7 Super-flint \u00b7 Cork finish 19 mm",
+"note": "Sculpted, mould-blown decanter",
+"image": "/__l5e/assets-v1/88c84a81-bba7-4e6a-833d-ea2fb57ce317/bottle-CQ-055.jpg"
+},
+{
+"ref": "CQ-056",
+"name": "Sculpted Decanter C6",
+"spec": "200 ml \u00b7 Extra-flint \u00b7 Cork finish 21.5 mm",
+"note": "Sculpted, mould-blown decanter",
+"image": "/__l5e/assets-v1/5540d6bf-d010-4341-8a4e-1b816dacb6f4/bottle-CQ-056.jpg"
+},
+{
+"ref": "CQ-057",
+"name": "Sculpted Decanter D7",
+"spec": "375 ml \u00b7 Flint \u00b7 ROPP 30\u00d760",
+"note": "Sculpted, mould-blown decanter",
+"image": "/__l5e/assets-v1/12f52c4e-d458-4cbe-a927-42aa02e19db2/bottle-CQ-057.jpg"
+},
+{
+"ref": "CQ-058",
+"name": "Sculpted Decanter E8",
+"spec": "500 ml \u00b7 Antique green \u00b7 Guala fitment",
+"note": "Sculpted, mould-blown decanter",
+"image": "/__l5e/assets-v1/917f57bc-738b-428a-8d50-cb0d35b3dba4/bottle-CQ-058.jpg"
+},
+{
+"ref": "CQ-059",
+"name": "Sculpted Decanter F9",
+"spec": "700 ml \u00b7 Amber \u00b7 T-cork finish",
+"note": "Sculpted, mould-blown decanter",
+"image": "/__l5e/assets-v1/36a20462-22e7-4907-bafc-f8f9335fa207/bottle-CQ-059.jpg"
+},
+{
+"ref": "CQ-060",
+"name": "Sculpted Decanter A0",
+"spec": "750 ml \u00b7 Super-flint \u00b7 GPI 28-400 screw",
+"note": "Sculpted, mould-blown decanter",
+"image": "/__l5e/assets-v1/73197257-1e5e-4e7f-9d29-6d45d04069b5/bottle-CQ-060.jpg"
+},
+{
+"ref": "CQ-061",
+"name": "Fluted Body B1",
+"spec": "1,000 ml \u00b7 Extra-flint \u00b7 Cork finish 19 mm",
+"note": "Fluted / frosted surface",
+"image": "/__l5e/assets-v1/58e6ebbd-9d90-46ea-866b-d226447bfd0b/bottle-CQ-061.jpg"
+},
+{
+"ref": "CQ-062",
+"name": "Fluted Body C2",
+"spec": "1,500 ml \u00b7 Flint \u00b7 Cork finish 21.5 mm",
+"note": "Fluted / frosted surface",
+"image": "/__l5e/assets-v1/30b0e805-cf04-4471-a29a-cf36a058058b/bottle-CQ-062.jpg"
+},
+{
+"ref": "CQ-063",
+"name": "Fluted Body D3",
+"spec": "50 ml \u00b7 Antique green \u00b7 ROPP 30\u00d760",
+"note": "Fluted / frosted surface",
+"image": "/__l5e/assets-v1/9a9e0af0-28ad-4cd1-95ae-5766aaf7c72e/bottle-CQ-063.jpg"
+},
+{
+"ref": "CQ-064",
+"name": "Fluted Body E4",
+"spec": "100 ml \u00b7 Amber \u00b7 Guala fitment",
+"note": "Fluted / frosted surface",
+"image": "/__l5e/assets-v1/696e1fc2-cc76-4fef-80d1-f8baf6bc03cd/bottle-CQ-064.jpg"
+},
+{
+"ref": "CQ-065",
+"name": "Fluted Body F5",
+"spec": "200 ml \u00b7 Super-flint \u00b7 T-cork finish",
+"note": "Fluted / frosted surface",
+"image": "/__l5e/assets-v1/ed8c2e90-6937-4f2a-84d6-ddb93c764ffc/bottle-CQ-065.jpg"
+},
+{
+"ref": "CQ-066",
+"name": "Fluted Body A6",
+"spec": "375 ml \u00b7 Extra-flint \u00b7 GPI 28-400 screw",
+"note": "Fluted / frosted surface",
+"image": "/__l5e/assets-v1/de2594e7-4a2a-4e1c-b704-f2bbaa785c20/bottle-CQ-066.jpg"
+},
+{
+"ref": "CQ-067",
+"name": "Fluted Body B7",
+"spec": "500 ml \u00b7 Flint \u00b7 Cork finish 19 mm",
+"note": "Fluted / frosted surface",
+"image": "/__l5e/assets-v1/40c509c3-cf87-4477-9818-4b9c9de79464/bottle-CQ-067.jpg"
+},
+{
+"ref": "CQ-068",
+"name": "Fluted Body C8",
+"spec": "700 ml \u00b7 Antique green \u00b7 Cork finish 21.5 mm",
+"note": "Fluted / frosted surface",
+"image": "/__l5e/assets-v1/75f4fdf7-d63a-4142-8861-05abcfad32ce/bottle-CQ-068.jpg"
+},
+{
+"ref": "CQ-069",
+"name": "Fluted Body D9",
+"spec": "750 ml \u00b7 Amber \u00b7 ROPP 30\u00d760",
+"note": "Fluted / frosted surface",
+"image": "/__l5e/assets-v1/fff02c80-4f5d-419e-8c24-7c6f82283601/bottle-CQ-069.jpg"
+},
+{
+"ref": "CQ-070",
+"name": "Fluted Body E0",
+"spec": "1,000 ml \u00b7 Super-flint \u00b7 Guala fitment",
+"note": "Fluted / frosted surface",
+"image": "/__l5e/assets-v1/cf09f1c6-26c0-41e3-85d6-00d507278de5/bottle-CQ-070.jpg"
+},
+{
+"ref": "CQ-071",
+"name": "Coated Body F1",
+"spec": "1,500 ml \u00b7 Extra-flint \u00b7 T-cork finish",
+"note": "Spray-coated gradient body",
+"image": "/__l5e/assets-v1/bd5857d3-8435-4004-a539-7a150d59c7d9/bottle-CQ-071.jpg"
+},
+{
+"ref": "CQ-072",
+"name": "Coated Body A2",
+"spec": "50 ml \u00b7 Flint \u00b7 GPI 28-400 screw",
+"note": "Spray-coated gradient body",
+"image": "/__l5e/assets-v1/7c705432-4d35-4f4d-b86f-e9cc3eb5c941/bottle-CQ-072.jpg"
+},
+{
+"ref": "CQ-073",
+"name": "Coated Body B3",
+"spec": "100 ml \u00b7 Antique green \u00b7 Cork finish 19 mm",
+"note": "Spray-coated gradient body",
+"image": "/__l5e/assets-v1/7f7afbec-4a1f-44ed-ad75-231606cbcd47/bottle-CQ-073.jpg"
+},
+{
+"ref": "CQ-074",
+"name": "Coated Body C4",
+"spec": "200 ml \u00b7 Amber \u00b7 Cork finish 21.5 mm",
+"note": "Spray-coated gradient body",
+"image": "/__l5e/assets-v1/0b309832-fcf4-4afb-9557-a6b8839dd94a/bottle-CQ-074.jpg"
+},
+{
+"ref": "CQ-075",
+"name": "Coated Body D5",
+"spec": "375 ml \u00b7 Super-flint \u00b7 ROPP 30\u00d760",
+"note": "Spray-coated gradient body",
+"image": "/__l5e/assets-v1/1463d356-1851-44b5-b26e-092e46dd261e/bottle-CQ-075.jpg"
+},
+{
+"ref": "CQ-076",
+"name": "Coated Body E6",
+"spec": "500 ml \u00b7 Extra-flint \u00b7 Guala fitment",
+"note": "Spray-coated gradient body",
+"image": "/__l5e/assets-v1/9194be80-99f1-4d51-b81b-0f14d2ec675d/bottle-CQ-076.jpg"
+},
+{
+"ref": "CQ-077",
+"name": "Coated Body F7",
+"spec": "700 ml \u00b7 Flint \u00b7 T-cork finish",
+"note": "Spray-coated gradient body",
+"image": "/__l5e/assets-v1/c191ffbb-534b-4c41-b408-5f5d424c3091/bottle-CQ-077.jpg"
+},
+{
+"ref": "CQ-078",
+"name": "Coated Body A8",
+"spec": "750 ml \u00b7 Antique green \u00b7 GPI 28-400 screw",
+"note": "Spray-coated gradient body",
+"image": "/__l5e/assets-v1/e75a3546-33c8-4228-a9c2-1ee2e798bd64/bottle-CQ-078.jpg"
+},
+{
+"ref": "CQ-079",
+"name": "Coated Body B9",
+"spec": "1,000 ml \u00b7 Amber \u00b7 Cork finish 19 mm",
+"note": "Spray-coated gradient body",
+"image": "/__l5e/assets-v1/c32d0851-fd7a-434a-9075-e3733e65000d/bottle-CQ-079.jpg"
+},
+{
+"ref": "CQ-080",
+"name": "Coated Body C0",
+"spec": "1,500 ml \u00b7 Super-flint \u00b7 Cork finish 21.5 mm",
+"note": "Spray-coated gradient body",
+"image": "/__l5e/assets-v1/a8424ba9-1cc6-42c4-bb1b-6bc0e441816e/bottle-CQ-080.jpg"
+},
+{
+"ref": "CQ-081",
+"name": "Wine Punt D1",
+"spec": "50 ml \u00b7 Extra-flint \u00b7 ROPP 30\u00d760",
+"note": "Wine / champagne body with punt",
+"image": "/__l5e/assets-v1/5f9db548-aeab-4140-97d6-7f74e75f13c8/bottle-CQ-081.jpg"
+},
+{
+"ref": "CQ-082",
+"name": "Wine Punt E2",
+"spec": "100 ml \u00b7 Flint \u00b7 Guala fitment",
+"note": "Wine / champagne body with punt",
+"image": "/__l5e/assets-v1/b6d99851-87c4-4111-8a6e-4d8162acf39f/bottle-CQ-082.jpg"
+},
+{
+"ref": "CQ-083",
+"name": "Wine Punt F3",
+"spec": "200 ml \u00b7 Antique green \u00b7 T-cork finish",
+"note": "Wine / champagne body with punt",
+"image": "/__l5e/assets-v1/2f09f392-018b-4d5f-80f5-0f559d27419f/bottle-CQ-083.jpg"
+},
+{
+"ref": "CQ-084",
+"name": "Wine Punt A4",
+"spec": "375 ml \u00b7 Amber \u00b7 GPI 28-400 screw",
+"note": "Wine / champagne body with punt",
+"image": "/__l5e/assets-v1/ca4dadab-67b6-4f37-b54e-f43192c05957/bottle-CQ-084.jpg"
+},
+{
+"ref": "CQ-085",
+"name": "Wine Punt B5",
+"spec": "500 ml \u00b7 Super-flint \u00b7 Cork finish 19 mm",
+"note": "Wine / champagne body with punt",
+"image": "/__l5e/assets-v1/615d7b7b-c832-4ff7-9eb6-97d19b653496/bottle-CQ-085.jpg"
+},
+{
+"ref": "CQ-086",
+"name": "Wine Punt C6",
+"spec": "700 ml \u00b7 Extra-flint \u00b7 Cork finish 21.5 mm",
+"note": "Wine / champagne body with punt",
+"image": "/__l5e/assets-v1/16cd32c1-9aad-407a-a909-089aefe4d027/bottle-CQ-086.jpg"
+},
+{
+"ref": "CQ-087",
+"name": "Wine Punt D7",
+"spec": "750 ml \u00b7 Flint \u00b7 ROPP 30\u00d760",
+"note": "Wine / champagne body with punt",
+"image": "/__l5e/assets-v1/25584731-7bc4-452e-bd6b-85cb5a37ead7/bottle-CQ-087.jpg"
+},
+{
+"ref": "CQ-088",
+"name": "Wine Punt E8",
+"spec": "1,000 ml \u00b7 Antique green \u00b7 Guala fitment",
+"note": "Wine / champagne body with punt",
+"image": "/__l5e/assets-v1/b6c9dece-9721-4841-85cd-23e2a6276fbf/bottle-CQ-088.jpg"
+},
+{
+"ref": "CQ-089",
+"name": "Wine Punt F9",
+"spec": "1,500 ml \u00b7 Amber \u00b7 T-cork finish",
+"note": "Wine / champagne body with punt",
+"image": "/__l5e/assets-v1/36422efa-4c4a-4fcc-983b-3f9e43aefa11/bottle-CQ-089.jpg"
+},
+{
+"ref": "CQ-090",
+"name": "Wine Punt A0",
+"spec": "50 ml \u00b7 Super-flint \u00b7 GPI 28-400 screw",
+"note": "Wine / champagne body with punt",
+"image": "/__l5e/assets-v1/6d565611-00b7-41b8-a693-88f7cefbc3ef/bottle-CQ-090.jpg"
+},
+{
+"ref": "CQ-091",
+"name": "Crystal Decanter B1",
+"spec": "100 ml \u00b7 Extra-flint \u00b7 Cork finish 19 mm",
+"note": "Heavy pressed crystal decanter",
+"image": "/__l5e/assets-v1/5f583929-3def-4902-9d54-42ba36cbc3e1/bottle-CQ-091.jpg"
+},
+{
+"ref": "CQ-092",
+"name": "Crystal Decanter C2",
+"spec": "200 ml \u00b7 Flint \u00b7 Cork finish 21.5 mm",
+"note": "Heavy pressed crystal decanter",
+"image": "/__l5e/assets-v1/21bc8208-0e2d-41ab-931c-9ff8ca086c38/bottle-CQ-092.jpg"
+},
+{
+"ref": "CQ-093",
+"name": "Crystal Decanter D3",
+"spec": "375 ml \u00b7 Antique green \u00b7 ROPP 30\u00d760",
+"note": "Heavy pressed crystal decanter",
+"image": "/__l5e/assets-v1/b6a9aa36-b075-4d85-93f2-f51a08241307/bottle-CQ-093.jpg"
+},
+{
+"ref": "CQ-094",
+"name": "Crystal Decanter E4",
+"spec": "500 ml \u00b7 Amber \u00b7 Guala fitment",
+"note": "Heavy pressed crystal decanter",
+"image": "/__l5e/assets-v1/603c363f-0c72-4ccd-988f-2c792bf8f6e1/bottle-CQ-094.jpg"
+},
+{
+"ref": "CQ-095",
+"name": "Crystal Decanter F5",
+"spec": "700 ml \u00b7 Super-flint \u00b7 T-cork finish",
+"note": "Heavy pressed crystal decanter",
+"image": "/__l5e/assets-v1/5ff9bcf6-2d5c-437a-b39b-5cd623bd2d5d/bottle-CQ-095.jpg"
+},
+{
+"ref": "CQ-096",
+"name": "Crystal Decanter A6",
+"spec": "750 ml \u00b7 Extra-flint \u00b7 GPI 28-400 screw",
+"note": "Heavy pressed crystal decanter",
+"image": "/__l5e/assets-v1/a7d49d6f-2453-4673-96f4-35031e20863d/bottle-CQ-096.jpg"
+},
+{
+"ref": "CQ-097",
+"name": "Crystal Decanter B7",
+"spec": "1,000 ml \u00b7 Flint \u00b7 Cork finish 19 mm",
+"note": "Heavy pressed crystal decanter",
+"image": "/__l5e/assets-v1/da9b16db-8a5c-4e4c-8ef3-fdf3bb579d6c/bottle-CQ-097.jpg"
+},
+{
+"ref": "CQ-098",
+"name": "Crystal Decanter C8",
+"spec": "1,500 ml \u00b7 Antique green \u00b7 Cork finish 21.5 mm",
+"note": "Heavy pressed crystal decanter",
+"image": "/__l5e/assets-v1/26d14136-64dc-4e68-9efe-1016c943d9e1/bottle-CQ-098.jpg"
+},
+{
+"ref": "CQ-099",
+"name": "Crystal Decanter D9",
+"spec": "50 ml \u00b7 Amber \u00b7 ROPP 30\u00d760",
+"note": "Heavy pressed crystal decanter",
+"image": "/__l5e/assets-v1/4a67dab0-56af-48ed-b29a-d5808f530c35/bottle-CQ-099.jpg"
+},
+{
+"ref": "CQ-100",
+"name": "Crystal Decanter E0",
+"spec": "100 ml \u00b7 Super-flint \u00b7 Guala fitment",
+"note": "Heavy pressed crystal decanter",
+"image": "/__l5e/assets-v1/277ea8d2-c5e1-462b-b0a5-1e37b5b80f00/bottle-CQ-100.jpg"
+},
+{
+"ref": "CQ-101",
+"name": "Classic Spirit F1",
+"spec": "200 ml \u00b7 Extra-flint \u00b7 T-cork finish",
+"note": "Classic spirit body",
+"image": "/__l5e/assets-v1/57174a29-d028-49a5-9249-9f833f13d8e0/bottle-CQ-101.jpg"
+},
+{
+"ref": "CQ-102",
+"name": "Classic Spirit A2",
+"spec": "375 ml \u00b7 Flint \u00b7 GPI 28-400 screw",
+"note": "Classic spirit body",
+"image": "/__l5e/assets-v1/73fd610e-e80b-4629-974f-f7014768edd3/bottle-CQ-102.jpg"
+},
+{
+"ref": "CQ-103",
+"name": "Classic Spirit B3",
+"spec": "500 ml \u00b7 Antique green \u00b7 Cork finish 19 mm",
+"note": "Classic spirit body",
+"image": "/__l5e/assets-v1/148d9f1a-f2b3-4a14-8338-cbd64e01dc80/bottle-CQ-103.jpg"
+},
+{
+"ref": "CQ-104",
+"name": "Classic Spirit C4",
+"spec": "700 ml \u00b7 Amber \u00b7 Cork finish 21.5 mm",
+"note": "Classic spirit body",
+"image": "/__l5e/assets-v1/8912a4ea-8306-40a2-aa8c-0aa4b7786160/bottle-CQ-104.jpg"
+},
+{
+"ref": "CQ-105",
+"name": "Classic Spirit D5",
+"spec": "750 ml \u00b7 Super-flint \u00b7 ROPP 30\u00d760",
+"note": "Classic spirit body",
+"image": "/__l5e/assets-v1/bf95a00b-f9b5-46fc-ae86-f999dbc9d5ae/bottle-CQ-105.jpg"
+},
+{
+"ref": "CQ-106",
+"name": "Classic Spirit E6",
+"spec": "1,000 ml \u00b7 Extra-flint \u00b7 Guala fitment",
+"note": "Classic spirit body",
+"image": "/__l5e/assets-v1/7d8a7013-c44d-469d-b333-7f8c4b3f8734/bottle-CQ-106.jpg"
+},
+{
+"ref": "CQ-107",
+"name": "Classic Spirit F7",
+"spec": "1,500 ml \u00b7 Flint \u00b7 T-cork finish",
+"note": "Classic spirit body",
+"image": "/__l5e/assets-v1/e15adc04-77e3-4db0-a53c-2b25b181975b/bottle-CQ-107.jpg"
+},
+{
+"ref": "CQ-108",
+"name": "Classic Spirit A8",
+"spec": "50 ml \u00b7 Antique green \u00b7 GPI 28-400 screw",
+"note": "Classic spirit body",
+"image": "/__l5e/assets-v1/2b9174e4-dc9b-4f07-9e6a-50e1bf57e929/bottle-CQ-108.jpg"
+},
+{
+"ref": "CQ-109",
+"name": "Classic Spirit B9",
+"spec": "100 ml \u00b7 Amber \u00b7 Cork finish 19 mm",
+"note": "Classic spirit body",
+"image": "/__l5e/assets-v1/f12947d5-80bc-4e3e-8c53-d444aa7a2257/bottle-CQ-109.jpg"
+},
+{
+"ref": "CQ-110",
+"name": "Classic Spirit C0",
+"spec": "200 ml \u00b7 Super-flint \u00b7 Cork finish 21.5 mm",
+"note": "Classic spirit body",
+"image": "/__l5e/assets-v1/9602e14e-a3cd-4e0a-b0df-aacf6817708c/bottle-CQ-110.jpg"
+},
+{
+"ref": "CQ-111",
+"name": "Art Form D1",
+"spec": "375 ml \u00b7 Extra-flint \u00b7 ROPP 30\u00d760",
+"note": "Free-form art bottle",
+"image": "/__l5e/assets-v1/55af511c-9d4e-4f8a-b052-7f8a18846013/bottle-CQ-111.jpg"
+},
+{
+"ref": "CQ-112",
+"name": "Art Form E2",
+"spec": "500 ml \u00b7 Flint \u00b7 Guala fitment",
+"note": "Free-form art bottle",
+"image": "/__l5e/assets-v1/092f3c11-c998-40b0-ba68-885f70907056/bottle-CQ-112.jpg"
+},
+{
+"ref": "CQ-113",
+"name": "Art Form F3",
+"spec": "700 ml \u00b7 Antique green \u00b7 T-cork finish",
+"note": "Free-form art bottle",
+"image": "/__l5e/assets-v1/641a0891-3307-43ed-8118-a5274a6ed4c9/bottle-CQ-113.jpg"
+},
+{
+"ref": "CQ-114",
+"name": "Art Form A4",
+"spec": "750 ml \u00b7 Amber \u00b7 GPI 28-400 screw",
+"note": "Free-form art bottle",
+"image": "/__l5e/assets-v1/2757b87c-843c-4068-8e7b-d992abec241b/bottle-CQ-114.jpg"
+},
+{
+"ref": "CQ-115",
+"name": "Art Form B5",
+"spec": "1,000 ml \u00b7 Super-flint \u00b7 Cork finish 19 mm",
+"note": "Free-form art bottle",
+"image": "/__l5e/assets-v1/2f7212d1-b85c-4d76-9754-7cca945165ab/bottle-CQ-115.jpg"
+},
+{
+"ref": "CQ-116",
+"name": "Art Form C6",
+"spec": "1,500 ml \u00b7 Extra-flint \u00b7 Cork finish 21.5 mm",
+"note": "Free-form art bottle",
+"image": "/__l5e/assets-v1/8c71295b-88a4-48b9-907c-f91d993e00d7/bottle-CQ-116.jpg"
+},
+{
+"ref": "CQ-117",
+"name": "Art Form D7",
+"spec": "50 ml \u00b7 Flint \u00b7 ROPP 30\u00d760",
+"note": "Free-form art bottle",
+"image": "/__l5e/assets-v1/011ce9ad-2ed6-466a-ba47-cf6964f81b5b/bottle-CQ-117.jpg"
+},
+{
+"ref": "CQ-118",
+"name": "Art Form E8",
+"spec": "100 ml \u00b7 Antique green \u00b7 Guala fitment",
+"note": "Free-form art bottle",
+"image": "/__l5e/assets-v1/382c2bd6-f95b-45ee-9876-b85b0f8efd33/bottle-CQ-118.jpg"
+},
+{
+"ref": "CQ-119",
+"name": "Art Form F9",
+"spec": "200 ml \u00b7 Amber \u00b7 T-cork finish",
+"note": "Free-form art bottle",
+"image": "/__l5e/assets-v1/882b72ae-99e2-4e10-9168-db102d2ae92d/bottle-CQ-119.jpg"
+},
+{
+"ref": "CQ-120",
+"name": "Art Form A0",
+"spec": "375 ml \u00b7 Super-flint \u00b7 GPI 28-400 screw",
+"note": "Free-form art bottle",
+"image": "/__l5e/assets-v1/c73b063c-d490-465a-a261-d314580df883/bottle-CQ-120.jpg"
+},
+{
+"ref": "CQ-121",
+"name": "Matte Colour B1",
+"spec": "500 ml \u00b7 Extra-flint \u00b7 Cork finish 19 mm",
+"note": "Full matte colour coating",
+"image": "/__l5e/assets-v1/79fbef50-7d00-438b-a232-db0d806876e2/bottle-CQ-121.jpg"
+},
+{
+"ref": "CQ-122",
+"name": "Matte Colour C2",
+"spec": "700 ml \u00b7 Flint \u00b7 Cork finish 21.5 mm",
+"note": "Full matte colour coating",
+"image": "/__l5e/assets-v1/dd7b3a6b-9d59-479d-b56e-b4f1c0683f6b/bottle-CQ-122.jpg"
+},
+{
+"ref": "CQ-123",
+"name": "Matte Colour D3",
+"spec": "750 ml \u00b7 Antique green \u00b7 ROPP 30\u00d760",
+"note": "Full matte colour coating",
+"image": "/__l5e/assets-v1/938e8851-e987-4962-90da-50fe6a97cd49/bottle-CQ-123.jpg"
+},
+{
+"ref": "CQ-124",
+"name": "Matte Colour E4",
+"spec": "1,000 ml \u00b7 Amber \u00b7 Guala fitment",
+"note": "Full matte colour coating",
+"image": "/__l5e/assets-v1/5bbe1d1f-0736-4353-87c2-338bf9b66cb7/bottle-CQ-124.jpg"
+},
+{
+"ref": "CQ-125",
+"name": "Matte Colour F5",
+"spec": "1,500 ml \u00b7 Super-flint \u00b7 T-cork finish",
+"note": "Full matte colour coating",
+"image": "/__l5e/assets-v1/dae186b5-3be5-420b-9bff-9f27a5650438/bottle-CQ-125.jpg"
+},
+{
+"ref": "CQ-126",
+"name": "Matte Colour A6",
+"spec": "50 ml \u00b7 Extra-flint \u00b7 GPI 28-400 screw",
+"note": "Full matte colour coating",
+"image": "/__l5e/assets-v1/2799f1ed-66c2-4ed1-98b3-94e023157704/bottle-CQ-126.jpg"
+},
+{
+"ref": "CQ-127",
+"name": "Matte Colour B7",
+"spec": "100 ml \u00b7 Flint \u00b7 Cork finish 19 mm",
+"note": "Full matte colour coating",
+"image": "/__l5e/assets-v1/2832c914-7f13-442a-af80-87ac6b414183/bottle-CQ-127.jpg"
+},
+{
+"ref": "CQ-128",
+"name": "Matte Colour C8",
+"spec": "200 ml \u00b7 Antique green \u00b7 Cork finish 21.5 mm",
+"note": "Full matte colour coating",
+"image": "/__l5e/assets-v1/3d42de2a-9d17-4d28-b398-6953baa9b634/bottle-CQ-128.jpg"
+},
+{
+"ref": "CQ-129",
+"name": "Matte Colour D9",
+"spec": "375 ml \u00b7 Amber \u00b7 ROPP 30\u00d760",
+"note": "Full matte colour coating",
+"image": "/__l5e/assets-v1/99947b96-6696-4cdf-a685-34109864e8c9/bottle-CQ-129.jpg"
+},
+{
+"ref": "CQ-130",
+"name": "Matte Colour E0",
+"spec": "500 ml \u00b7 Super-flint \u00b7 Guala fitment",
+"note": "Full matte colour coating",
+"image": "/__l5e/assets-v1/54ab457f-ebb0-40df-abb4-a459e1b57af3/bottle-CQ-130.jpg"
+},
+{
+"ref": "CQ-131",
+"name": "Print Ready F1",
+"spec": "700 ml \u00b7 Extra-flint \u00b7 T-cork finish",
+"note": "Decoration-ready body",
+"image": "/__l5e/assets-v1/85c9f919-db0c-4171-8506-c733785529bb/bottle-CQ-131.jpg"
+},
+{
+"ref": "CQ-132",
+"name": "Print Ready A2",
+"spec": "750 ml \u00b7 Flint \u00b7 GPI 28-400 screw",
+"note": "Decoration-ready body",
+"image": "/__l5e/assets-v1/5220b05a-5d97-4f74-b8de-55fe09c071eb/bottle-CQ-132.jpg"
+},
+{
+"ref": "CQ-133",
+"name": "Print Ready B3",
+"spec": "1,000 ml \u00b7 Antique green \u00b7 Cork finish 19 mm",
+"note": "Decoration-ready body",
+"image": "/__l5e/assets-v1/1a286c81-9155-478e-a37e-405e2ee00aef/bottle-CQ-133.jpg"
+},
+{
+"ref": "CQ-134",
+"name": "Print Ready C4",
+"spec": "1,500 ml \u00b7 Amber \u00b7 Cork finish 21.5 mm",
+"note": "Decoration-ready body",
+"image": "/__l5e/assets-v1/87c9348a-c367-4834-be90-47f4e2dc935f/bottle-CQ-134.jpg"
+},
+{
+"ref": "CQ-135",
+"name": "Print Ready D5",
+"spec": "50 ml \u00b7 Super-flint \u00b7 ROPP 30\u00d760",
+"note": "Decoration-ready body",
+"image": "/__l5e/assets-v1/2370967e-d549-4512-81f6-5a309869c385/bottle-CQ-135.jpg"
+},
+{
+"ref": "CQ-136",
+"name": "Print Ready E6",
+"spec": "100 ml \u00b7 Extra-flint \u00b7 Guala fitment",
+"note": "Decoration-ready body",
+"image": "/__l5e/assets-v1/e02d86b2-cc1a-4173-8eaa-70a7f858507d/bottle-CQ-136.jpg"
+},
+{
+"ref": "CQ-137",
+"name": "Print Ready F7",
+"spec": "200 ml \u00b7 Flint \u00b7 T-cork finish",
+"note": "Decoration-ready body",
+"image": "/__l5e/assets-v1/7e902e42-d650-4518-b486-0c99ced62895/bottle-CQ-137.jpg"
+},
+{
+"ref": "CQ-138",
+"name": "Print Ready A8",
+"spec": "375 ml \u00b7 Antique green \u00b7 GPI 28-400 screw",
+"note": "Decoration-ready body",
+"image": "/__l5e/assets-v1/1cc93c0b-a059-403d-94ac-3f381acc1630/bottle-CQ-138.jpg"
+},
+{
+"ref": "CQ-139",
+"name": "Print Ready B9",
+"spec": "500 ml \u00b7 Amber \u00b7 Cork finish 19 mm",
+"note": "Decoration-ready body",
+"image": "/__l5e/assets-v1/e2b1dd93-aacb-4b73-8835-1698f9a6ce55/bottle-CQ-139.jpg"
+},
+{
+"ref": "CQ-140",
+"name": "Print Ready C0",
+"spec": "700 ml \u00b7 Super-flint \u00b7 Cork finish 21.5 mm",
+"note": "Decoration-ready body",
+"image": "/__l5e/assets-v1/b7dc94a2-952e-46dd-a51e-da7138f0e0f8/bottle-CQ-140.jpg"
+},
+{
+"ref": "CQ-141",
+"name": "Dark Glass D1",
+"spec": "750 ml \u00b7 Extra-flint \u00b7 ROPP 30\u00d760",
+"note": "Antique / dark glass body",
+"image": "/__l5e/assets-v1/10a00b31-cb9f-46ae-b34b-d9c77857db76/bottle-CQ-141.jpg"
+},
+{
+"ref": "CQ-142",
+"name": "Dark Glass E2",
+"spec": "1,000 ml \u00b7 Flint \u00b7 Guala fitment",
+"note": "Antique / dark glass body",
+"image": "/__l5e/assets-v1/ec76eafd-995d-43aa-80e2-426138cde772/bottle-CQ-142.jpg"
+},
+{
+"ref": "CQ-143",
+"name": "Dark Glass F3",
+"spec": "1,500 ml \u00b7 Antique green \u00b7 T-cork finish",
+"note": "Antique / dark glass body",
+"image": "/__l5e/assets-v1/853cb69a-5883-402c-9bf1-1c8e5af445bb/bottle-CQ-143.jpg"
+},
+{
+"ref": "CQ-144",
+"name": "Dark Glass A4",
+"spec": "50 ml \u00b7 Amber \u00b7 GPI 28-400 screw",
+"note": "Antique / dark glass body",
+"image": "/__l5e/assets-v1/12f57687-177d-41ac-ade3-ed3f29090c89/bottle-CQ-144.jpg"
+}
+],
+"closures": [
+{
+"ref": "CAP-145",
+"name": "Timber Top Cork B5",
+"spec": "Natural cork + zamak \u00b7 \u00d8 36 mm",
+"note": "Solid wood head on natural cork",
+"image": "/__l5e/assets-v1/2bc89578-6bf5-4557-9163-c5c44a7de371/cap-CQ-145.jpg"
+},
+{
+"ref": "CAP-146",
+"name": "Timber Top Cork C6",
+"spec": "Agglomerate cork + glass \u00b7 \u00d8 38 mm",
+"note": "Solid wood head on natural cork",
+"image": "/__l5e/assets-v1/3826ca59-1fa5-4aea-854c-00496d65aa87/cap-CQ-146.jpg"
+},
+{
+"ref": "CAP-147",
+"name": "Timber Top Cork D7",
+"spec": "Aluminium + PE liner \u00b7 \u00d8 26 mm",
+"note": "Solid wood head on natural cork",
+"image": "/__l5e/assets-v1/507ca383-bfcf-49cf-a007-4be4baed0244/cap-CQ-147.jpg"
+},
+{
+"ref": "CAP-148",
+"name": "Timber Top Cork E8",
+"spec": "Pressed glass + PVC gasket \u00b7 \u00d8 28 mm",
+"note": "Solid wood head on natural cork",
+"image": "/__l5e/assets-v1/8b3c8c67-7192-44f1-8b2f-887e4c8bf614/cap-CQ-148.jpg"
+},
+{
+"ref": "CAP-149",
+"name": "Timber Top Cork F9",
+"spec": "Composite + wood veneer \u00b7 \u00d8 30 mm",
+"note": "Solid wood head on natural cork",
+"image": "/__l5e/assets-v1/bc64f74e-40b1-4ebe-9f6b-7ca41838bba4/cap-CQ-149.jpg"
+},
+{
+"ref": "CAP-150",
+"name": "Timber Top Cork A0",
+"spec": "Natural cork + oak \u00b7 \u00d8 32 mm",
+"note": "Solid wood head on natural cork",
+"image": "/__l5e/assets-v1/fe1c464e-5955-4e9a-b85e-e3102c802516/cap-CQ-150.jpg"
+},
+{
+"ref": "CAP-151",
+"name": "Timber Top Cork B1",
+"spec": "Natural cork + zamak \u00b7 \u00d8 34 mm",
+"note": "Solid wood head on natural cork",
+"image": "/__l5e/assets-v1/d85d8622-5179-4b4e-b7b9-bb0946937e5c/cap-CQ-151.jpg"
+},
+{
+"ref": "CAP-152",
+"name": "Timber Top Cork C2",
+"spec": "Agglomerate cork + glass \u00b7 \u00d8 36 mm",
+"note": "Solid wood head on natural cork",
+"image": "/__l5e/assets-v1/5dee5968-39c6-4b03-a9b5-5f0e8d2f35ee/cap-CQ-152.jpg"
+},
+{
+"ref": "CAP-153",
+"name": "Timber Top Cork D3",
+"spec": "Aluminium + PE liner \u00b7 \u00d8 38 mm",
+"note": "Solid wood head on natural cork",
+"image": "/__l5e/assets-v1/ca080e04-418c-4acb-aa45-61acfd7b3bfe/cap-CQ-153.jpg"
+},
+{
+"ref": "CAP-154",
+"name": "Timber Top Cork E4",
+"spec": "Pressed glass + PVC gasket \u00b7 \u00d8 26 mm",
+"note": "Solid wood head on natural cork",
+"image": "/__l5e/assets-v1/bfbc613e-1637-4ccd-ac77-f298582ae26b/cap-CQ-154.jpg"
+},
+{
+"ref": "CAP-155",
+"name": "Timber Top Cork F5",
+"spec": "Composite + wood veneer \u00b7 \u00d8 28 mm",
+"note": "Solid wood head on natural cork",
+"image": "/__l5e/assets-v1/0f9f3bcd-dc32-458d-bb67-c8282f971ef8/cap-CQ-155.jpg"
+},
+{
+"ref": "CAP-156",
+"name": "Metal Head Cork A6",
+"spec": "Natural cork + oak \u00b7 \u00d8 30 mm",
+"note": "Anodised metal head on cork",
+"image": "/__l5e/assets-v1/c8b8e46d-6abc-4e99-8429-6acc18c0550f/cap-CQ-156.jpg"
+},
+{
+"ref": "CAP-157",
+"name": "Metal Head Cork B7",
+"spec": "Natural cork + zamak \u00b7 \u00d8 32 mm",
+"note": "Anodised metal head on cork",
+"image": "/__l5e/assets-v1/dedf99c6-9b91-45fb-8525-0a39a592bd82/cap-CQ-157.jpg"
+},
+{
+"ref": "CAP-158",
+"name": "Metal Head Cork C8",
+"spec": "Agglomerate cork + glass \u00b7 \u00d8 34 mm",
+"note": "Anodised metal head on cork",
+"image": "/__l5e/assets-v1/e882729d-eab4-4e64-8a6e-f85eaf5caa56/cap-CQ-158.jpg"
+},
+{
+"ref": "CAP-159",
+"name": "Metal Head Cork D9",
+"spec": "Aluminium + PE liner \u00b7 \u00d8 36 mm",
+"note": "Anodised metal head on cork",
+"image": "/__l5e/assets-v1/2a311ddb-d48c-4c61-a3ea-897ac3f5b299/cap-CQ-159.jpg"
+},
+{
+"ref": "CAP-160",
+"name": "Metal Head Cork E0",
+"spec": "Pressed glass + PVC gasket \u00b7 \u00d8 38 mm",
+"note": "Anodised metal head on cork",
+"image": "/__l5e/assets-v1/12f57580-53c9-4af1-8519-6c21ae2369ee/cap-CQ-160.jpg"
+},
+{
+"ref": "CAP-161",
+"name": "Metal Head Cork F1",
+"spec": "Composite + wood veneer \u00b7 \u00d8 26 mm",
+"note": "Anodised metal head on cork",
+"image": "/__l5e/assets-v1/116e054b-5229-49c5-8594-7cdd8db9fe42/cap-CQ-161.jpg"
+},
+{
+"ref": "CAP-162",
+"name": "Metal Head Cork A2",
+"spec": "Natural cork + oak \u00b7 \u00d8 28 mm",
+"note": "Anodised metal head on cork",
+"image": "/__l5e/assets-v1/0dc15753-cf08-4fa0-915c-473088358191/cap-CQ-162.jpg"
+},
+{
+"ref": "CAP-163",
+"name": "Metal Head Cork B3",
+"spec": "Natural cork + zamak \u00b7 \u00d8 30 mm",
+"note": "Anodised metal head on cork",
+"image": "/__l5e/assets-v1/6128f995-73ba-4bc5-9b4c-cfec5a878b2f/cap-CQ-163.jpg"
+},
+{
+"ref": "CAP-164",
+"name": "Metal Head Cork C4",
+"spec": "Agglomerate cork + glass \u00b7 \u00d8 32 mm",
+"note": "Anodised metal head on cork",
+"image": "/__l5e/assets-v1/257f862a-7160-4f94-8cb4-0c9e5b1e2385/cap-CQ-164.jpg"
+},
+{
+"ref": "CAP-165",
+"name": "Metal Head Cork D5",
+"spec": "Aluminium + PE liner \u00b7 \u00d8 34 mm",
+"note": "Anodised metal head on cork",
+"image": "/__l5e/assets-v1/cdff8c13-b233-48c5-8f55-84e5986dd313/cap-CQ-165.jpg"
+},
+{
+"ref": "CAP-166",
+"name": "Ornament Stopper E6",
+"spec": "Pressed glass + PVC gasket \u00b7 \u00d8 36 mm",
+"note": "Pressed glass ornament head",
+"image": "/__l5e/assets-v1/6634e1c0-9963-4ad2-a42a-1d2c36eb691e/cap-CQ-166.jpg"
+},
+{
+"ref": "CAP-167",
+"name": "Ornament Stopper F7",
+"spec": "Composite + wood veneer \u00b7 \u00d8 38 mm",
+"note": "Pressed glass ornament head",
+"image": "/__l5e/assets-v1/bf7d3bf5-9492-458d-b24d-90ceeb23cb5d/cap-CQ-167.jpg"
+},
+{
+"ref": "CAP-168",
+"name": "Ornament Stopper A8",
+"spec": "Natural cork + oak \u00b7 \u00d8 26 mm",
+"note": "Pressed glass ornament head",
+"image": "/__l5e/assets-v1/bcbbaef2-aff8-43b0-b344-2ff792e71d37/cap-CQ-168.jpg"
+},
+{
+"ref": "CAP-169",
+"name": "Ornament Stopper B9",
+"spec": "Natural cork + zamak \u00b7 \u00d8 28 mm",
+"note": "Pressed glass ornament head",
+"image": "/__l5e/assets-v1/ba4555c7-8f1d-4236-8277-a0516e085e05/cap-CQ-169.jpg"
+},
+{
+"ref": "CAP-170",
+"name": "Ornament Stopper C0",
+"spec": "Agglomerate cork + glass \u00b7 \u00d8 30 mm",
+"note": "Pressed glass ornament head",
+"image": "/__l5e/assets-v1/c403583f-3928-4369-9295-89d93810b83f/cap-CQ-170.jpg"
+},
+{
+"ref": "CAP-171",
+"name": "Ornament Stopper D1",
+"spec": "Aluminium + PE liner \u00b7 \u00d8 32 mm",
+"note": "Pressed glass ornament head",
+"image": "/__l5e/assets-v1/063a50f1-9069-4feb-ad21-a6fca00e5329/cap-CQ-171.jpg"
+},
+{
+"ref": "CAP-172",
+"name": "Ornament Stopper E2",
+"spec": "Pressed glass + PVC gasket \u00b7 \u00d8 34 mm",
+"note": "Pressed glass ornament head",
+"image": "/__l5e/assets-v1/8148ae9f-32a3-45d2-bb34-51250784b7a7/cap-CQ-172.jpg"
+},
+{
+"ref": "CAP-173",
+"name": "Aluminium Screw F3",
+"spec": "Composite + wood veneer \u00b7 \u00d8 36 mm",
+"note": "ROPP / pilfer-proof screw cap",
+"image": "/__l5e/assets-v1/f70a846c-55f2-4840-869f-31d087a2f822/cap-CQ-173.jpg"
+},
+{
+"ref": "CAP-174",
+"name": "Aluminium Screw A4",
+"spec": "Natural cork + oak \u00b7 \u00d8 38 mm",
+"note": "ROPP / pilfer-proof screw cap",
+"image": "/__l5e/assets-v1/403cdd25-b51e-4659-bbea-5374fc5a0128/cap-CQ-174.jpg"
+},
+{
+"ref": "CAP-175",
+"name": "Aluminium Screw B5",
+"spec": "Natural cork + zamak \u00b7 \u00d8 26 mm",
+"note": "ROPP / pilfer-proof screw cap",
+"image": "/__l5e/assets-v1/5b084e92-e764-4db2-b223-b5c3e7559c9d/cap-CQ-175.jpg"
+},
+{
+"ref": "CAP-176",
+"name": "Aluminium Screw C6",
+"spec": "Agglomerate cork + glass \u00b7 \u00d8 28 mm",
+"note": "ROPP / pilfer-proof screw cap",
+"image": "/__l5e/assets-v1/cdbc14ac-658f-48fc-85d3-d40bf2a67efe/cap-CQ-176.jpg"
+},
+{
+"ref": "CAP-177",
+"name": "Aluminium Screw D7",
+"spec": "Aluminium + PE liner \u00b7 \u00d8 30 mm",
+"note": "ROPP / pilfer-proof screw cap",
+"image": "/__l5e/assets-v1/962d7572-2a98-48e7-8c99-3cc01811967a/cap-CQ-177.jpg"
+},
+{
+"ref": "CAP-178",
+"name": "Aluminium Screw E8",
+"spec": "Pressed glass + PVC gasket \u00b7 \u00d8 32 mm",
+"note": "ROPP / pilfer-proof screw cap",
+"image": "/__l5e/assets-v1/b73ac91d-616d-438f-854b-6e32f4d319af/cap-CQ-178.jpg"
+},
+{
+"ref": "CAP-179",
+"name": "Aluminium Screw F9",
+"spec": "Composite + wood veneer \u00b7 \u00d8 34 mm",
+"note": "ROPP / pilfer-proof screw cap",
+"image": "/__l5e/assets-v1/7c5ace80-cad4-4902-9cce-1f2e6b95f4db/cap-CQ-179.jpg"
+},
+{
+"ref": "CAP-180",
+"name": "Aluminium Screw A0",
+"spec": "Natural cork + oak \u00b7 \u00d8 36 mm",
+"note": "ROPP / pilfer-proof screw cap",
+"image": "/__l5e/assets-v1/9b2c6eb9-ea2a-44bc-a551-2d480c64144d/cap-CQ-180.jpg"
+},
+{
+"ref": "CAP-181",
+"name": "Aluminium Screw B1",
+"spec": "Natural cork + zamak \u00b7 \u00d8 38 mm",
+"note": "ROPP / pilfer-proof screw cap",
+"image": "/__l5e/assets-v1/6e0299a8-9eb4-4458-bde9-769422423c9f/cap-CQ-181.jpg"
+},
+{
+"ref": "CAP-182",
+"name": "Aluminium Screw C2",
+"spec": "Agglomerate cork + glass \u00b7 \u00d8 26 mm",
+"note": "ROPP / pilfer-proof screw cap",
+"image": "/__l5e/assets-v1/5c16aff3-7b69-4300-9727-a5aad166fef6/cap-CQ-182.jpg"
+},
+{
+"ref": "CAP-183",
+"name": "Aluminium Screw D3",
+"spec": "Aluminium + PE liner \u00b7 \u00d8 28 mm",
+"note": "ROPP / pilfer-proof screw cap",
+"image": "/__l5e/assets-v1/5b74d4bd-5549-450b-9842-2e85325a05a9/cap-CQ-183.jpg"
+},
+{
+"ref": "CAP-184",
+"name": "Aluminium Screw E4",
+"spec": "Pressed glass + PVC gasket \u00b7 \u00d8 30 mm",
+"note": "ROPP / pilfer-proof screw cap",
+"image": "/__l5e/assets-v1/e16f526d-1060-4982-8db5-40c420f8b742/cap-CQ-184.jpg"
+},
+{
+"ref": "CAP-185",
+"name": "Aluminium Screw F5",
+"spec": "Composite + wood veneer \u00b7 \u00d8 32 mm",
+"note": "ROPP / pilfer-proof screw cap",
+"image": "/__l5e/assets-v1/81f2febd-a64b-4ebd-accc-8a729156e58e/cap-CQ-185.jpg"
+},
+{
+"ref": "CAP-186",
+"name": "Aluminium Screw A6",
+"spec": "Natural cork + oak \u00b7 \u00d8 34 mm",
+"note": "ROPP / pilfer-proof screw cap",
+"image": "/__l5e/assets-v1/ac5febf7-63fc-441a-98fa-a8b58f1e6582/cap-CQ-186.jpg"
+},
+{
+"ref": "CAP-187",
+"name": "Composite Lid B7",
+"spec": "Natural cork + zamak \u00b7 \u00d8 36 mm",
+"note": "Composite disc lid",
+"image": "/__l5e/assets-v1/bc7c0c8d-ce0d-4615-a260-f743928da647/cap-CQ-187.jpg"
+},
+{
+"ref": "CAP-188",
+"name": "Composite Lid C8",
+"spec": "Agglomerate cork + glass \u00b7 \u00d8 38 mm",
+"note": "Composite disc lid",
+"image": "/__l5e/assets-v1/3eea201f-4a8f-451a-b526-f7734e8f25b8/cap-CQ-188.jpg"
+},
+{
+"ref": "CAP-189",
+"name": "Composite Lid D9",
+"spec": "Aluminium + PE liner \u00b7 \u00d8 26 mm",
+"note": "Composite disc lid",
+"image": "/__l5e/assets-v1/181e15db-5b41-4a65-a734-941e6bc2a6d8/cap-CQ-189.jpg"
+},
+{
+"ref": "CAP-190",
+"name": "Composite Lid E0",
+"spec": "Pressed glass + PVC gasket \u00b7 \u00d8 28 mm",
+"note": "Composite disc lid",
+"image": "/__l5e/assets-v1/063783b3-b8f6-47cb-bb1c-60e9064e061b/cap-CQ-190.jpg"
+},
+{
+"ref": "CAP-191",
+"name": "Pressed Glass Stopper F1",
+"spec": "Composite + wood veneer \u00b7 \u00d8 30 mm",
+"note": "Solid pressed glass stopper",
+"image": "/__l5e/assets-v1/e68cd575-ff64-47bf-bb12-f4351210e156/cap-CQ-191.jpg"
+},
+{
+"ref": "CAP-192",
+"name": "Pressed Glass Stopper A2",
+"spec": "Natural cork + oak \u00b7 \u00d8 32 mm",
+"note": "Solid pressed glass stopper",
+"image": "/__l5e/assets-v1/80e58167-c686-4a94-b354-ff70f476dd02/cap-CQ-192.jpg"
+},
+{
+"ref": "CAP-193",
+"name": "Pressed Glass Stopper B3",
+"spec": "Natural cork + zamak \u00b7 \u00d8 34 mm",
+"note": "Solid pressed glass stopper",
+"image": "/__l5e/assets-v1/4438700c-d594-4a11-98a6-c6c36185ac1e/cap-CQ-193.jpg"
+},
+{
+"ref": "CAP-194",
+"name": "Pressed Glass Stopper C4",
+"spec": "Agglomerate cork + glass \u00b7 \u00d8 36 mm",
+"note": "Solid pressed glass stopper",
+"image": "/__l5e/assets-v1/b92f83b8-134f-498c-a01e-975007cceb6b/cap-CQ-194.jpg"
+},
+{
+"ref": "CAP-195",
+"name": "Pressed Glass Stopper D5",
+"spec": "Aluminium + PE liner \u00b7 \u00d8 38 mm",
+"note": "Solid pressed glass stopper",
+"image": "/__l5e/assets-v1/b8ac5cd5-e73b-43cb-9a4f-a07f19431602/cap-CQ-195.jpg"
+},
+{
+"ref": "CAP-196",
+"name": "Pressed Glass Stopper E6",
+"spec": "Pressed glass + PVC gasket \u00b7 \u00d8 26 mm",
+"note": "Solid pressed glass stopper",
+"image": "/__l5e/assets-v1/571da9f7-444d-4aee-879d-02766f35739a/cap-CQ-196.jpg"
+},
+{
+"ref": "CAP-197",
+"name": "Pressed Glass Stopper F7",
+"spec": "Composite + wood veneer \u00b7 \u00d8 28 mm",
+"note": "Solid pressed glass stopper",
+"image": "/__l5e/assets-v1/f762ff7f-3166-4f55-b34a-bb2c6d5148c9/cap-CQ-197.jpg"
+},
+{
+"ref": "CAP-198",
+"name": "Pressed Glass Stopper A8",
+"spec": "Natural cork + oak \u00b7 \u00d8 30 mm",
+"note": "Solid pressed glass stopper",
+"image": "/__l5e/assets-v1/e98f7243-d116-4e76-bfaa-05985febafbe/cap-CQ-198.jpg"
+}
+],
+"cases": [
+{
+"ref": "PACK-005",
+"name": "Timber Presentation Case F5",
+"spec": "Kraft board \u00b7 Cardboard cradle lining",
+"note": "Solid timber, lined interior",
+"image": "/__l5e/assets-v1/8f5ce20c-c499-4091-8554-5adf3dea6ff6/box-005.jpg"
+},
+{
+"ref": "PACK-006",
+"name": "Timber Presentation Case A6",
+"spec": "Solid timber \u00b7 Red velvet lining",
+"note": "Solid timber, lined interior",
+"image": "/__l5e/assets-v1/24e5294b-f6a7-410e-812f-81a24fa2223a/box-006.jpg"
+},
+{
+"ref": "PACK-007",
+"name": "Timber Presentation Case B7",
+"spec": "Rigid grey board \u00b7 Black velvet lining",
+"note": "Solid timber, lined interior",
+"image": "/__l5e/assets-v1/c1fa2977-723c-4ed1-82ce-3666e0cc771a/box-007.jpg"
+},
+{
+"ref": "PACK-008",
+"name": "Timber Presentation Case C8",
+"spec": "5-ply corrugated \u00b7 EVA foam lining",
+"note": "Solid timber, lined interior",
+"image": "/__l5e/assets-v1/b0dd93a5-8584-4503-96be-4e7f691f4335/box-008.jpg"
+},
+{
+"ref": "PACK-009",
+"name": "Timber Presentation Case D9",
+"spec": "MDF + veneer \u00b7 Satin lining",
+"note": "Solid timber, lined interior",
+"image": "/__l5e/assets-v1/f61554a5-210f-41fd-bdd2-83afec64cde2/box-009.jpg"
+},
+{
+"ref": "PACK-010",
+"name": "Timber Presentation Case E0",
+"spec": "PU leather + board \u00b7 Flocked EVA lining",
+"note": "Solid timber, lined interior",
+"image": "/__l5e/assets-v1/f017c2f2-a479-4b16-9419-c9a52c15e4ea/box-010.jpg"
+},
+{
+"ref": "PACK-011",
+"name": "Timber Presentation Case F1",
+"spec": "Kraft board \u00b7 Cardboard cradle lining",
+"note": "Solid timber, lined interior",
+"image": "/__l5e/assets-v1/830165fd-fe55-4460-ac8d-1b21e73f5dd0/box-011.jpg"
+},
+{
+"ref": "PACK-012",
+"name": "Timber Presentation Case A2",
+"spec": "Solid timber \u00b7 Red velvet lining",
+"note": "Solid timber, lined interior",
+"image": "/__l5e/assets-v1/a4012f77-14c5-4171-b7c3-22d447c1fdab/box-012.jpg"
+},
+{
+"ref": "PACK-013",
+"name": "Timber Presentation Case B3",
+"spec": "Rigid grey board \u00b7 Black velvet lining",
+"note": "Solid timber, lined interior",
+"image": "/__l5e/assets-v1/dd5d9f11-79fc-4f0e-94cb-c57202c7f0ed/box-013.jpg"
+},
+{
+"ref": "PACK-014",
+"name": "Timber Presentation Case C4",
+"spec": "5-ply corrugated \u00b7 EVA foam lining",
+"note": "Solid timber, lined interior",
+"image": "/__l5e/assets-v1/73b8d4f0-70e0-4eec-87a7-e8066becf1e3/box-014.jpg"
+},
+{
+"ref": "PACK-015",
+"name": "Rigid Gift Box D5",
+"spec": "MDF + veneer \u00b7 Satin lining",
+"note": "Rigid board, foil decoration",
+"image": "/__l5e/assets-v1/9601e81b-f0db-4af2-b8f0-091910aa590c/box-015.jpg"
+},
+{
+"ref": "PACK-016",
+"name": "Rigid Gift Box E6",
+"spec": "PU leather + board \u00b7 Flocked EVA lining",
+"note": "Rigid board, foil decoration",
+"image": "/__l5e/assets-v1/df44c742-1edd-47a5-8047-2b5e4f0f6602/box-016.jpg"
+},
+{
+"ref": "PACK-017",
+"name": "Rigid Gift Box F7",
+"spec": "Kraft board \u00b7 Cardboard cradle lining",
+"note": "Rigid board, foil decoration",
+"image": "/__l5e/assets-v1/32698426-8545-4881-9c03-5b403c901be4/box-017.jpg"
+},
+{
+"ref": "PACK-018",
+"name": "Rigid Gift Box A8",
+"spec": "Solid timber \u00b7 Red velvet lining",
+"note": "Rigid board, foil decoration",
+"image": "/__l5e/assets-v1/e08297fe-4045-4cf6-9ac8-afadc5ee4d92/box-018.jpg"
+},
+{
+"ref": "PACK-019",
+"name": "Rigid Gift Box B9",
+"spec": "Rigid grey board \u00b7 Black velvet lining",
+"note": "Rigid board, foil decoration",
+"image": "/__l5e/assets-v1/95c28330-7179-44ec-94ed-e9eebf203972/box-019.jpg"
+},
+{
+"ref": "PACK-020",
+"name": "Rigid Gift Box C0",
+"spec": "5-ply corrugated \u00b7 EVA foam lining",
+"note": "Rigid board, foil decoration",
+"image": "/__l5e/assets-v1/b9d47684-448e-47eb-bb0d-3e88146dda41/box-020.jpg"
+},
+{
+"ref": "PACK-021",
+"name": "Rigid Gift Box D1",
+"spec": "MDF + veneer \u00b7 Satin lining",
+"note": "Rigid board, foil decoration",
+"image": "/__l5e/assets-v1/08d89a6a-4156-4f8a-a5d8-120b74e44367/box-021.jpg"
+},
+{
+"ref": "PACK-022",
+"name": "Rigid Gift Box E2",
+"spec": "PU leather + board \u00b7 Flocked EVA lining",
+"note": "Rigid board, foil decoration",
+"image": "/__l5e/assets-v1/89783147-ea5e-4526-aa6a-9df7eb8909c6/box-022.jpg"
+},
+{
+"ref": "PACK-023",
+"name": "Rigid Gift Box F3",
+"spec": "Kraft board \u00b7 Cardboard cradle lining",
+"note": "Rigid board, foil decoration",
+"image": "/__l5e/assets-v1/43347dea-2003-4648-b9af-14392b9f2cf2/box-023.jpg"
+},
+{
+"ref": "PACK-024",
+"name": "Rigid Gift Box A4",
+"spec": "Solid timber \u00b7 Red velvet lining",
+"note": "Rigid board, foil decoration",
+"image": "/__l5e/assets-v1/56317fb2-76b6-4456-b6a7-46e82085de99/box-024.jpg"
+},
+{
+"ref": "PACK-025",
+"name": "Kraft Carrier B5",
+"spec": "Rigid grey board \u00b7 Black velvet lining",
+"note": "Corrugated kraft carrier",
+"image": "/__l5e/assets-v1/818754da-82a3-4294-a7ea-37efd5e045c7/box-025.jpg"
+},
+{
+"ref": "PACK-026",
+"name": "Kraft Carrier C6",
+"spec": "5-ply corrugated \u00b7 EVA foam lining",
+"note": "Corrugated kraft carrier",
+"image": "/__l5e/assets-v1/01bc10b5-914b-4028-88af-0673d90a0e10/box-026.jpg"
+},
+{
+"ref": "PACK-027",
+"name": "Kraft Carrier D7",
+"spec": "MDF + veneer \u00b7 Satin lining",
+"note": "Corrugated kraft carrier",
+"image": "/__l5e/assets-v1/32a72b93-34f0-4ac6-8dfb-5ac319457d32/box-027.jpg"
+},
+{
+"ref": "PACK-028",
+"name": "Kraft Carrier E8",
+"spec": "PU leather + board \u00b7 Flocked EVA lining",
+"note": "Corrugated kraft carrier",
+"image": "/__l5e/assets-v1/d1065e28-d828-4ef9-91a2-d7504bab0cbe/box-028.jpg"
+},
+{
+"ref": "PACK-029",
+"name": "Kraft Carrier F9",
+"spec": "Kraft board \u00b7 Cardboard cradle lining",
+"note": "Corrugated kraft carrier",
+"image": "/__l5e/assets-v1/2508e8d1-7bcc-43a5-a7eb-d608312ffc36/box-029.jpg"
+},
+{
+"ref": "PACK-030",
+"name": "Kraft Carrier A0",
+"spec": "Solid timber \u00b7 Red velvet lining",
+"note": "Corrugated kraft carrier",
+"image": "/__l5e/assets-v1/3cfbc479-c2e3-4271-82be-d277f630c459/box-030.jpg"
+},
+{
+"ref": "PACK-031",
+"name": "Kraft Carrier B1",
+"spec": "Rigid grey board \u00b7 Black velvet lining",
+"note": "Corrugated kraft carrier",
+"image": "/__l5e/assets-v1/15c4648e-310d-43a8-b5f9-494d37f4178f/box-031.jpg"
+},
+{
+"ref": "PACK-032",
+"name": "Kraft Carrier C2",
+"spec": "5-ply corrugated \u00b7 EVA foam lining",
+"note": "Corrugated kraft carrier",
+"image": "/__l5e/assets-v1/d96cdcce-7f87-47c2-a741-3b446feb1dd3/box-032.jpg"
+},
+{
+"ref": "PACK-033",
+"name": "Kraft Carrier D3",
+"spec": "MDF + veneer \u00b7 Satin lining",
+"note": "Corrugated kraft carrier",
+"image": "/__l5e/assets-v1/e6425c05-1cbf-4c1d-99df-76c90b5590ff/box-033.jpg"
+},
+{
+"ref": "PACK-034",
+"name": "Kraft Carrier E4",
+"spec": "PU leather + board \u00b7 Flocked EVA lining",
+"note": "Corrugated kraft carrier",
+"image": "/__l5e/assets-v1/07701628-42e2-4954-9502-41231c12ec47/box-034.jpg"
+},
+{
+"ref": "PACK-035",
+"name": "Hinged Display Case F5",
+"spec": "Kraft board \u00b7 Cardboard cradle lining",
+"note": "Hinged display case with window",
+"image": "/__l5e/assets-v1/a555f06b-6d32-4bc4-95f0-81264bf93de4/box-035.jpg"
+},
+{
+"ref": "PACK-036",
+"name": "Hinged Display Case A6",
+"spec": "Solid timber \u00b7 Red velvet lining",
+"note": "Hinged display case with window",
+"image": "/__l5e/assets-v1/0a22b535-121e-4fa8-9085-c08d4e89ded3/box-036.jpg"
+},
+{
+"ref": "PACK-037",
+"name": "Hinged Display Case B7",
+"spec": "Rigid grey board \u00b7 Black velvet lining",
+"note": "Hinged display case with window",
+"image": "/__l5e/assets-v1/fb39fe72-f9bd-44c7-8bfb-04e85963709f/box-037.jpg"
+},
+{
+"ref": "PACK-038",
+"name": "Hinged Display Case C8",
+"spec": "5-ply corrugated \u00b7 EVA foam lining",
+"note": "Hinged display case with window",
+"image": "/__l5e/assets-v1/4fee437d-b697-4f34-9d40-fe5bbf7653b9/box-038.jpg"
+},
+{
+"ref": "PACK-039",
+"name": "Hinged Display Case D9",
+"spec": "MDF + veneer \u00b7 Satin lining",
+"note": "Hinged display case with window",
+"image": "/__l5e/assets-v1/ad47857e-cd22-4254-a9de-42931248f53e/box-039.jpg"
+},
+{
+"ref": "PACK-040",
+"name": "Hinged Display Case E0",
+"spec": "PU leather + board \u00b7 Flocked EVA lining",
+"note": "Hinged display case with window",
+"image": "/__l5e/assets-v1/9193587e-4415-47f4-bd3d-076bfd42088f/box-040.jpg"
+},
+{
+"ref": "PACK-041",
+"name": "Hinged Display Case F1",
+"spec": "Kraft board \u00b7 Cardboard cradle lining",
+"note": "Hinged display case with window",
+"image": "/__l5e/assets-v1/66de6df4-d434-4e90-82f6-aa42e3390e3e/box-041.jpg"
+},
+{
+"ref": "PACK-042",
+"name": "Hinged Display Case A2",
+"spec": "Solid timber \u00b7 Red velvet lining",
+"note": "Hinged display case with window",
+"image": "/__l5e/assets-v1/f323c68e-c0e9-406c-8e0d-e2c88bed3a54/box-042.jpg"
+},
+{
+"ref": "PACK-043",
+"name": "Hinged Display Case B3",
+"spec": "Rigid grey board \u00b7 Black velvet lining",
+"note": "Hinged display case with window",
+"image": "/__l5e/assets-v1/dbc57ac7-a9a0-4847-acd5-f14d67386713/box-043.jpg"
+},
+{
+"ref": "PACK-044",
+"name": "Hinged Display Case C4",
+"spec": "5-ply corrugated \u00b7 EVA foam lining",
+"note": "Hinged display case with window",
+"image": "/__l5e/assets-v1/672f39ea-d6c9-486a-ac5b-ae019c34a701/box-044.jpg"
+},
+{
+"ref": "PACK-045",
+"name": "Magnetic Folder Box D5",
+"spec": "MDF + veneer \u00b7 Satin lining",
+"note": "Magnetic folding presentation box",
+"image": "/__l5e/assets-v1/e2760a1d-f442-4d21-9898-f9ea6dd7b137/box-045.jpg"
+},
+{
+"ref": "PACK-046",
+"name": "Magnetic Folder Box E6",
+"spec": "PU leather + board \u00b7 Flocked EVA lining",
+"note": "Magnetic folding presentation box",
+"image": "/__l5e/assets-v1/3948e6e4-4723-4808-b133-92ef834f6a2c/box-046.jpg"
+},
+{
+"ref": "PACK-047",
+"name": "Magnetic Folder Box F7",
+"spec": "Kraft board \u00b7 Cardboard cradle lining",
+"note": "Magnetic folding presentation box",
+"image": "/__l5e/assets-v1/54f60e80-6716-4a81-a75e-2410e47d1039/box-047.jpg"
+},
+{
+"ref": "PACK-048",
+"name": "Magnetic Folder Box A8",
+"spec": "Solid timber \u00b7 Red velvet lining",
+"note": "Magnetic folding presentation box",
+"image": "/__l5e/assets-v1/924595ce-7909-41ef-8b6d-60988b3271bb/box-048.jpg"
+},
+{
+"ref": "PACK-049",
+"name": "Magnetic Folder Box B9",
+"spec": "Rigid grey board \u00b7 Black velvet lining",
+"note": "Magnetic folding presentation box",
+"image": "/__l5e/assets-v1/73ffd95d-c012-4193-b1c7-4ade197ae7e9/box-049.jpg"
+},
+{
+"ref": "PACK-050",
+"name": "Magnetic Folder Box C0",
+"spec": "5-ply corrugated \u00b7 EVA foam lining",
+"note": "Magnetic folding presentation box",
+"image": "/__l5e/assets-v1/1a381bf4-c99c-4881-81a3-bfe55906d6db/box-050.jpg"
+},
+{
+"ref": "PACK-051",
+"name": "Magnetic Folder Box D1",
+"spec": "MDF + veneer \u00b7 Satin lining",
+"note": "Magnetic folding presentation box",
+"image": "/__l5e/assets-v1/37ff798d-5e06-4a8a-8f1c-1bfd4ddc9ce7/box-051.jpg"
+},
+{
+"ref": "PACK-052",
+"name": "Magnetic Folder Box E2",
+"spec": "PU leather + board \u00b7 Flocked EVA lining",
+"note": "Magnetic folding presentation box",
+"image": "/__l5e/assets-v1/dba6e413-5e43-49aa-9878-67455dd2730c/box-052.jpg"
+},
+{
+"ref": "PACK-053",
+"name": "Magnetic Folder Box F3",
+"spec": "Kraft board \u00b7 Cardboard cradle lining",
+"note": "Magnetic folding presentation box",
+"image": "/__l5e/assets-v1/820008eb-67f6-42ef-96fd-89ea34f4f235/box-053.jpg"
+},
+{
+"ref": "PACK-054",
+"name": "Magnetic Folder Box A4",
+"spec": "Solid timber \u00b7 Red velvet lining",
+"note": "Magnetic folding presentation box",
+"image": "/__l5e/assets-v1/4d432dab-ef86-4c41-aaaf-5b117ea2b9b6/box-054.jpg"
+},
+{
+"ref": "PACK-055",
+"name": "Twin-Bottle Case B5",
+"spec": "Rigid grey board \u00b7 Black velvet lining",
+"note": "Two-bottle case with cradle",
+"image": "/__l5e/assets-v1/9d4b74a7-5ea8-416c-91d5-7ab62207b4ea/box-055.jpg"
+},
+{
+"ref": "PACK-056",
+"name": "Twin-Bottle Case C6",
+"spec": "5-ply corrugated \u00b7 EVA foam lining",
+"note": "Two-bottle case with cradle",
+"image": "/__l5e/assets-v1/8010da2f-e6a4-4ede-8a42-f034547c9384/box-056.jpg"
+},
+{
+"ref": "PACK-057",
+"name": "Twin-Bottle Case D7",
+"spec": "MDF + veneer \u00b7 Satin lining",
+"note": "Two-bottle case with cradle",
+"image": "/__l5e/assets-v1/ec341bd7-e9ad-4e6c-ae3c-2512bc19fbeb/box-057.jpg"
+},
+{
+"ref": "PACK-058",
+"name": "Twin-Bottle Case E8",
+"spec": "PU leather + board \u00b7 Flocked EVA lining",
+"note": "Two-bottle case with cradle",
+"image": "/__l5e/assets-v1/4cd9ac3d-9a8d-40e3-9232-cc73744d820d/box-058.jpg"
+},
+{
+"ref": "PACK-059",
+"name": "Twin-Bottle Case F9",
+"spec": "Kraft board \u00b7 Cardboard cradle lining",
+"note": "Two-bottle case with cradle",
+"image": "/__l5e/assets-v1/5ee7a9f6-4c88-46d3-bf5d-1571bf7fc0b2/box-059.jpg"
+},
+{
+"ref": "PACK-060",
+"name": "Twin-Bottle Case A0",
+"spec": "Solid timber \u00b7 Red velvet lining",
+"note": "Two-bottle case with cradle",
+"image": "/__l5e/assets-v1/1cda9b59-262b-4952-a755-6a02dcfcafa9/box-060.jpg"
+},
+{
+"ref": "PACK-061",
+"name": "Twin-Bottle Case B1",
+"spec": "Rigid grey board \u00b7 Black velvet lining",
+"note": "Two-bottle case with cradle",
+"image": "/__l5e/assets-v1/208ef736-9efc-4015-b3c3-93504d7a8660/box-061.jpg"
+},
+{
+"ref": "PACK-062",
+"name": "Twin-Bottle Case C2",
+"spec": "5-ply corrugated \u00b7 EVA foam lining",
+"note": "Two-bottle case with cradle",
+"image": "/__l5e/assets-v1/dddc09ac-4da6-4d09-be39-5acf478f3dc2/box-062.jpg"
+},
+{
+"ref": "PACK-063",
+"name": "Twin-Bottle Case D3",
+"spec": "MDF + veneer \u00b7 Satin lining",
+"note": "Two-bottle case with cradle",
+"image": "/__l5e/assets-v1/bcb35c0a-c14c-40d4-a153-2a01252ddd5e/box-063.jpg"
+},
+{
+"ref": "PACK-064",
+"name": "Twin-Bottle Case E4",
+"spec": "PU leather + board \u00b7 Flocked EVA lining",
+"note": "Two-bottle case with cradle",
+"image": "/__l5e/assets-v1/289805da-5a4c-49d9-becf-e1463f3ce91c/box-064.jpg"
+},
+{
+"ref": "PACK-065",
+"name": "Slide Drawer Box F5",
+"spec": "Kraft board \u00b7 Cardboard cradle lining",
+"note": "Slide-out drawer box",
+"image": "/__l5e/assets-v1/17c24205-208a-427b-af15-3204be5b8a3d/box-065.jpg"
+},
+{
+"ref": "PACK-066",
+"name": "Slide Drawer Box A6",
+"spec": "Solid timber \u00b7 Red velvet lining",
+"note": "Slide-out drawer box",
+"image": "/__l5e/assets-v1/58ee786e-b0b3-4f16-b16b-ea6e52d2b201/box-066.jpg"
+},
+{
+"ref": "PACK-067",
+"name": "Slide Drawer Box B7",
+"spec": "Rigid grey board \u00b7 Black velvet lining",
+"note": "Slide-out drawer box",
+"image": "/__l5e/assets-v1/ffe29516-4c9e-4336-92f0-c50bcda55bdb/box-067.jpg"
+},
+{
+"ref": "PACK-068",
+"name": "Slide Drawer Box C8",
+"spec": "5-ply corrugated \u00b7 EVA foam lining",
+"note": "Slide-out drawer box",
+"image": "/__l5e/assets-v1/a9a1801b-3405-45d5-880d-f4fc5d243234/box-068.jpg"
+},
+{
+"ref": "PACK-069",
+"name": "Slide Drawer Box D9",
+"spec": "MDF + veneer \u00b7 Satin lining",
+"note": "Slide-out drawer box",
+"image": "/__l5e/assets-v1/83d2a8d6-2221-4729-853c-86a089c13171/box-069.jpg"
+},
+{
+"ref": "PACK-070",
+"name": "Slide Drawer Box E0",
+"spec": "PU leather + board \u00b7 Flocked EVA lining",
+"note": "Slide-out drawer box",
+"image": "/__l5e/assets-v1/bd1380a8-4627-49c1-9e33-3fa13ba58764/box-070.jpg"
+},
+{
+"ref": "PACK-071",
+"name": "Slide Drawer Box F1",
+"spec": "Kraft board \u00b7 Cardboard cradle lining",
+"note": "Slide-out drawer box",
+"image": "/__l5e/assets-v1/84a20f7c-d43d-47bd-a0f0-87e998009c9f/box-071.jpg"
+},
+{
+"ref": "PACK-072",
+"name": "Slide Drawer Box A2",
+"spec": "Solid timber \u00b7 Red velvet lining",
+"note": "Slide-out drawer box",
+"image": "/__l5e/assets-v1/394ad022-8865-44eb-b54f-6413e56623e6/box-072.jpg"
+},
+{
+"ref": "PACK-073",
+"name": "Slide Drawer Box B3",
+"spec": "Rigid grey board \u00b7 Black velvet lining",
+"note": "Slide-out drawer box",
+"image": "/__l5e/assets-v1/9e306314-8dcf-4acc-94e3-e2c05369da0f/box-073.jpg"
+},
+{
+"ref": "PACK-074",
+"name": "Slide Drawer Box C4",
+"spec": "5-ply corrugated \u00b7 EVA foam lining",
+"note": "Slide-out drawer box",
+"image": "/__l5e/assets-v1/9531259e-20a7-471c-8dd1-9d7158be7047/box-074.jpg"
+},
+{
+"ref": "PACK-075",
+"name": "Cylinder Tube D5",
+"spec": "MDF + veneer \u00b7 Satin lining",
+"note": "Round tube with foam insert",
+"image": "/__l5e/assets-v1/4dc8e427-0c87-4fe8-b931-3fa8a58a6bb0/box-075.jpg"
+},
+{
+"ref": "PACK-076",
+"name": "Cylinder Tube E6",
+"spec": "PU leather + board \u00b7 Flocked EVA lining",
+"note": "Round tube with foam insert",
+"image": "/__l5e/assets-v1/054e53d3-c5f3-4a80-99a7-77b7b53d8852/box-076.jpg"
+},
+{
+"ref": "PACK-077",
+"name": "Cylinder Tube F7",
+"spec": "Kraft board \u00b7 Cardboard cradle lining",
+"note": "Round tube with foam insert",
+"image": "/__l5e/assets-v1/1f5c7360-94d4-4e33-99a5-83dcd3676b2f/box-077.jpg"
+},
+{
+"ref": "PACK-078",
+"name": "Cylinder Tube A8",
+"spec": "Solid timber \u00b7 Red velvet lining",
+"note": "Round tube with foam insert",
+"image": "/__l5e/assets-v1/ad5d5a50-a8f1-4134-b909-3c4b80e5cf18/box-078.jpg"
+},
+{
+"ref": "PACK-079",
+"name": "Cylinder Tube B9",
+"spec": "Rigid grey board \u00b7 Black velvet lining",
+"note": "Round tube with foam insert",
+"image": "/__l5e/assets-v1/16abe010-07c7-49a7-a36f-a6c4087a419c/box-079.jpg"
+},
+{
+"ref": "PACK-080",
+"name": "Cylinder Tube C0",
+"spec": "5-ply corrugated \u00b7 EVA foam lining",
+"note": "Round tube with foam insert",
+"image": "/__l5e/assets-v1/d4a09b88-32fb-479f-9968-04748f1d2d95/box-080.jpg"
+},
+{
+"ref": "PACK-081",
+"name": "Cylinder Tube D1",
+"spec": "MDF + veneer \u00b7 Satin lining",
+"note": "Round tube with foam insert",
+"image": "/__l5e/assets-v1/7ddbf9ba-e281-47f2-b0b6-7a3f5a520519/box-081.jpg"
+},
+{
+"ref": "PACK-082",
+"name": "Cylinder Tube E2",
+"spec": "PU leather + board \u00b7 Flocked EVA lining",
+"note": "Round tube with foam insert",
+"image": "/__l5e/assets-v1/06eaa552-0900-4213-b1e5-61704357602a/box-082.jpg"
+},
+{
+"ref": "PACK-083",
+"name": "Cylinder Tube F3",
+"spec": "Kraft board \u00b7 Cardboard cradle lining",
+"note": "Round tube with foam insert",
+"image": "/__l5e/assets-v1/77d61b46-8e12-4f4f-a635-411abeec5c35/box-083.jpg"
+},
+{
+"ref": "PACK-084",
+"name": "Cylinder Tube A4",
+"spec": "Solid timber \u00b7 Red velvet lining",
+"note": "Round tube with foam insert",
+"image": "/__l5e/assets-v1/884f70f4-56ec-4931-bea9-9364c8092465/box-084.jpg"
+},
+{
+"ref": "PACK-085",
+"name": "Leather Wrapped Case B5",
+"spec": "Rigid grey board \u00b7 Black velvet lining",
+"note": "PU leather wrapped case",
+"image": "/__l5e/assets-v1/98322cd3-7827-4078-bbca-0928f5d3bd75/box-085.jpg"
+},
+{
+"ref": "PACK-086",
+"name": "Leather Wrapped Case C6",
+"spec": "5-ply corrugated \u00b7 EVA foam lining",
+"note": "PU leather wrapped case",
+"image": "/__l5e/assets-v1/49af33f6-cbb9-4458-90ac-1fe46ed11bc7/box-086.jpg"
+},
+{
+"ref": "PACK-087",
+"name": "Leather Wrapped Case D7",
+"spec": "MDF + veneer \u00b7 Satin lining",
+"note": "PU leather wrapped case",
+"image": "/__l5e/assets-v1/b30f4fb3-56d6-4da5-8e5d-d04179044fed/box-087.jpg"
+},
+{
+"ref": "PACK-088",
+"name": "Leather Wrapped Case E8",
+"spec": "PU leather + board \u00b7 Flocked EVA lining",
+"note": "PU leather wrapped case",
+"image": "/__l5e/assets-v1/6a88402f-98f2-40b4-9abe-d42ac3bfbe00/box-088.jpg"
+},
+{
+"ref": "PACK-089",
+"name": "Leather Wrapped Case F9",
+"spec": "Kraft board \u00b7 Cardboard cradle lining",
+"note": "PU leather wrapped case",
+"image": "/__l5e/assets-v1/cb2c94b3-4adf-48dd-b3e7-1cbc5b3a07bc/box-089.jpg"
+},
+{
+"ref": "PACK-090",
+"name": "Leather Wrapped Case A0",
+"spec": "Solid timber \u00b7 Red velvet lining",
+"note": "PU leather wrapped case",
+"image": "/__l5e/assets-v1/2f28eb67-6436-473b-a019-219427f2ad6f/box-090.jpg"
+},
+{
+"ref": "PACK-091",
+"name": "Leather Wrapped Case B1",
+"spec": "Rigid grey board \u00b7 Black velvet lining",
+"note": "PU leather wrapped case",
+"image": "/__l5e/assets-v1/be5b4bd3-4353-446e-b347-10bd23d4dcc0/box-091.jpg"
+},
+{
+"ref": "PACK-092",
+"name": "Leather Wrapped Case C2",
+"spec": "5-ply corrugated \u00b7 EVA foam lining",
+"note": "PU leather wrapped case",
+"image": "/__l5e/assets-v1/dfe33d1d-746f-44ff-a601-189ba84ba037/box-092.jpg"
+},
+{
+"ref": "PACK-093",
+"name": "Leather Wrapped Case D3",
+"spec": "MDF + veneer \u00b7 Satin lining",
+"note": "PU leather wrapped case",
+"image": "/__l5e/assets-v1/0a51296d-7885-4fd1-939d-f50d0816262c/box-093.jpg"
+},
+{
+"ref": "PACK-094",
+"name": "Leather Wrapped Case E4",
+"spec": "PU leather + board \u00b7 Flocked EVA lining",
+"note": "PU leather wrapped case",
+"image": "/__l5e/assets-v1/46388044-797d-4e31-af92-6813e527e149/box-094.jpg"
+},
+{
+"ref": "PACK-095",
+"name": "Luxury Trunk Case F5",
+"spec": "Kraft board \u00b7 Cardboard cradle lining",
+"note": "Trunk-style luxury case",
+"image": "/__l5e/assets-v1/fdb47633-db3a-45cd-83fd-f3267527c3d4/box-095.jpg"
+},
+{
+"ref": "PACK-096",
+"name": "Luxury Trunk Case A6",
+"spec": "Solid timber \u00b7 Red velvet lining",
+"note": "Trunk-style luxury case",
+"image": "/__l5e/assets-v1/8c63baeb-9fb2-4eff-8aa4-763faeabc0c7/box-096.jpg"
+},
+{
+"ref": "PACK-097",
+"name": "Luxury Trunk Case B7",
+"spec": "Rigid grey board \u00b7 Black velvet lining",
+"note": "Trunk-style luxury case",
+"image": "/__l5e/assets-v1/13f555c0-0834-4c2e-8794-92766704f7cd/box-097.jpg"
+},
+{
+"ref": "PACK-098",
+"name": "Luxury Trunk Case C8",
+"spec": "5-ply corrugated \u00b7 EVA foam lining",
+"note": "Trunk-style luxury case",
+"image": "/__l5e/assets-v1/76f40e4b-c76b-448e-bc65-6ec3cab84584/box-098.jpg"
+},
+{
+"ref": "PACK-099",
+"name": "Luxury Trunk Case D9",
+"spec": "MDF + veneer \u00b7 Satin lining",
+"note": "Trunk-style luxury case",
+"image": "/__l5e/assets-v1/c3a8b254-d3ac-467b-abcc-93739f268e58/box-099.jpg"
+},
+{
+"ref": "PACK-100",
+"name": "Luxury Trunk Case E0",
+"spec": "PU leather + board \u00b7 Flocked EVA lining",
+"note": "Trunk-style luxury case",
+"image": "/__l5e/assets-v1/0189b7ff-93a1-401b-ba1c-5dc202fbf9f5/box-100.jpg"
+},
+{
+"ref": "PACK-101",
+"name": "Luxury Trunk Case F1",
+"spec": "Kraft board \u00b7 Cardboard cradle lining",
+"note": "Trunk-style luxury case",
+"image": "/__l5e/assets-v1/b3c117c8-c793-4cde-867c-04355afa4fc5/box-101.jpg"
+},
+{
+"ref": "PACK-102",
+"name": "Luxury Trunk Case A2",
+"spec": "Solid timber \u00b7 Red velvet lining",
+"note": "Trunk-style luxury case",
+"image": "/__l5e/assets-v1/0b3e3399-0df1-4ba3-a710-53931b3cf589/box-102.jpg"
+},
+{
+"ref": "PACK-103",
+"name": "Luxury Trunk Case B3",
+"spec": "Rigid grey board \u00b7 Black velvet lining",
+"note": "Trunk-style luxury case",
+"image": "/__l5e/assets-v1/40131599-6e1f-402e-a69d-58c561533f4b/box-103.jpg"
+},
+{
+"ref": "PACK-104",
+"name": "Luxury Trunk Case C4",
+"spec": "5-ply corrugated \u00b7 EVA foam lining",
+"note": "Trunk-style luxury case",
+"image": "/__l5e/assets-v1/a273010f-4099-40d5-a8ef-be6ee040359e/box-104.jpg"
+}
+],
+"forge": {
+"hd": "/__l5e/assets-v1/72e4782f-b01c-484b-b707-f13b299460db/forge-1280.mp4",
+"sd": "/__l5e/assets-v1/ef389205-63fd-4b6a-bff8-3c4482190a67/forge-854.mp4",
+"poster": "/__l5e/assets-v1/d25b7acf-dc52-4ee0-a603-b8f43c1e773d/forge-poster.jpg"
+},
+"capModel": "/__l5e/assets-v1/b3bd08f6-aba3-4445-8835-399ac85946be/cap.glb"
+}
