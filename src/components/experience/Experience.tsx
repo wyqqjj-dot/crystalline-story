@@ -6,6 +6,8 @@ import { Scene } from "./Scene";
 import { Panel } from "./Panel";
 import { IntroGate } from "./IntroGate";
 import { ForgeFilm } from "./ForgeFilm";
+import { Genesis } from "./Genesis";
+
 import { journey, quality, stationFor, type Station } from "@/lib/journey";
 
 /** how much upward wheel/touch travel (in px) completes the forge ritual */
