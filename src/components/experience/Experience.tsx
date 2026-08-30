@@ -6,7 +6,7 @@ import { Scene } from "./Scene";
 import { Panel } from "./Panel";
 import { IntroGate } from "./IntroGate";
 import { ForgeFilm } from "./ForgeFilm";
-import { journey, stationFor, type Station } from "@/lib/journey";
+import { journey, quality, stationFor, type Station } from "@/lib/journey";
 
 /** how much upward wheel/touch travel (in px) completes the forge ritual */
 const RITUAL_TRAVEL = 2600;
@@ -26,6 +26,7 @@ export function Experience() {
     const weak =
       window.matchMedia("(max-width: 768px)").matches ||
       (navigator.hardwareConcurrency ?? 8) <= 4;
+    quality.lite = weak;
     setMobile(weak);
   }, []);
 

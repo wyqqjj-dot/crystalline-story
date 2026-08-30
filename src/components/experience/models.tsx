@@ -5,6 +5,7 @@ import { MeshTransmissionMaterial, useGLTF, useTexture } from "@react-three/drei
 import boxAsset from "@/assets/box.jpg.asset.json";
 import bottleModel from "@/assets/bottle-cq100.glb.asset.json";
 import { CAP_MODEL } from "@/lib/catalog";
+import { quality } from "@/lib/journey";
 
 /**
  * MODEL INTERFACE
@@ -66,8 +67,8 @@ export const Bottle = forwardRef<THREE.Group, { opacity?: number }>(function Bot
       <group scale={2.3} position={[0, -0.85, 0]}>
         <mesh geometry={geometry} castShadow>
           <MeshTransmissionMaterial
-            samples={6}
-            resolution={256}
+            samples={quality.lite ? 3 : 6}
+            resolution={quality.lite ? 128 : 256}
             transmission={1}
             thickness={0.32}
             ior={1.52}
