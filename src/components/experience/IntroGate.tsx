@@ -3,15 +3,16 @@ import { AnimatePresence, motion } from "framer-motion";
 /** Prompt for the scroll-up forge ritual — a single hairline, no counters. */
 export function IntroGate({ progress, done }: { progress: number; done: boolean }) {
   const label =
-    progress < 0.04
-      ? "Scroll up to melt the crystal"
-      : progress < 0.32
-        ? "Molten glass"
-        : progress < 0.62
-          ? "The pour"
-          : progress < 0.88
-            ? "Filling the mould"
+    progress < 0.06
+      ? "Push upward to awaken the crystal"
+      : progress < 0.34
+        ? "Particles converge"
+        : progress < 0.5
+          ? "Crystal dissolves"
+          : progress < 0.78
+            ? "Molten glass enters the mould"
             : "The bottle takes shape";
+
 
   return (
     <AnimatePresence>
