@@ -63,6 +63,11 @@ function DocViewer({
     setLoaded(false);
     setFailed(false);
     warmPdf(category.docUrl);
+    const timeout = window.setTimeout(() => {
+      setFailed(true);
+      if (attempt < 2) setAttempt((value) => value + 1);
+    }, 12_000);
+    return () => window.clearTimeout(timeout);
   }, [category.docUrl, page, attempt]);
 
   return (
