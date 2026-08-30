@@ -30,6 +30,9 @@ export function advanceJourney(dt: number) {
   journey.dragV *= Math.exp(-3.2 * clamped);
 }
 
+/** device tier shared with the 3D materials: phones / low-core CPUs run lite */
+export const quality = { lite: false };
+
 export const clamp01 = (x: number) => (x < 0 ? 0 : x > 1 ? 1 : x);
 
 /** normalized 0..1 progress of p inside [a,b] */
