@@ -4,6 +4,7 @@ import { MeshTransmissionMaterial, useGLTF, useTexture } from "@react-three/drei
 
 import boxAsset from "@/assets/box.jpg.asset.json";
 import bottleModel from "@/assets/bottle-cq100.glb.asset.json";
+import { CAP_MODEL } from "@/lib/catalog";
 
 /**
  * MODEL INTERFACE
