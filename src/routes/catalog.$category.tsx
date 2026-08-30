@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 
 import { CATALOG, categoryBySlug, type CatalogItem } from "@/lib/catalog";
@@ -31,60 +31,131 @@ export const Route = createFileRoute("/catalog/$category")({
   component: CatalogPage,
 });
 
-function DocViewer({ item, onClose }: { item: CatalogItem; onClose: () => void }) {
+const PAGE = 36;
+
+/* --------------------------------- lightbox -------------------------------- */
+
+function Lightbox({
+  items,
+  index,
+  onIndex,
+  onClose,
+}: {
+  items: CatalogItem[];
+  index: number;
+  onIndex: (i: number) => void;
+  onClose: () => void;
+}) {
+  const item = items[index]!;
+  const [loaded, setLoaded] = useState(false);
+  const [zoom, setZoom] = useState(false);
+
+  const step = useCallback(
+    (d: number) => {
+      setLoaded(false);
+      setZoom(false);
+      onIndex((index + d + items.length) % items.length);
+    },
+    [index, items.length, onIndex],
+  );
+
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowRight") step(1);
+      if (e.key === "ArrowLeft") step(-1);
+    };
     window.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
     return () => {
       window.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
     };
-  }, [onClose]);
+  }, [onClose, step]);
+
+  /* neighbour prefetch keeps stepping instant */
+  useEffect(() => {
+    [1, -1].forEach((d) => {
+      const n = items[(index + d + items.length) % items.length];
+      if (n) {
+        const img = new Image();
+        img.src = n.image;
+      }
+    });
+  }, [index, items]);
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col bg-black/90 backdrop-blur-md">
-      <div className="flex items-center justify-between gap-6 border-b border-white/10 px-6 py-5">
-        <div>
+    <div className="fixed inset-0 z-50 flex flex-col bg-black/95 backdrop-blur-sm">
+      <div className="flex items-start justify-between gap-4 px-5 py-4 md:px-8">
+        <div className="min-w-0">
           <p className="text-[10px] tracking-[0.4em] text-accent uppercase">{item.ref}</p>
-          <p className="mt-2 text-sm text-muted-foreground">
-            {item.docLabel} · page {item.docPage}
-          </p>
+          <p className="mt-2 truncate text-sm">{item.name}</p>
         </div>
-        <div className="flex items-center gap-4">
-          <a
-            href={item.doc}
-            target="_blank"
-            rel="noreferrer"
-            className="border border-accent/60 px-5 py-3 text-[10px] tracking-[0.3em] text-accent uppercase transition-colors hover:bg-accent hover:text-accent-foreground"
-          >
-            Open PDF
-          </a>
-          <button
-            type="button"
-            onClick={onClose}
-            className="border border-white/20 px-5 py-3 text-[10px] tracking-[0.3em] text-muted-foreground uppercase transition-colors hover:border-white/50 hover:text-foreground"
-          >
-            Close
-          </button>
-        </div>
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Close"
+          className="shrink-0 border border-white/20 px-4 py-2 text-[10px] tracking-[0.3em] text-muted-foreground uppercase transition-colors hover:border-white/60 hover:text-foreground"
+        >
+          Close
+        </button>
       </div>
-      <iframe
-        key={item.doc}
-        src={item.doc}
-        title={`${item.name} — ${item.docLabel}`}
-        className="min-h-0 flex-1 bg-black"
-      />
+
+      <div className="relative flex min-h-0 flex-1 items-center justify-center overflow-auto px-3 pb-3">
+        {!loaded && (
+          <div className="absolute h-[52vh] w-[70vw] max-w-md animate-pulse bg-white/5" aria-hidden />
+        )}
+        <img
+          key={item.image}
+          src={item.image}
+          alt={`${item.ref} ${item.name} — ${item.spec}`}
+          onLoad={() => setLoaded(true)}
+          onClick={() => setZoom((z) => !z)}
+          className={`origin-center transition-transform duration-300 ${
+            zoom ? "max-w-none scale-[1.9] cursor-zoom-out" : "max-h-full max-w-full cursor-zoom-in"
+          } ${loaded ? "opacity-100" : "opacity-0"}`}
+        />
+      </div>
+
+      <div className="flex items-center justify-between gap-4 border-t border-white/10 px-5 py-4 md:px-8">
+        <button
+          type="button"
+          onClick={() => step(-1)}
+          className="border border-white/20 px-5 py-3 text-[10px] tracking-[0.3em] uppercase transition-colors hover:border-accent hover:text-accent"
+        >
+          ← Prev
+        </button>
+        <p className="truncate text-center text-[10px] tracking-[0.28em] text-muted-foreground uppercase">
+          {item.spec}
+        </p>
+        <button
+          type="button"
+          onClick={() => step(1)}
+          className="border border-white/20 px-5 py-3 text-[10px] tracking-[0.3em] uppercase transition-colors hover:border-accent hover:text-accent"
+        >
+          Next →
+        </button>
+      </div>
     </div>
   );
 }
 
+/* --------------------------------- page ---------------------------------- */
+
 function CatalogPage() {
   const { category } = Route.useLoaderData();
-  const [open, setOpen] = useState<CatalogItem | null>(null);
+  const [shown, setShown] = useState(PAGE);
+  const [open, setOpen] = useState<number | null>(null);
+
+  useEffect(() => {
+    setShown(PAGE);
+    setOpen(null);
+  }, [category.slug]);
+
+  const items = category.items;
 
   return (
-    <div className="min-h-screen bg-background px-6 pt-28 pb-28 text-foreground md:px-14 md:pt-36">
+    <div className="min-h-screen bg-background px-5 pt-24 pb-24 text-foreground md:px-14 md:pt-36">
       <Link
         to="/"
         className="text-[10px] tracking-[0.4em] text-muted-foreground uppercase transition-colors hover:text-accent"
@@ -92,19 +163,21 @@ function CatalogPage() {
         ← Back to the experience
       </Link>
 
-      <p className="mt-14 text-[10px] tracking-[0.5em] text-accent uppercase">Catalogue</p>
-      <h1 className="mt-6 text-4xl leading-[1.02] font-light tracking-tight md:text-7xl">
+      <p className="mt-12 text-[10px] tracking-[0.5em] text-accent uppercase">
+        Catalogue · {items.length} references
+      </p>
+      <h1 className="mt-5 text-3xl leading-[1.04] font-light tracking-tight md:text-6xl">
         {category.title}
       </h1>
-      <p className="mt-6 max-w-xl text-sm leading-relaxed text-muted-foreground">{category.lead}</p>
+      <p className="mt-6 max-w-2xl text-sm leading-relaxed text-muted-foreground">{category.lead}</p>
 
-      <nav className="mt-10 flex flex-wrap gap-3">
+      <nav className="mt-9 flex flex-wrap gap-2 md:gap-3">
         {CATALOG.map((c) => (
           <Link
             key={c.slug}
             to="/catalog/$category"
             params={{ category: c.slug }}
-            className={`border px-5 py-3 text-[10px] tracking-[0.34em] uppercase transition-colors duration-500 ${
+            className={`border px-4 py-3 text-[10px] tracking-[0.28em] uppercase transition-colors duration-500 md:px-5 md:tracking-[0.34em] ${
               c.slug === category.slug
                 ? "border-accent text-accent"
                 : "border-white/15 text-muted-foreground hover:border-accent/60 hover:text-accent"
@@ -113,41 +186,59 @@ function CatalogPage() {
             {c.label}
           </Link>
         ))}
+        <a
+          href={category.docUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="border border-white/15 px-4 py-3 text-[10px] tracking-[0.28em] text-muted-foreground uppercase transition-colors hover:border-accent/60 hover:text-accent md:px-5"
+        >
+          {category.docLabel} ↓
+        </a>
       </nav>
 
-      <div className="mt-16 grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
-        {category.items.map((item) => (
+      <div className="mt-12 grid grid-cols-2 gap-x-4 gap-y-9 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+        {items.slice(0, shown).map((item, i) => (
           <article key={item.ref} className="group">
             <button
               type="button"
-              onClick={() => setOpen(item)}
-              className="block w-full cursor-pointer text-left"
-              aria-label={`${item.ref} ${item.name} — open catalogue page ${item.docPage}`}
+              onClick={() => setOpen(i)}
+              className="block w-full cursor-zoom-in text-left"
+              aria-label={`${item.ref} ${item.name} — enlarge`}
             >
-              <div className="overflow-hidden border border-white/10 bg-white/[0.03] transition-colors duration-500 group-hover:border-accent/50">
+              <div className="overflow-hidden border border-white/10 bg-white/[0.02] transition-colors duration-500 group-hover:border-accent/50">
                 <img
                   src={item.image}
-                  alt={`${item.name} — ${item.spec}`}
+                  alt={`${item.ref} ${item.name} — ${item.spec}`}
                   loading="lazy"
-                  width={800}
-                  height={800}
-                  className="aspect-square w-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-[1.04] group-hover:opacity-100"
+                  decoding="async"
+                  width={520}
+                  height={640}
+                  className="aspect-[4/5] w-full object-contain transition-transform duration-700 group-hover:scale-[1.05]"
                 />
               </div>
-              <p className="mt-5 text-[10px] tracking-[0.4em] text-accent uppercase">{item.ref}</p>
-              <h2 className="mt-3 text-xl font-light">{item.name}</h2>
-              <p className="mt-2 text-sm text-muted-foreground">{item.spec}</p>
-              <p className="mt-4 text-[10px] tracking-[0.34em] text-muted-foreground uppercase transition-colors duration-500 group-hover:text-accent">
-                {item.docLabel} · p.{item.docPage} →
-              </p>
+              <p className="mt-3 text-[10px] tracking-[0.34em] text-accent uppercase">{item.ref}</p>
+              <h2 className="mt-2 text-sm font-light">{item.name}</h2>
+              <p className="mt-1 text-[11px] leading-relaxed text-muted-foreground">{item.spec}</p>
             </button>
           </article>
         ))}
       </div>
 
-      {open && <DocViewer item={open} onClose={() => setOpen(null)} />}
+      {shown < items.length && (
+        <button
+          type="button"
+          onClick={() => setShown((s) => s + PAGE)}
+          className="mt-14 border border-accent/60 px-8 py-4 text-[11px] tracking-[0.34em] text-accent uppercase transition-colors duration-500 hover:bg-accent hover:text-accent-foreground"
+        >
+          Load more ({items.length - shown} left)
+        </button>
+      )}
 
-      <div className="mt-24 border-t border-white/10 pt-10">
+      {open !== null && (
+        <Lightbox items={items} index={open} onIndex={setOpen} onClose={() => setOpen(null)} />
+      )}
+
+      <div className="mt-20 border-t border-white/10 pt-10">
         <a
           href="/#inquiry"
           className="inline-flex border border-accent/60 px-8 py-4 text-[11px] tracking-[0.34em] text-accent uppercase transition-colors duration-500 hover:bg-accent hover:text-accent-foreground"

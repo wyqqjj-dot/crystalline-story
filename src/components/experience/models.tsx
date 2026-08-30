@@ -4,6 +4,8 @@ import { MeshTransmissionMaterial, useGLTF, useTexture } from "@react-three/drei
 
 import boxAsset from "@/assets/box.jpg.asset.json";
 import bottleModel from "@/assets/bottle-cq100.glb.asset.json";
+import { CAP_MODEL } from "@/lib/catalog";
+import { quality } from "@/lib/journey";
 
 /**
  * MODEL INTERFACE
@@ -65,8 +67,8 @@ export const Bottle = forwardRef<THREE.Group, { opacity?: number }>(function Bot
       <group scale={2.3} position={[0, -0.85, 0]}>
         <mesh geometry={geometry} castShadow>
           <MeshTransmissionMaterial
-            samples={6}
-            resolution={256}
+            samples={quality.lite ? 3 : 6}
+            resolution={quality.lite ? 128 : 256}
             transmission={1}
             thickness={0.32}
             ior={1.52}
@@ -96,60 +98,50 @@ export const Bottle = forwardRef<THREE.Group, { opacity?: number }>(function Bot
 useGLTF.preload(bottleModel.url);
 
 /* --------------------------------- stopper --------------------------------- */
-/** CQ-193 — turned glass head + natural cork plug */
+/**
+ * CQ-193 — the client's own closure geometry (GLB, decimated + hole-filled so
+ * the crown reads as one sealed piece of glass). The supplied model is
+ * untextured, so it is finished here as the polished clear glass of the
+ * reference photograph.
+ */
 export const Stopper = forwardRef<THREE.Group, { opacity?: number }>(function Stopper(
   { opacity = 1 },
   ref,
 ) {
   const transparent = opacity < 1;
+  const gltf = useGLTF(CAP_MODEL);
 
-  const head = useMemo(
-    () =>
-      lathe([
-        [0.001, 0.52],
-        [0.09, 0.5],
-        [0.17, 0.44],
-        [0.225, 0.34],
-        [0.25, 0.22],
-        [0.245, 0.1],
-        [0.215, 0.02],
-        [0.18, -0.02],
-        [0.001, -0.03],
-      ]),
-    [],
-  );
+  const geometry = useMemo(() => {
+    let found: THREE.BufferGeometry | null = null;
+    gltf.scene.traverse((o) => {
+      const m = o as THREE.Mesh;
+      if (!found && m.isMesh && m.geometry) found = m.geometry;
+    });
+    return found;
+  }, [gltf]);
 
-  const cork = useMemo(
-    () =>
-      lathe([
-        [0.001, 0.02],
-        [0.15, 0.0],
-        [0.158, -0.06],
-        [0.152, -0.16],
-        [0.142, -0.26],
-        [0.12, -0.31],
-        [0.001, -0.33],
-      ]),
-    [],
-  );
+  if (!geometry) return <group ref={ref} />;
 
   return (
     <group ref={ref}>
-      <mesh geometry={head} castShadow>
-        <meshPhysicalMaterial {...GLASS} transparent={transparent} opacity={opacity} />
-      </mesh>
-      <mesh geometry={cork} castShadow>
-        <meshStandardMaterial
-          color="#c1936a"
-          roughness={0.92}
-          metalness={0}
-          transparent={transparent}
-          opacity={opacity}
-        />
-      </mesh>
+      {/* model is normalised to height 1 and centred on the origin */}
+      <group scale={0.55} position={[0, 0.14, 0]}>
+        <mesh geometry={geometry} castShadow>
+          <meshPhysicalMaterial
+            {...GLASS}
+            thickness={0.6}
+            attenuationDistance={4}
+            attenuationColor="#e6f3f8"
+            transparent={transparent}
+            opacity={opacity}
+          />
+        </mesh>
+      </group>
     </group>
   );
 });
+
+useGLTF.preload(CAP_MODEL);
 
 /* ----------------------------------- box ----------------------------------- */
 /** CQ-B-1 — twin-door timber presentation box */

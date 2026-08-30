@@ -5,7 +5,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Scene } from "./Scene";
 import { Panel } from "./Panel";
 import { IntroGate } from "./IntroGate";
-import { journey, stationFor, type Station } from "@/lib/journey";
+import { ForgeFilm } from "./ForgeFilm";
+import { journey, quality, stationFor, type Station } from "@/lib/journey";
 
 /** how much upward wheel/touch travel (in px) completes the forge ritual */
 const RITUAL_TRAVEL = 2600;
@@ -18,6 +19,16 @@ export function Experience() {
   const [progress, setProgress] = useState(0);
   const [introProgress, setIntroProgress] = useState(0);
   const [introDone, setIntroDone] = useState(false);
+  const [mobile, setMobile] = useState(false);
+
+  /* device tier: phones get a lighter renderer + lighter physics */
+  useEffect(() => {
+    const weak =
+      window.matchMedia("(max-width: 768px)").matches ||
+      (navigator.hardwareConcurrency ?? 8) <= 4;
+    quality.lite = weak;
+    setMobile(weak);
+  }, []);
 
   /* ---- the opening is driven by the user pushing upward, never by a timer ---- */
   useEffect(() => {
@@ -137,22 +148,23 @@ export function Experience() {
     };
   }, []);
 
-  const inTrack = progress > 0 && progress < 1;
-
   return (
     <>
       {/* fixed WebGL stage */}
       <div className="fixed inset-0 z-0">
         <Canvas
           shadows="basic"
-          dpr={[1, 1.6]}
+          dpr={[1, mobile ? 1.15 : 1.6]}
           camera={{ position: [0, 0, 6.2], fov: 42 }}
-          gl={{ antialias: true, powerPreference: "high-performance" }}
+          gl={{ antialias: !mobile, powerPreference: "high-performance" }}
         >
           <color attach="background" args={["#0a0a0a"]} />
-          <Scene introRef={introRef} />
+          <Scene introRef={introRef} lite={mobile} />
         </Canvas>
       </div>
+
+      {/* scroll-scrubbed forge film — crystal, molten pour, mould, bottle */}
+      <ForgeFilm tRef={introRef} done={introDone} />
 
       <IntroGate progress={introProgress} done={introDone} />
 
@@ -175,28 +187,18 @@ export function Experience() {
           )}
         </AnimatePresence>
 
-        {/* final frame */}
-        <motion.div
-          animate={{ opacity: progress > 0.97 ? 1 : 0 }}
-          transition={{ duration: 0.6 }}
-          className="pointer-events-none fixed inset-x-0 bottom-[12vh] z-20 text-center"
-        >
-          <h2 className="text-4xl font-light tracking-tight md:text-6xl">Ready for the world.</h2>
-          <p className="mt-4 text-[11px] tracking-[0.5em] text-muted-foreground uppercase">
-            Jining Chunqiu Import &amp; Export Co., Ltd.
-          </p>
-        </motion.div>
-
-        {/* progress rail */}
-        <div className="pointer-events-none fixed top-1/2 left-5 z-20 hidden h-40 w-px -translate-y-1/2 bg-white/12 md:block">
+        {/* closing frame — sits at the end of the track, it never follows the scroll */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 flex h-screen items-end justify-center pb-[14vh] text-center">
           <motion.div
-            className="w-px bg-accent"
-            style={{ height: `${Math.max(2, progress * 100)}%` }}
-          />
+            animate={{ opacity: progress > 0.95 ? 1 : 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-3xl font-light tracking-tight md:text-6xl">Ready for the world.</h2>
+            <p className="mt-4 text-[10px] tracking-[0.42em] text-muted-foreground uppercase md:text-[11px] md:tracking-[0.5em]">
+              Jining Chunqiu Import &amp; Export Co., Ltd.
+            </p>
+          </motion.div>
         </div>
-        <span className="pointer-events-none fixed bottom-8 left-5 z-20 hidden text-[10px] tracking-[0.4em] text-muted-foreground uppercase md:block">
-          {inTrack ? String(Math.round(progress * 100)).padStart(2, "0") : "00"} / 100
-        </span>
       </div>
     </>
   );
