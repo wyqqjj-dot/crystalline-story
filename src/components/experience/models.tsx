@@ -27,7 +27,7 @@ export const GLASS = {
   clearcoat: 1,
   clearcoatRoughness: 0.04,
   envMapIntensity: 2.4,
-  color: "#eef6f8",
+  color: "#fffdf7",
 } as const;
 
 /** smooth lathe helper: sample a profile as a rounded curve */
@@ -72,17 +72,17 @@ export const Bottle = forwardRef<THREE.Group, { opacity?: number }>(function Bot
             transmission={1}
             thickness={0.32}
             ior={1.52}
-            chromaticAberration={0.06}
-            anisotropicBlur={0.12}
-            distortion={0.16}
-            distortionScale={0.35}
-            temporalDistortion={0.08}
+            chromaticAberration={0.045}
+            anisotropicBlur={0.1}
+            distortion={0.12}
+            distortionScale={0.28}
+            temporalDistortion={0.06}
             roughness={0.02}
             clearcoat={1}
             clearcoatRoughness={0.03}
             attenuationDistance={6}
-            attenuationColor="#dff0f6"
-            color="#f2fafc"
+            attenuationColor="#fffaf0"
+            color="#fffdf7"
             backside
             backsideThickness={0.18}
             transparent={opacity < 1}
@@ -124,14 +124,27 @@ export const Stopper = forwardRef<THREE.Group, { opacity?: number }>(function St
 
   return (
     <group ref={ref}>
-      {/* model is normalised to height 1 and centred on the origin */}
+      {/* sealed clear-glass crown, matched to the supplied four-view stopper */}
       <group scale={0.55} position={[0, 0.14, 0]}>
         <mesh geometry={geometry} castShadow>
           <meshPhysicalMaterial
             {...GLASS}
             thickness={0.6}
             attenuationDistance={4}
-            attenuationColor="#e6f3f8"
+            attenuationColor="#f5ead2"
+            transparent={transparent}
+            opacity={opacity}
+          />
+        </mesh>
+        {/* frosted inner plug: visible below the recessed crown */}
+        <mesh position={[0, -0.42, 0]} castShadow>
+          <cylinderGeometry args={[0.29, 0.32, 0.34, 64]} />
+          <meshPhysicalMaterial
+            color="#e7e0d2"
+            roughness={0.62}
+            metalness={0}
+            transmission={0.18}
+            thickness={0.16}
             transparent={transparent}
             opacity={opacity}
           />
