@@ -19,6 +19,15 @@ export function Experience() {
   const [progress, setProgress] = useState(0);
   const [introProgress, setIntroProgress] = useState(0);
   const [introDone, setIntroDone] = useState(false);
+  const [mobile, setMobile] = useState(false);
+
+  /* device tier: phones get a lighter renderer + lighter physics */
+  useEffect(() => {
+    const weak =
+      window.matchMedia("(max-width: 768px)").matches ||
+      (navigator.hardwareConcurrency ?? 8) <= 4;
+    setMobile(weak);
+  }, []);
 
   /* ---- the opening is driven by the user pushing upward, never by a timer ---- */
   useEffect(() => {
