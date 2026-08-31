@@ -1,20 +1,11 @@
 import { AnimatePresence, motion } from "framer-motion";
 
-/** Prompt for the scroll-up forge ritual — a single hairline, no counters. */
-export function IntroGate({ progress, done }: { progress: number; done: boolean }) {
-  const label =
-    progress < 0.06
-      ? "Swipe upward to awaken the crystal"
-      : progress < 0.28
-        ? "Magnetic fragments converge"
-        : progress < 0.44
-          ? "Crystal melts into glass"
-          : progress < 0.66
-            ? "The stream enters the mould"
-            : progress < 0.86
-              ? "The mould opens"
-              : "The bottle takes shape";
+import { RITUAL, ritualStage } from "@/lib/journey";
 
+/** Prompt for the scroll-up forge ritual — seven named stages, one hairline meter. */
+export function IntroGate({ progress, done }: { progress: number; done: boolean }) {
+  const stage = ritualStage(progress);
+  const label = progress < 0.02 ? "Swipe upward to begin" : stage.label;
 
   return (
     <AnimatePresence>
@@ -44,10 +35,29 @@ export function IntroGate({ progress, done }: { progress: number; done: boolean 
           </div>
 
           <div className="flex flex-col items-center gap-5">
+            <span className="text-[10px] tracking-[0.44em] text-accent/80 uppercase">
+              Stage {stage.n} / {RITUAL.length}
+            </span>
             <span className="text-[10px] tracking-[0.44em] text-muted-foreground uppercase">
               {label}
             </span>
-            <div className="h-20 w-px bg-white/12 md:h-24">
+
+            {/* seven segments, one per stage */}
+            <div className="flex items-end gap-2">
+              {RITUAL.map((s) => {
+                const local = Math.min(1, Math.max(0, (progress - s.from) / (s.to - s.from)));
+                return (
+                  <span key={s.n} className="h-px w-6 bg-white/12">
+                    <span
+                      className="block h-px bg-accent transition-[width] duration-150"
+                      style={{ width: `${local * 100}%` }}
+                    />
+                  </span>
+                );
+              })}
+            </div>
+
+            <div className="h-16 w-px bg-white/12 md:h-20">
               <div
                 className="w-px bg-accent transition-[height] duration-150"
                 style={{ height: `${Math.max(2, progress * 100)}%` }}
