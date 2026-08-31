@@ -8,6 +8,8 @@ import {
   type CatalogCategory,
   type CatalogItem,
 } from "@/lib/catalog";
+import { tintStyle, useProductTint } from "@/lib/product-color";
+
 
 export const Route = createFileRoute("/catalog/$category")({
   loader: ({ params }) => {
@@ -67,6 +69,7 @@ function DocViewer({
   const [failed, setFailed] = useState(false);
   const src = `${category.docUrl}#page=${page ?? 1}&view=FitH`;
   const specs = item ? itemSpecs(category.slug, item) : null;
+  const tint = useProductTint(item?.image);
 
   useEffect(() => {
     setLoaded(false);
@@ -80,8 +83,15 @@ function DocViewer({
   }, [category.docUrl, page, attempt]);
 
   return (
-    <div className="fixed inset-0 z-[60] flex flex-col bg-background" role="dialog" aria-modal="true" aria-label={category.docLabel}>
+    <div
+      className="product-surface fixed inset-0 z-[60] flex flex-col"
+      style={tintStyle(tint)}
+      role="dialog"
+      aria-modal="true"
+      aria-label={category.docLabel}
+    >
       <header className="flex shrink-0 items-center justify-between gap-4 border-b border-border px-5 py-4 md:px-8">
+
         <div className="min-w-0">
           <p className="text-[10px] tracking-[0.38em] text-accent uppercase">
             {item ? `Specification · ${item.ref}` : "Source document"}
@@ -182,6 +192,7 @@ function Lightbox({
   const item = items[index];
   const [loaded, setLoaded] = useState(false);
   const [zoom, setZoom] = useState(false);
+  const tint = useProductTint(item?.image);
 
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
@@ -219,7 +230,7 @@ function Lightbox({
   if (!item) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col bg-background/95 backdrop-blur-sm">
+    <div className="product-surface fixed inset-0 z-50 flex flex-col backdrop-blur-sm" style={tintStyle(tint)}>
       <div className="flex items-start justify-between gap-4 px-5 py-4 md:px-8">
         <div className="min-w-0">
           <p className="text-[10px] tracking-[0.4em] text-accent uppercase">{item.ref}</p>
