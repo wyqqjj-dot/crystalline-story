@@ -183,7 +183,9 @@ export function Experience() {
         >
           <color attach="background" args={["#000000"]} />
           {!introDone && <Genesis tRef={introRef} lite={mobile || lowPower} />}
-          {!introDone && <ForgeSequence tRef={introRef} lite={mobile || lowPower} />}
+          <Suspense fallback={null}>
+            {!introDone && <ForgeSequence tRef={introRef} lite={mobile || lowPower} />}
+          </Suspense>
           <Scene introRef={introRef} lite={mobile || lowPower} />
         </Canvas>
       </div>

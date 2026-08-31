@@ -27,15 +27,13 @@ function ImportedModel({
   position,
   scale,
   rotation,
-  opacity,
-  visible = true,
+  opacityRef,
 }: {
   url: string;
   position: [number, number, number];
   scale: number;
   rotation?: [number, number, number];
-  opacity: number;
-  visible?: boolean;
+  opacityRef: { current: number };
 }) {
   const { scene } = useGLTF(url);
   const root = useMemo(() => scene.clone(true), [scene]);
@@ -49,23 +47,17 @@ function ImportedModel({
       const materials = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
       mesh.material = materials.map((material) => material.clone());
     });
-    setOpacity(root, opacity);
-  }, [root, opacity]);
+  }, [root]);
 
-  useFrame(() => setOpacity(root, opacity));
+  useFrame(() => {
+    setOpacity(root, opacityRef.current);
+    root.visible = opacityRef.current > 0.01;
+  });
 
-  return (
-    <primitive
-      object={root}
-      position={position}
-      scale={scale}
-      rotation={rotation}
-      visible={visible && opacity > 0.01}
-    />
-  );
+  return <primitive object={root} position={position} scale={scale} rotation={rotation} />;
 }
 
-function FlowField({ t, lite }: { t: number; lite: boolean }) {
+function FlowField({ tRef, lite }: { tRef: { current: number }; lite: boolean }) {
   const points = useRef<THREE.Points>(null);
   const bead = useRef<THREE.Mesh>(null);
   const count = lite ? 36 : 72;
@@ -76,6 +68,7 @@ function FlowField({ t, lite }: { t: number; lite: boolean }) {
   }, [count]);
 
   useFrame((state) => {
+    const t = clamp01(tRef.current);
     const flow = ease(range(t, 0.39, 0.7));
     const arrive = ease(range(t, 0.6, 0.76));
     const attr = geometry.getAttribute("position") as THREE.BufferAttribute;
@@ -127,7 +120,8 @@ function FlowField({ t, lite }: { t: number; lite: boolean }) {
   );
 }
 
-function Mould({ t, lite }: { t: number; lite: boolean }) {
+function Mould({ tRef, lite }: { tRef: { current: number }; lite: boolean }) {
+  const t = clamp01(tRef.current);
   const open = ease(range(t, 0.68, 0.86));
   const fill = ease(range(t, 0.58, 0.78));
   const opacity = 0.98 * (1 - ease(range(t, 0.84, 0.98)));
@@ -137,10 +131,10 @@ function Mould({ t, lite }: { t: number; lite: boolean }) {
   return (
     <group position={[0, -0.2, 0]} rotation={[0, 0, 0.04]}>
       <group position={[-spread, 0, 0]}>
-        <ImportedModel url={mouldAsset.url} position={[0, 0, 0]} scale={scale} opacity={opacity} />
+        <ImportedModel url={mouldAsset.url} position={[0, 0, 0]} scale={scale} opacityRef={{ current: opacity }} />
       </group>
       <group position={[spread, 0, 0]} rotation={[0, open * 0.2, 0]}>
-        <ImportedModel url={mouldAsset.url} position={[0, 0, 0]} scale={scale} opacity={opacity} />
+        <ImportedModel url={mouldAsset.url} position={[0, 0, 0]} scale={scale} opacityRef={{ current: opacity }} />
       </group>
       <mesh position={[0, -0.48, 0.2]} scale={[0.72, 0.12 + fill * 0.36, 0.28]}>
         <sphereGeometry args={[1, lite ? 12 : 20, lite ? 8 : 12]} />
@@ -161,18 +155,19 @@ function Mould({ t, lite }: { t: number; lite: boolean }) {
 /** Pure WebGL continuation of the ritual: pipe, flowing glass, mould fill, open. */
 export function ForgeSequence({ tRef, lite }: { tRef: { current: number }; lite: boolean }) {
   const root = useRef<THREE.Group>(null);
+  const pipeOpacity = useRef(0);
+  const boxOpacity = useRef(0);
 
   useFrame(() => {
     const t = clamp01(tRef.current);
     const opacity = ease(range(t, 0.34, 0.47)) * (1 - ease(range(t, 0.86, 1)));
+    pipeOpacity.current = ease(range(t, 0.36, 0.48)) * (1 - ease(range(t, 0.76, 0.9)));
+    boxOpacity.current = ease(range(t, 0.82, 0.9));
     if (root.current) {
       root.current.visible = opacity > 0.01;
       root.current.position.y = Math.sin(t * Math.PI) * 0.08;
     }
   });
-
-  const pipeOpacity = ease(range(0.38, 0.39, 0.48)) * (1 - ease(range(0.8, 0.78, 0.94)));
-  const mouldOpacity = ease(range(0.56, 0.56, 0.67)) * (1 - ease(range(0.84, 0.82, 0.98)));
 
   return (
     <group ref={root}>
@@ -181,17 +176,15 @@ export function ForgeSequence({ tRef, lite }: { tRef: { current: number }; lite:
         position={[2.02, 0.78, 0.1]}
         scale={lite ? 1.05 : 1.2}
         rotation={[0, 0, -0.12]}
-        opacity={pipeOpacity}
+        opacityRef={pipeOpacity}
       />
-      <FlowField t={tRef.current} lite={lite} />
-      <group visible={mouldOpacity > 0.01}>
-        <Mould t={tRef.current} lite={lite} />
-      </group>
+      <FlowField tRef={tRef} lite={lite} />
+      <Mould tRef={tRef} lite={lite} />
       <ImportedModel
         url={boxModelAsset.url}
         position={[-2.05, -0.75, -0.3]}
         scale={0.24}
-        opacity={ease(range(tRef.current, 0.82, 0.9))}
+        opacityRef={boxOpacity}
       />
     </group>
   );
