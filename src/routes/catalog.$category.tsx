@@ -8,6 +8,8 @@ import {
   type CatalogCategory,
   type CatalogItem,
 } from "@/lib/catalog";
+import { tintStyle, useProductTint } from "@/lib/product-color";
+
 
 export const Route = createFileRoute("/catalog/$category")({
   loader: ({ params }) => {
