@@ -46,6 +46,16 @@ export function Scene({ introRef, lite = false }: { introRef: { current: number 
 
     /* -------------------- physics: the mould releases the bottle ------------- */
     const d = drop.current;
+    if (d.started && intro < 0.9) {
+      // the visitor rewound the ritual — arm the drop again for the next release
+      d.started = false;
+      d.active = false;
+      d.hits = 0;
+      d.y = 2.35;
+      d.v = 0;
+      d.tilt = 0;
+      d.tiltV = 0;
+    }
     if (!d.started && intro > 0.955) {
       d.started = true;
       d.active = true;
@@ -53,6 +63,7 @@ export function Scene({ introRef, lite = false }: { introRef: { current: number 
       d.v = -0.4;
       d.tilt = 0.14;
       d.tiltV = -1.6;
+
     }
     if (d.active) {
       // gravity + substeps so the contact never tunnels

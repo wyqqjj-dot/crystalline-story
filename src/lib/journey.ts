@@ -33,6 +33,10 @@ export function advanceJourney(dt: number) {
 /** device tier shared with the 3D materials: phones / low-core CPUs run lite */
 export const quality = { lite: false };
 
+/** normalized pointer position (-1..1) used by the opening particle field */
+export const pointer = { x: 0, y: 0, active: false, press: false };
+
+
 export const clamp01 = (x: number) => (x < 0 ? 0 : x > 1 ? 1 : x);
 
 /** normalized 0..1 progress of p inside [a,b] */

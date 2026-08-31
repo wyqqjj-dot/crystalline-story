@@ -127,17 +127,24 @@ function Mould({ tRef, lite }: { tRef: { current: number }; lite: boolean }) {
   const rightOpacity = useRef(0);
   const scale = lite ? 1.08 : 1.18;
 
-  useFrame(() => {
+  useFrame((state) => {
     const t = clamp01(tRef.current);
     const open = ease(range(t, 0.68, 0.86));
+    // brief hold, then a mechanical tremor just before the halves part
+    const tremor = Math.sin(range(t, 0.6, 0.68) * Math.PI) * (1 - open);
     const fill = ease(range(t, 0.58, 0.78));
     const opacity = 0.98 * (1 - ease(range(t, 0.84, 0.98)));
     const spread = open * 1.05;
     leftOpacity.current = opacity;
     rightOpacity.current = opacity;
-    if (left.current) left.current.position.x = -spread;
+    const shake = Math.sin(state.clock.elapsedTime * 46) * 0.012 * tremor;
+    if (left.current) {
+      left.current.position.x = -spread + shake;
+      left.current.position.y = shake * 0.4;
+    }
     if (right.current) {
-      right.current.position.x = spread;
+      right.current.position.x = spread - shake;
+      right.current.position.y = -shake * 0.4;
       right.current.rotation.y = open * 0.2;
     }
     if (liquid.current) {
