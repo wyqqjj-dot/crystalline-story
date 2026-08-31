@@ -84,12 +84,12 @@ export function useProductTint(url?: string | null): Tint | null {
 }
 
 /** CSS custom properties that retint the accent tokens for a subtree. */
-export function tintStyle(tint: Tint | null): React.CSSProperties | undefined {
+export function tintStyle(tint: Tint | null): CSSProperties | undefined {
   if (!tint) return undefined;
   return {
     ["--accent" as string]: tint.accent,
     ["--ring" as string]: tint.accent,
     ["--product-soft" as string]: tint.soft,
     ["--product-deep" as string]: tint.deep,
-  } as React.CSSProperties;
+  } as CSSProperties;
 }
