@@ -127,14 +127,44 @@ export const Stopper = forwardRef<THREE.Group, { opacity?: number }>(function St
       {/* sealed clear-glass crown: the underside is intentionally closed */}
       <group scale={0.55} position={[0, 0.14, 0]}>
         <mesh geometry={geometry} castShadow>
-          <meshPhysicalMaterial
-            {...GLASS}
-            thickness={0.72}
-            attenuationDistance={4}
+          <MeshTransmissionMaterial
+            samples={quality.lite ? 3 : 6}
+            resolution={quality.lite ? 128 : 256}
+            transmission={1}
+            thickness={0.78}
+            ior={1.52}
+            chromaticAberration={0.06}
+            anisotropicBlur={0.08}
+            distortion={0.08}
+            distortionScale={0.22}
+            temporalDistortion={0.04}
+            roughness={0.012}
+            clearcoat={1}
+            clearcoatRoughness={0.02}
+            attenuationDistance={4.2}
             attenuationColor="#f5ead2"
+            color="#fffdf7"
+            backside
+            backsideThickness={0.4}
+            envMapIntensity={3.6}
             transparent={transparent}
             opacity={opacity}
-            side={THREE.DoubleSide}
+          />
+        </mesh>
+        {/* sealed top: a thin polished glass meniscus closing the crown */}
+        <mesh position={[0, 0.5, 0]}>
+          <sphereGeometry args={[0.235, 48, 24, 0, Math.PI * 2, 0, Math.PI / 2]} />
+          <meshPhysicalMaterial
+            color="#fffdf7"
+            roughness={0.02}
+            clearcoat={1}
+            clearcoatRoughness={0.02}
+            transmission={0.94}
+            thickness={0.3}
+            ior={1.52}
+            envMapIntensity={3.4}
+            transparent={transparent}
+            opacity={opacity}
           />
         </mesh>
         {/* recessed frosted plug and a thin sealed underside, based on the reference views */}
