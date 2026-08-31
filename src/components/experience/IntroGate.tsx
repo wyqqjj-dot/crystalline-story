@@ -1,20 +1,8 @@
 import { AnimatePresence, motion } from "framer-motion";
 
-/** Prompt for the scroll-up forge ritual — a single hairline, no counters. */
+/** A single minimal hint. No stages, no counters, no progress meter. */
 export function IntroGate({ progress, done }: { progress: number; done: boolean }) {
-  const label =
-    progress < 0.06
-      ? "Swipe upward to awaken the crystal"
-      : progress < 0.28
-        ? "Magnetic fragments converge"
-        : progress < 0.44
-          ? "Crystal melts into glass"
-          : progress < 0.66
-            ? "The stream enters the mould"
-            : progress < 0.86
-              ? "The mould opens"
-              : "The bottle takes shape";
-
+  const hint = Math.max(0, 1 - progress * 9);
 
   return (
     <AnimatePresence>
@@ -43,17 +31,13 @@ export function IntroGate({ progress, done }: { progress: number; done: boolean 
             </motion.h1>
           </div>
 
-          <div className="flex flex-col items-center gap-5">
-            <span className="text-[10px] tracking-[0.44em] text-muted-foreground uppercase">
-              {label}
-            </span>
-            <div className="h-20 w-px bg-white/12 md:h-24">
-              <div
-                className="w-px bg-accent transition-[height] duration-150"
-                style={{ height: `${Math.max(2, progress * 100)}%` }}
-              />
-            </div>
-          </div>
+          <motion.span
+            animate={{ opacity: hint }}
+            transition={{ duration: 0.5 }}
+            className="text-[10px] tracking-[0.44em] text-muted-foreground uppercase"
+          >
+            Drag or scroll to forge
+          </motion.span>
         </motion.div>
       )}
     </AnimatePresence>

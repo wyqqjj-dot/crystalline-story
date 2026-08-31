@@ -8,10 +8,11 @@ import { IntroGate } from "./IntroGate";
 import { ForgeSequence } from "./ForgeSequence";
 import { Genesis } from "./Genesis";
 
-import { journey, quality, stationFor, type Station } from "@/lib/journey";
+import { journey, pointer, quality, stationFor, type Station } from "@/lib/journey";
 
-/** how much upward wheel/touch travel (in px) completes the forge ritual */
+/** how much drag/wheel travel (in px) completes the forge ritual */
 const RITUAL_TRAVEL = 2600;
+
 
 export function Experience() {
   const track = useRef<HTMLDivElement>(null);
@@ -53,40 +54,72 @@ export function Experience() {
     return () => cancelAnimationFrame(raf);
   }, []);
 
-  /* ---- the opening is driven by the user pushing upward, never by a timer ---- */
+  /* ---- the opening is one continuous, reversible axis under user control ---- */
   useEffect(() => {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) {
+      introRef.current = 1;
+      introTarget.current = 1;
+      setIntroProgress(1);
+      setIntroDone(true);
+      return;
+    }
+
     let raf = 0;
     let last = performance.now();
-    let done = false;
+    let locked = true;
 
+    const lock = () => {
+      if (locked) return;
+      locked = true;
+      document.body.style.overflow = "hidden";
+      setIntroDone(false);
+    };
+    const unlock = () => {
+      if (!locked) return;
+      locked = false;
+      document.body.style.overflow = "";
+      setIntroDone(true);
+    };
+
+    /** positive px = forward through the ritual, negative = rewind */
     const push = (px: number) => {
-      if (done) return;
       introTarget.current = Math.min(1, Math.max(0, introTarget.current + px / RITUAL_TRAVEL));
     };
 
     const loop = (now: number) => {
       const dt = Math.min((now - last) / 1000, 0.05);
       last = now;
-      // critically damped follow: smooth even with coarse wheel steps
+      // critically damped follow: light inertia, always able to rest anywhere
       introRef.current += (introTarget.current - introRef.current) * (1 - Math.exp(-7 * dt));
-      const shown = Math.round(introRef.current * 100) / 100;
+      const shown = Math.round(introRef.current * 1000) / 1000;
       setIntroProgress((p) => (p === shown ? p : shown));
-      if (!done && introRef.current > 0.995) {
-        done = true;
+      if (locked && introTarget.current >= 1 && introRef.current > 0.995) {
         introRef.current = 1;
-        setIntroDone(true);
-        document.body.style.overflow = "";
+        unlock();
         window.scrollTo({ top: 0 });
       }
       raf = requestAnimationFrame(loop);
     };
     raf = requestAnimationFrame(loop);
 
+    /** true when the gesture should drive the ritual instead of the page */
+    const owns = (forward: boolean) => {
+      if (locked) return true;
+      // at the very top of the page, rewinding re-enters the ritual
+      if (!forward && window.scrollY <= 0) {
+        lock();
+        return true;
+      }
+      return false;
+    };
+
     const onWheel = (e: WheelEvent) => {
-      if (done) return;
-      e.preventDefault();
       const dy = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? 100 : 1);
-      push(-dy); // scrolling up (negative deltaY) advances the ritual
+      if (dy === 0) return;
+      if (!owns(dy > 0)) return;
+      e.preventDefault();
+      push(dy);
     };
 
     let touchY: number | null = null;
@@ -94,18 +127,50 @@ export function Experience() {
       touchY = e.touches[0]?.clientY ?? null;
     };
     const onTouchMove = (e: TouchEvent) => {
-      if (done) return;
       const y = e.touches[0]?.clientY;
       if (y == null || touchY == null) return;
-      e.preventDefault();
-      push((touchY - y) * 2.2); // swiping up
+      const dy = touchY - y; // swiping up moves content up => forward
       touchY = y;
+      if (dy === 0) return;
+      if (!owns(dy > 0)) return;
+      e.preventDefault();
+      push(dy * 2.2);
     };
+    const onTouchEnd = () => {
+      touchY = null;
+    };
+
+    /* vertical pointer drag also drives the ritual (desktop) */
+    let dragY: number | null = null;
+    const onDown = (e: PointerEvent) => {
+      dragY = e.clientY;
+      pointer.press = true;
+    };
+    const onMove = (e: PointerEvent) => {
+      pointer.x = (e.clientX / window.innerWidth) * 2 - 1;
+      pointer.y = -((e.clientY / window.innerHeight) * 2 - 1);
+      pointer.active = true;
+      if (dragY === null || e.pointerType === "touch") return;
+      const dy = dragY - e.clientY;
+      dragY = e.clientY;
+      if (owns(dy > 0)) push(dy * 1.6);
+    };
+    const onUp = () => {
+      dragY = null;
+      pointer.press = false;
+    };
+    const onLeave = () => {
+      pointer.active = false;
+    };
+
     const onKey = (e: KeyboardEvent) => {
-      if (done) return;
-      if (e.key === "ArrowUp" || e.key === "PageUp" || e.key === " ") {
+      if (!locked) return;
+      if (e.key === "ArrowDown" || e.key === "PageDown" || e.key === " ") {
         e.preventDefault();
         push(360);
+      } else if (e.key === "ArrowUp" || e.key === "PageUp") {
+        e.preventDefault();
+        push(-360);
       }
     };
 
@@ -113,6 +178,12 @@ export function Experience() {
     window.addEventListener("wheel", onWheel, { passive: false });
     window.addEventListener("touchstart", onTouchStart, { passive: true });
     window.addEventListener("touchmove", onTouchMove, { passive: false });
+    window.addEventListener("touchend", onTouchEnd, { passive: true });
+    window.addEventListener("pointerdown", onDown);
+    window.addEventListener("pointermove", onMove);
+    window.addEventListener("pointerup", onUp);
+    window.addEventListener("pointercancel", onUp);
+    window.addEventListener("pointerleave", onLeave);
     window.addEventListener("keydown", onKey);
 
     return () => {
@@ -120,10 +191,17 @@ export function Experience() {
       window.removeEventListener("wheel", onWheel);
       window.removeEventListener("touchstart", onTouchStart);
       window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("touchend", onTouchEnd);
+      window.removeEventListener("pointerdown", onDown);
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerup", onUp);
+      window.removeEventListener("pointercancel", onUp);
+      window.removeEventListener("pointerleave", onLeave);
       window.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
     };
   }, []);
+
 
   /* ---- scroll drives the camera path, one-to-one ---- */
   useEffect(() => {
