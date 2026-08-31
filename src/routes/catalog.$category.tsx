@@ -363,6 +363,16 @@ function CatalogPage() {
               <h2 className="mt-2 text-sm font-light">{item.name}</h2>
               <p className="mt-1 text-[11px] leading-relaxed text-muted-foreground">{item.spec}</p>
             </button>
+            <button
+              type="button"
+              onClick={() => {
+                setDocItem(item);
+                setDocOpen(true);
+              }}
+              className="mt-3 border border-border px-3 py-2 text-[9px] tracking-[0.28em] text-muted-foreground uppercase transition-colors hover:border-accent hover:text-accent"
+            >
+              Full spec
+            </button>
           </article>
         ))}
       </div>
