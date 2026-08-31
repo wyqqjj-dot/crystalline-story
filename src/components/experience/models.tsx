@@ -1,11 +1,11 @@
 import { forwardRef, useMemo } from "react";
 import * as THREE from "three";
-import { MeshTransmissionMaterial, useGLTF, useLoader, useTexture } from "@react-three/drei";
+import { useLoader } from "@react-three/fiber";
+import { MeshTransmissionMaterial, useGLTF, useTexture } from "@react-three/drei";
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader.js";
 
 import bottleAsset from "@/assets/cq68yx-bottle.stl.asset.json";
 import boxAsset from "@/assets/box.jpg.asset.json";
-import bottleModel from "@/assets/bottle-cq100.glb.asset.json";
 import { CAP_MODEL } from "@/lib/catalog";
 import { quality } from "@/lib/journey";
 
@@ -45,59 +45,38 @@ function lathe(points: [number, number][], segments = 96) {
 }
 
 /* ---------------------------------- bottle --------------------------------- */
-/** CQ-100 — client CAD geometry, super-flint glass */
+/** CQ-68 — the uploaded production STL, finished as high-transmission glass. */
 export const Bottle = forwardRef<THREE.Group, { opacity?: number }>(function Bottle(
   { opacity = 1 },
   ref,
 ) {
-  const gltf = useGLTF(bottleModel.url);
-
-  const geometry = useMemo(() => {
-    let found: THREE.BufferGeometry | null = null;
-    gltf.scene.traverse((o) => {
-      const m = o as THREE.Mesh;
-      if (!found && m.isMesh && m.geometry) found = m.geometry;
-    });
-    return found;
-  }, [gltf]);
-
-  if (!geometry) return <group ref={ref} />;
+  const geometry = useLoader(STLLoader, bottleAsset.url);
+  const material = useMemo(
+    () =>
+      new THREE.MeshPhysicalMaterial({
+        transmission: 1,
+        thickness: 0.32,
+        ior: 1.52,
+        roughness: 0.018,
+        clearcoat: 1,
+        clearcoatRoughness: 0.03,
+        attenuationDistance: 6,
+        attenuationColor: new THREE.Color("#fffaf0"),
+        color: new THREE.Color("#fffdf7"),
+        envMapIntensity: 3.4,
+        transparent: opacity < 1,
+        opacity,
+      }),
+    [opacity],
+  );
 
   return (
     <group ref={ref}>
-      {/* model is normalised to height 1 with its base at y = 0 */}
-      <group scale={2.3} position={[0, -0.85, 0]}>
-        <mesh geometry={geometry} castShadow>
-          <MeshTransmissionMaterial
-            samples={quality.lite ? 3 : 6}
-            resolution={quality.lite ? 128 : 256}
-            transmission={1}
-            thickness={0.32}
-            ior={1.52}
-            chromaticAberration={0.045}
-            anisotropicBlur={0.1}
-            distortion={0.12}
-            distortionScale={0.28}
-            temporalDistortion={0.06}
-            roughness={0.02}
-            clearcoat={1}
-            clearcoatRoughness={0.03}
-            attenuationDistance={6}
-            attenuationColor="#fffaf0"
-            color="#fffdf7"
-            backside
-            backsideThickness={0.18}
-            transparent={opacity < 1}
-            opacity={opacity}
-            envMapIntensity={3.4}
-          />
-        </mesh>
-      </group>
+      {/* source STL is 257 units tall; this normalises it to a 2.3-unit bottle */}
+      <mesh geometry={geometry} material={material} scale={0.009} position={[0, -1.15, 0]} castShadow />
     </group>
   );
 });
-
-useGLTF.preload(bottleModel.url);
 
 /* --------------------------------- stopper --------------------------------- */
 /**
@@ -126,19 +105,20 @@ export const Stopper = forwardRef<THREE.Group, { opacity?: number }>(function St
 
   return (
     <group ref={ref}>
-      {/* sealed clear-glass crown, matched to the supplied four-view stopper */}
+      {/* sealed clear-glass crown: the underside is intentionally closed */}
       <group scale={0.55} position={[0, 0.14, 0]}>
         <mesh geometry={geometry} castShadow>
           <meshPhysicalMaterial
             {...GLASS}
-            thickness={0.6}
+            thickness={0.72}
             attenuationDistance={4}
             attenuationColor="#f5ead2"
             transparent={transparent}
             opacity={opacity}
+            side={THREE.DoubleSide}
           />
         </mesh>
-        {/* frosted inner plug: visible below the recessed crown */}
+        {/* recessed frosted plug and a thin sealed underside, based on the reference views */}
         <mesh position={[0, -0.42, 0]} castShadow>
           <cylinderGeometry args={[0.29, 0.32, 0.34, 64]} />
           <meshPhysicalMaterial
@@ -147,6 +127,17 @@ export const Stopper = forwardRef<THREE.Group, { opacity?: number }>(function St
             metalness={0}
             transmission={0.18}
             thickness={0.16}
+            transparent={transparent}
+            opacity={opacity}
+            side={THREE.DoubleSide}
+          />
+        </mesh>
+        <mesh position={[0, -0.595, 0]}>
+          <cylinderGeometry args={[0.3, 0.3, 0.025, 64]} />
+          <meshPhysicalMaterial
+            color="#f7f1e5"
+            roughness={0.48}
+            transmission={0.08}
             transparent={transparent}
             opacity={opacity}
           />
