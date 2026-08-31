@@ -241,7 +241,16 @@ export function Content() {
               info@jnchunqiu.com
             </a>
           </p>
-          <p className="md:text-right">© {new Date().getFullYear()} Chunqiu. All rights reserved.</p>
+          <div className="md:text-right">
+            <Link
+              to="/company"
+              className="text-[10px] tracking-[0.34em] text-accent uppercase transition-colors hover:text-foreground"
+            >
+              Company · address · contact
+            </Link>
+            <p className="mt-4">© {new Date().getFullYear()} Chunqiu. All rights reserved.</p>
+          </div>
+
         </div>
       </footer>
     </div>
