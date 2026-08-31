@@ -69,6 +69,7 @@ function DocViewer({
   const [failed, setFailed] = useState(false);
   const src = `${category.docUrl}#page=${page ?? 1}&view=FitH`;
   const specs = item ? itemSpecs(category.slug, item) : null;
+  const tint = useProductTint(item?.image);
 
   useEffect(() => {
     setLoaded(false);
@@ -82,8 +83,15 @@ function DocViewer({
   }, [category.docUrl, page, attempt]);
 
   return (
-    <div className="fixed inset-0 z-[60] flex flex-col bg-background" role="dialog" aria-modal="true" aria-label={category.docLabel}>
+    <div
+      className="product-surface fixed inset-0 z-[60] flex flex-col"
+      style={tintStyle(tint)}
+      role="dialog"
+      aria-modal="true"
+      aria-label={category.docLabel}
+    >
       <header className="flex shrink-0 items-center justify-between gap-4 border-b border-border px-5 py-4 md:px-8">
+
         <div className="min-w-0">
           <p className="text-[10px] tracking-[0.38em] text-accent uppercase">
             {item ? `Specification · ${item.ref}` : "Source document"}
