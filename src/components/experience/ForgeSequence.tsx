@@ -121,22 +121,42 @@ function FlowField({ tRef, lite }: { tRef: { current: number }; lite: boolean })
 }
 
 function Mould({ tRef, lite }: { tRef: { current: number }; lite: boolean }) {
-  const t = clamp01(tRef.current);
-  const open = ease(range(t, 0.68, 0.86));
-  const fill = ease(range(t, 0.58, 0.78));
-  const opacity = 0.98 * (1 - ease(range(t, 0.84, 0.98)));
-  const spread = open * 1.05;
+  const left = useRef<THREE.Group>(null);
+  const right = useRef<THREE.Group>(null);
+  const liquid = useRef<THREE.Mesh>(null);
+  const leftOpacity = useRef(0);
+  const rightOpacity = useRef(0);
   const scale = lite ? 1.08 : 1.18;
+
+  useFrame(() => {
+    const t = clamp01(tRef.current);
+    const open = ease(range(t, 0.68, 0.86));
+    const fill = ease(range(t, 0.58, 0.78));
+    const opacity = 0.98 * (1 - ease(range(t, 0.84, 0.98)));
+    const spread = open * 1.05;
+    leftOpacity.current = opacity;
+    rightOpacity.current = opacity;
+    if (left.current) left.current.position.x = -spread;
+    if (right.current) {
+      right.current.position.x = spread;
+      right.current.rotation.y = open * 0.2;
+    }
+    if (liquid.current) {
+      liquid.current.scale.set(0.72, 0.12 + fill * 0.36, 0.28);
+      const material = liquid.current.material as THREE.MeshPhysicalMaterial;
+      material.opacity = fill * (1 - open * 0.55);
+    }
+  });
 
   return (
     <group position={[0, -0.2, 0]} rotation={[0, 0, 0.04]}>
-      <group position={[-spread, 0, 0]}>
-        <ImportedModel url={mouldAsset.url} position={[0, 0, 0]} scale={scale} opacityRef={{ current: opacity }} />
+      <group ref={left}>
+        <ImportedModel url={mouldAsset.url} position={[0, 0, 0]} scale={scale} opacityRef={leftOpacity} />
       </group>
-      <group position={[spread, 0, 0]} rotation={[0, open * 0.2, 0]}>
-        <ImportedModel url={mouldAsset.url} position={[0, 0, 0]} scale={scale} opacityRef={{ current: opacity }} />
+      <group ref={right}>
+        <ImportedModel url={mouldAsset.url} position={[0, 0, 0]} scale={scale} opacityRef={rightOpacity} />
       </group>
-      <mesh position={[0, -0.48, 0.2]} scale={[0.72, 0.12 + fill * 0.36, 0.28]}>
+      <mesh ref={liquid} position={[0, -0.48, 0.2]}>
         <sphereGeometry args={[1, lite ? 12 : 20, lite ? 8 : 12]} />
         <meshPhysicalMaterial
           color="#c5a572"
@@ -145,7 +165,7 @@ function Mould({ tRef, lite }: { tRef: { current: number }; lite: boolean }) {
           transmission={0.35}
           roughness={0.2}
           transparent
-          opacity={fill * (1 - open * 0.55)}
+          opacity={0}
         />
       </mesh>
     </group>
