@@ -1,7 +1,7 @@
-import { forwardRef, useEffect, useMemo } from "react";
+import { forwardRef, useMemo } from "react";
 import * as THREE from "three";
 import { useLoader } from "@react-three/fiber";
-import { MeshTransmissionMaterial, useGLTF } from "@react-three/drei";
+import { useGLTF } from "@react-three/drei";
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader.js";
 
 import bottleAsset from "@/assets/cq68yx-bottle.stl.asset.json";
