@@ -1,7 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 
-import { CATALOG, categoryBySlug, type CatalogCategory, type CatalogItem } from "@/lib/catalog";
+import {
+  CATALOG,
+  categoryBySlug,
+  itemSpecs,
+  type CatalogCategory,
+  type CatalogItem,
+} from "@/lib/catalog";
 
 export const Route = createFileRoute("/catalog/$category")({
   loader: ({ params }) => {
@@ -280,6 +286,7 @@ function CatalogPage() {
   const [shown, setShown] = useState(PAGE);
   const [open, setOpen] = useState<number | null>(null);
   const [docOpen, setDocOpen] = useState(false);
+  const [docItem, setDocItem] = useState<CatalogItem | null>(null);
 
   useEffect(() => {
     setShown(PAGE);
@@ -322,7 +329,10 @@ function CatalogPage() {
         ))}
         <button
           type="button"
-          onClick={() => setDocOpen(true)}
+          onClick={() => {
+            setDocItem(null);
+            setDocOpen(true);
+          }}
           className="border border-border px-4 py-3 text-[10px] tracking-[0.28em] text-muted-foreground uppercase transition-colors hover:border-accent/60 hover:text-accent md:px-5"
         >
           {category.docLabel} ↓
@@ -374,12 +384,22 @@ function CatalogPage() {
           onIndex={setOpen}
           onClose={() => setOpen(null)}
           onPreview={() => {
+            setDocItem(items[open] ?? null);
             setOpen(null);
             setDocOpen(true);
           }}
         />
       )}
-      {docOpen && <DocViewer category={category} onClose={() => setDocOpen(false)} />}
+      {docOpen && (
+        <DocViewer
+          category={category}
+          item={docItem}
+          onClose={() => {
+            setDocOpen(false);
+            setDocItem(null);
+          }}
+        />
+      )}
 
       <div className="mt-20 border-t border-border pt-10">
         <a
