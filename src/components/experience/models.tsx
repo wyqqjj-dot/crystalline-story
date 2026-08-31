@@ -1,11 +1,9 @@
 import { forwardRef, useMemo } from "react";
 import * as THREE from "three";
-import { useLoader } from "@react-three/fiber";
-import { useGLTF } from "@react-three/drei";
-import { STLLoader } from "three/examples/jsm/loaders/STLLoader.js";
+import { MeshTransmissionMaterial, useGLTF, useTexture } from "@react-three/drei";
 
-import bottleAsset from "@/assets/cq68yx-bottle.stl.asset.json";
-import boxModelAsset from "@/assets/box.glb.asset.json";
+import boxAsset from "@/assets/box.jpg.asset.json";
+import bottleModel from "@/assets/bottle-cq100.glb.asset.json";
 import { CAP_MODEL } from "@/lib/catalog";
 import { quality } from "@/lib/journey";
 
@@ -45,38 +43,59 @@ function lathe(points: [number, number][], segments = 96) {
 }
 
 /* ---------------------------------- bottle --------------------------------- */
-/** CQ-68 — the uploaded production STL, finished as high-transmission glass. */
+/** CQ-100 — the reference-photo bottle geometry, finished as super-flint glass. */
 export const Bottle = forwardRef<THREE.Group, { opacity?: number }>(function Bottle(
   { opacity = 1 },
   ref,
 ) {
-  const geometry = useLoader(STLLoader, bottleAsset.url);
-  const material = useMemo(
-    () =>
-      new THREE.MeshPhysicalMaterial({
-        transmission: 1,
-        thickness: 0.32,
-        ior: 1.52,
-        roughness: 0.018,
-        clearcoat: 1,
-        clearcoatRoughness: 0.03,
-        attenuationDistance: 6,
-        attenuationColor: new THREE.Color("#fffaf0"),
-        color: new THREE.Color("#fffdf7"),
-        envMapIntensity: 3.4,
-        transparent: opacity < 1,
-        opacity,
-      }),
-    [opacity],
-  );
+  const gltf = useGLTF(bottleModel.url);
+
+  const geometry = useMemo(() => {
+    let found: THREE.BufferGeometry | null = null;
+    gltf.scene.traverse((o) => {
+      const m = o as THREE.Mesh;
+      if (!found && m.isMesh && m.geometry) found = m.geometry;
+    });
+    return found;
+  }, [gltf]);
+
+  if (!geometry) return <group ref={ref} />;
 
   return (
     <group ref={ref}>
-      {/* source STL is 257 units tall; this normalises it to a 2.3-unit bottle */}
-      <mesh geometry={geometry} material={material} scale={0.009} position={[0, -1.15, 0]} castShadow />
+      {/* model is normalised to height 1 with its base at y = 0 */}
+      <group scale={2.3} position={[0, -0.85, 0]}>
+        <mesh geometry={geometry} castShadow>
+          <MeshTransmissionMaterial
+            samples={quality.lite ? 3 : 6}
+            resolution={quality.lite ? 128 : 256}
+            transmission={1}
+            thickness={0.32}
+            ior={1.52}
+            chromaticAberration={0.045}
+            anisotropicBlur={0.1}
+            distortion={0.12}
+            distortionScale={0.28}
+            temporalDistortion={0.06}
+            roughness={0.02}
+            clearcoat={1}
+            clearcoatRoughness={0.03}
+            attenuationDistance={6}
+            attenuationColor="#fffaf0"
+            color="#fffdf7"
+            backside
+            backsideThickness={0.18}
+            transparent={opacity < 1}
+            opacity={opacity}
+            envMapIntensity={3.4}
+          />
+        </mesh>
+      </group>
     </group>
   );
 });
+
+useGLTF.preload(bottleModel.url);
 
 /* --------------------------------- stopper --------------------------------- */
 /**
@@ -108,14 +127,44 @@ export const Stopper = forwardRef<THREE.Group, { opacity?: number }>(function St
       {/* sealed clear-glass crown: the underside is intentionally closed */}
       <group scale={0.55} position={[0, 0.14, 0]}>
         <mesh geometry={geometry} castShadow>
-          <meshPhysicalMaterial
-            {...GLASS}
-            thickness={0.72}
-            attenuationDistance={4}
+          <MeshTransmissionMaterial
+            samples={quality.lite ? 3 : 6}
+            resolution={quality.lite ? 128 : 256}
+            transmission={1}
+            thickness={0.78}
+            ior={1.52}
+            chromaticAberration={0.06}
+            anisotropicBlur={0.08}
+            distortion={0.08}
+            distortionScale={0.22}
+            temporalDistortion={0.04}
+            roughness={0.012}
+            clearcoat={1}
+            clearcoatRoughness={0.02}
+            attenuationDistance={4.2}
             attenuationColor="#f5ead2"
+            color="#fffdf7"
+            backside
+            backsideThickness={0.4}
+            envMapIntensity={3.6}
             transparent={transparent}
             opacity={opacity}
-            side={THREE.DoubleSide}
+          />
+        </mesh>
+        {/* sealed top: a thin polished glass meniscus closing the crown */}
+        <mesh position={[0, 0.5, 0]}>
+          <sphereGeometry args={[0.235, 48, 24, 0, Math.PI * 2, 0, Math.PI / 2]} />
+          <meshPhysicalMaterial
+            color="#fffdf7"
+            roughness={0.02}
+            clearcoat={1}
+            clearcoatRoughness={0.02}
+            transmission={0.94}
+            thickness={0.3}
+            ior={1.52}
+            envMapIntensity={3.4}
+            transparent={transparent}
+            opacity={opacity}
           />
         </mesh>
         {/* recessed frosted plug and a thin sealed underside, based on the reference views */}
@@ -150,22 +199,63 @@ export const Stopper = forwardRef<THREE.Group, { opacity?: number }>(function St
 useGLTF.preload(CAP_MODEL);
 
 /* ----------------------------------- box ----------------------------------- */
-/** CQ-B-1 — the uploaded production presentation box, with animated doors. */
+/** CQ-B-1 — twin-door timber presentation box, textured from the reference photo */
 export const GiftBox = forwardRef<
   THREE.Group,
   { leftDoor: React.RefObject<THREE.Group | null>; rightDoor: React.RefObject<THREE.Group | null> }
 >(function GiftBox({ leftDoor, rightDoor }, ref) {
-  const { scene } = useGLTF(boxModelAsset.url);
-  const model = useMemo(() => scene.clone(true), [scene]);
+  const map = useTexture(boxAsset.url);
+  map.colorSpace = THREE.SRGBColorSpace;
+
+  const wood = <meshStandardMaterial map={map} color="#6b4a2f" roughness={0.6} metalness={0} />;
 
   return (
     <group ref={ref}>
-      <primitive object={model} scale={0.2} position={[0, 0, 0]} />
-      {/* stable hinge groups remain available to the choreography */}
-      <group ref={leftDoor} />
-      <group ref={rightDoor} />
+      {/* shell: back + sides + top + bottom */}
+      <mesh castShadow receiveShadow position={[0, 0, -0.42]}>
+        <boxGeometry args={[1.5, 2.1, 0.08]} />
+        {wood}
+      </mesh>
+      <mesh castShadow position={[-0.75, 0, -0.02]}>
+        <boxGeometry args={[0.08, 2.1, 0.86]} />
+        {wood}
+      </mesh>
+      <mesh castShadow position={[0.75, 0, -0.02]}>
+        <boxGeometry args={[0.08, 2.1, 0.86]} />
+        {wood}
+      </mesh>
+      <mesh castShadow position={[0, 1.05, -0.02]}>
+        <boxGeometry args={[1.58, 0.08, 0.86]} />
+        {wood}
+      </mesh>
+      <mesh castShadow receiveShadow position={[0, -1.05, -0.02]}>
+        <boxGeometry args={[1.58, 0.08, 0.86]} />
+        {wood}
+      </mesh>
+
+      {/* red lining */}
+      <mesh position={[0, 0, -0.36]}>
+        <boxGeometry args={[1.4, 2, 0.04]} />
+        <meshStandardMaterial color="#6e1220" roughness={0.3} metalness={0} />
+      </mesh>
+      <mesh position={[0, -0.98, -0.02]}>
+        <boxGeometry args={[1.4, 0.05, 0.76]} />
+        <meshStandardMaterial color="#6e1220" roughness={0.3} metalness={0} />
+      </mesh>
+
+      {/* twin doors — each pivots on its own outer hinge */}
+      <group ref={leftDoor} position={[-0.74, 0, 0.4]}>
+        <mesh castShadow position={[0.37, 0, 0]}>
+          <boxGeometry args={[0.74, 2.06, 0.06]} />
+          {wood}
+        </mesh>
+      </group>
+      <group ref={rightDoor} position={[0.74, 0, 0.4]}>
+        <mesh castShadow position={[-0.37, 0, 0]}>
+          <boxGeometry args={[0.74, 2.06, 0.06]} />
+          {wood}
+        </mesh>
+      </group>
     </group>
   );
 });
-
-useGLTF.preload(boxModelAsset.url);

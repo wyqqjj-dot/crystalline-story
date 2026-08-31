@@ -5,7 +5,6 @@ import { useGLTF } from "@react-three/drei";
 
 import mouldAsset from "@/assets/mould.glb.asset.json";
 import pipeAsset from "@/assets/pipe.glb.asset.json";
-import boxModelAsset from "@/assets/box.glb.asset.json";
 import { clamp01, ease, lerp, range } from "@/lib/journey";
 
 function setOpacity(root: THREE.Object3D, opacity: number) {
@@ -176,13 +175,11 @@ function Mould({ tRef, lite }: { tRef: { current: number }; lite: boolean }) {
 export function ForgeSequence({ tRef, lite }: { tRef: { current: number }; lite: boolean }) {
   const root = useRef<THREE.Group>(null);
   const pipeOpacity = useRef(0);
-  const boxOpacity = useRef(0);
 
   useFrame(() => {
     const t = clamp01(tRef.current);
     const opacity = ease(range(t, 0.34, 0.47)) * (1 - ease(range(t, 0.86, 1)));
     pipeOpacity.current = ease(range(t, 0.36, 0.48)) * (1 - ease(range(t, 0.76, 0.9)));
-    boxOpacity.current = ease(range(t, 0.82, 0.9));
     if (root.current) {
       root.current.visible = opacity > 0.01;
       root.current.position.y = Math.sin(t * Math.PI) * 0.08;
@@ -200,16 +197,9 @@ export function ForgeSequence({ tRef, lite }: { tRef: { current: number }; lite:
       />
       <FlowField tRef={tRef} lite={lite} />
       <Mould tRef={tRef} lite={lite} />
-      <ImportedModel
-        url={boxModelAsset.url}
-        position={[-2.05, -0.75, -0.3]}
-        scale={0.24}
-        opacityRef={boxOpacity}
-      />
     </group>
   );
 }
 
 useGLTF.preload(mouldAsset.url);
 useGLTF.preload(pipeAsset.url);
-useGLTF.preload(boxModelAsset.url);

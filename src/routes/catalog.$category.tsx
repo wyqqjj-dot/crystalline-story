@@ -1,7 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 
-import { CATALOG, categoryBySlug, type CatalogCategory, type CatalogItem } from "@/lib/catalog";
+import {
+  CATALOG,
+  categoryBySlug,
+  itemSpecs,
+  type CatalogCategory,
+  type CatalogItem,
+} from "@/lib/catalog";
 
 export const Route = createFileRoute("/catalog/$category")({
   loader: ({ params }) => {
@@ -48,16 +54,19 @@ function warmPdf(url: string) {
 function DocViewer({
   category,
   page,
+  item,
   onClose,
 }: {
   category: CatalogCategory;
   page?: number;
+  item?: CatalogItem | null;
   onClose: () => void;
 }) {
   const [attempt, setAttempt] = useState(0);
   const [loaded, setLoaded] = useState(false);
   const [failed, setFailed] = useState(false);
   const src = `${category.docUrl}#page=${page ?? 1}&view=FitH`;
+  const specs = item ? itemSpecs(category.slug, item) : null;
 
   useEffect(() => {
     setLoaded(false);
@@ -74,8 +83,10 @@ function DocViewer({
     <div className="fixed inset-0 z-[60] flex flex-col bg-background" role="dialog" aria-modal="true" aria-label={category.docLabel}>
       <header className="flex shrink-0 items-center justify-between gap-4 border-b border-border px-5 py-4 md:px-8">
         <div className="min-w-0">
-          <p className="text-[10px] tracking-[0.38em] text-accent uppercase">Source document</p>
-          <h2 className="mt-1 truncate text-sm font-medium">{category.docLabel}</h2>
+          <p className="text-[10px] tracking-[0.38em] text-accent uppercase">
+            {item ? `Specification · ${item.ref}` : "Source document"}
+          </p>
+          <h2 className="mt-1 truncate text-sm font-medium">{item ? item.name : category.docLabel}</h2>
         </div>
         <button
           type="button"
@@ -86,37 +97,70 @@ function DocViewer({
           Close
         </button>
       </header>
-      <div className="relative min-h-0 flex-1 bg-muted/30">
-        {!loaded && !failed && (
-          <div className="absolute inset-0 flex items-center justify-center" aria-label="Loading document">
-            <div className="w-[min(86vw,28rem)] space-y-3" aria-hidden="true">
-              <div className="h-4 animate-pulse bg-muted" />
-              <div className="h-[55vh] animate-pulse bg-muted" />
-              <div className="h-3 w-2/3 animate-pulse bg-muted" />
+
+      <div className="flex min-h-0 flex-1 flex-col lg:flex-row">
+        <div className="relative min-h-[52vh] flex-1 bg-muted/30 lg:min-h-0">
+          {!loaded && !failed && (
+            <div className="absolute inset-0 flex items-center justify-center" aria-label="Loading document">
+              <div className="w-[min(86vw,28rem)] space-y-3" aria-hidden="true">
+                <div className="h-4 animate-pulse bg-muted" />
+                <div className="h-[45vh] animate-pulse bg-muted" />
+                <div className="h-3 w-2/3 animate-pulse bg-muted" />
+              </div>
             </div>
-          </div>
-        )}
-        {failed && (
-          <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-5 px-6 text-center">
-            <p className="text-sm text-muted-foreground">The catalogue could not be loaded.</p>
-            <button
-              type="button"
-              onClick={() => setAttempt((value) => value + 1)}
-              className="border border-accent px-5 py-3 text-[10px] tracking-[0.3em] text-accent uppercase transition-colors hover:bg-accent hover:text-accent-foreground"
+          )}
+          {failed && (
+            <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-5 px-6 text-center">
+              <p className="text-sm text-muted-foreground">The catalogue could not be loaded.</p>
+              <button
+                type="button"
+                onClick={() => setAttempt((value) => value + 1)}
+                className="border border-accent px-5 py-3 text-[10px] tracking-[0.3em] text-accent uppercase transition-colors hover:bg-accent hover:text-accent-foreground"
+              >
+                Retry preview
+              </button>
+            </div>
+          )}
+          <iframe
+            key={`${src}-${attempt}`}
+            src={src}
+            title={`${category.docLabel} preview`}
+            onLoad={() => setLoaded(true)}
+            onError={() => setFailed(true)}
+            className={`h-full w-full border-0 transition-opacity duration-300 ${loaded && !failed ? "opacity-100" : "opacity-0"}`}
+            allow="fullscreen"
+          />
+        </div>
+
+        {/* right-hand specification panel, side by side with the PDF preview */}
+        {specs && item && (
+          <aside className="min-h-0 w-full shrink-0 overflow-y-auto border-t border-border px-5 py-6 lg:w-[26rem] lg:border-t-0 lg:border-l lg:px-7">
+            <img
+              src={item.image}
+              alt={`${item.ref} ${item.name}`}
+              className="aspect-[4/5] w-32 border border-border bg-card object-contain"
+            />
+            <p className="mt-5 text-[10px] tracking-[0.38em] text-accent uppercase">Full specification</p>
+            <h3 className="mt-2 text-xl font-light tracking-tight">{item.name}</h3>
+            <p className="mt-2 text-[11px] leading-relaxed text-muted-foreground">{item.spec}</p>
+
+            <dl className="mt-6 space-y-3">
+              {specs.map((s) => (
+                <div key={s.k} className="flex items-baseline justify-between gap-6 border-b border-border pb-3">
+                  <dt className="shrink-0 text-[10px] tracking-[0.28em] text-muted-foreground uppercase">{s.k}</dt>
+                  <dd className="text-right text-[12px] leading-relaxed">{s.v}</dd>
+                </div>
+              ))}
+            </dl>
+
+            <a
+              href="/#inquiry"
+              className="mt-7 inline-flex border border-accent/60 px-6 py-3 text-[10px] tracking-[0.3em] text-accent uppercase transition-colors hover:bg-accent hover:text-accent-foreground"
             >
-              Retry preview
-            </button>
-          </div>
+              Request {item.ref}
+            </a>
+          </aside>
         )}
-        <iframe
-          key={`${src}-${attempt}`}
-          src={src}
-          title={`${category.docLabel} preview`}
-          onLoad={() => setLoaded(true)}
-          onError={() => setFailed(true)}
-          className={`h-full w-full border-0 transition-opacity duration-300 ${loaded && !failed ? "opacity-100" : "opacity-0"}`}
-          allow="fullscreen"
-        />
       </div>
     </div>
   );
@@ -242,6 +286,7 @@ function CatalogPage() {
   const [shown, setShown] = useState(PAGE);
   const [open, setOpen] = useState<number | null>(null);
   const [docOpen, setDocOpen] = useState(false);
+  const [docItem, setDocItem] = useState<CatalogItem | null>(null);
 
   useEffect(() => {
     setShown(PAGE);
@@ -284,7 +329,10 @@ function CatalogPage() {
         ))}
         <button
           type="button"
-          onClick={() => setDocOpen(true)}
+          onClick={() => {
+            setDocItem(null);
+            setDocOpen(true);
+          }}
           className="border border-border px-4 py-3 text-[10px] tracking-[0.28em] text-muted-foreground uppercase transition-colors hover:border-accent/60 hover:text-accent md:px-5"
         >
           {category.docLabel} ↓
@@ -315,6 +363,16 @@ function CatalogPage() {
               <h2 className="mt-2 text-sm font-light">{item.name}</h2>
               <p className="mt-1 text-[11px] leading-relaxed text-muted-foreground">{item.spec}</p>
             </button>
+            <button
+              type="button"
+              onClick={() => {
+                setDocItem(item);
+                setDocOpen(true);
+              }}
+              className="mt-3 border border-border px-3 py-2 text-[9px] tracking-[0.28em] text-muted-foreground uppercase transition-colors hover:border-accent hover:text-accent"
+            >
+              Full spec
+            </button>
           </article>
         ))}
       </div>
@@ -336,12 +394,22 @@ function CatalogPage() {
           onIndex={setOpen}
           onClose={() => setOpen(null)}
           onPreview={() => {
+            setDocItem(items[open] ?? null);
             setOpen(null);
             setDocOpen(true);
           }}
         />
       )}
-      {docOpen && <DocViewer category={category} onClose={() => setDocOpen(false)} />}
+      {docOpen && (
+        <DocViewer
+          category={category}
+          item={docItem}
+          onClose={() => {
+            setDocOpen(false);
+            setDocItem(null);
+          }}
+        />
+      )}
 
       <div className="mt-20 border-t border-border pt-10">
         <a
