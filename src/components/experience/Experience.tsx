@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Scene } from "./Scene";
 import { Panel } from "./Panel";
 import { IntroGate } from "./IntroGate";
-import { ForgeFilm } from "./ForgeFilm";
+import { ForgeSequence } from "./ForgeSequence";
 import { Genesis } from "./Genesis";
 
 import { journey, quality, stationFor, type Station } from "@/lib/journey";
@@ -22,14 +22,35 @@ export function Experience() {
   const [introProgress, setIntroProgress] = useState(0);
   const [introDone, setIntroDone] = useState(false);
   const [mobile, setMobile] = useState(false);
+  const [lowPower, setLowPower] = useState(false);
 
-  /* device tier: phones get a lighter renderer + lighter physics */
+  /* device tier: phones, low-memory devices, and slow frames use a lighter renderer */
   useEffect(() => {
     const weak =
       window.matchMedia("(max-width: 768px)").matches ||
-      (navigator.hardwareConcurrency ?? 8) <= 4;
+      (navigator.hardwareConcurrency ?? 8) <= 4 ||
+      ((navigator as Navigator & { deviceMemory?: number }).deviceMemory ?? 8) <= 4;
     quality.lite = weak;
     setMobile(weak);
+
+    let frames = 0;
+    let started = performance.now();
+    let raf = 0;
+    const sample = (now: number) => {
+      if (frames === 0) started = now;
+      frames += 1;
+      if (frames === 45) {
+        const average = (now - started) / frames;
+        if (average > 24) {
+          quality.lite = true;
+          setLowPower(true);
+        }
+      } else {
+        raf = requestAnimationFrame(sample);
+      }
+    };
+    raf = requestAnimationFrame(sample);
+    return () => cancelAnimationFrame(raf);
   }, []);
 
   /* ---- the opening is driven by the user pushing upward, never by a timer ---- */
@@ -156,19 +177,16 @@ export function Experience() {
       <div className="fixed inset-0 z-0">
         <Canvas
           shadows="basic"
-          dpr={[1, mobile ? 1.15 : 1.6]}
+          dpr={[1, mobile || lowPower ? 1.15 : 1.45]}
           camera={{ position: [0, 0, 6.2], fov: 42 }}
-          gl={{ antialias: !mobile, powerPreference: "high-performance" }}
+          gl={{ antialias: !(mobile || lowPower), powerPreference: "high-performance" }}
         >
           <color attach="background" args={["#000000"]} />
-          {!introDone && <Genesis tRef={introRef} lite={mobile} />}
-          <Scene introRef={introRef} lite={mobile} />
-
+          {!introDone && <Genesis tRef={introRef} lite={mobile || lowPower} />}
+          {!introDone && <ForgeSequence tRef={introRef} lite={mobile || lowPower} />}
+          <Scene introRef={introRef} lite={mobile || lowPower} />
         </Canvas>
       </div>
-
-      {/* scroll-scrubbed forge film — crystal, molten pour, mould, bottle */}
-      <ForgeFilm tRef={introRef} done={introDone} />
 
       <IntroGate progress={introProgress} done={introDone} />
 

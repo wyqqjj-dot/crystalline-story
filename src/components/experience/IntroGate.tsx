@@ -4,14 +4,16 @@ import { AnimatePresence, motion } from "framer-motion";
 export function IntroGate({ progress, done }: { progress: number; done: boolean }) {
   const label =
     progress < 0.06
-      ? "Push upward to awaken the crystal"
-      : progress < 0.34
-        ? "Particles converge"
-        : progress < 0.5
-          ? "Crystal dissolves"
-          : progress < 0.78
-            ? "Molten glass enters the mould"
-            : "The bottle takes shape";
+      ? "Swipe upward to awaken the crystal"
+      : progress < 0.28
+        ? "Magnetic fragments converge"
+        : progress < 0.44
+          ? "Crystal melts into glass"
+          : progress < 0.66
+            ? "The stream enters the mould"
+            : progress < 0.86
+              ? "The mould opens"
+              : "The bottle takes shape";
 
 
   return (
