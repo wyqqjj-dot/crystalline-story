@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { AnimatePresence, motion } from "framer-motion";
 
