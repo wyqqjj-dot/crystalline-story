@@ -192,6 +192,7 @@ function Lightbox({
   const item = items[index];
   const [loaded, setLoaded] = useState(false);
   const [zoom, setZoom] = useState(false);
+  const tint = useProductTint(item?.image);
 
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
