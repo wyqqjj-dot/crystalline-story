@@ -1,11 +1,11 @@
-import { forwardRef, useMemo } from "react";
+import { forwardRef, useEffect, useMemo } from "react";
 import * as THREE from "three";
 import { useLoader } from "@react-three/fiber";
-import { MeshTransmissionMaterial, useGLTF, useTexture } from "@react-three/drei";
+import { MeshTransmissionMaterial, useGLTF } from "@react-three/drei";
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader.js";
 
 import bottleAsset from "@/assets/cq68yx-bottle.stl.asset.json";
-import boxAsset from "@/assets/box.jpg.asset.json";
+import boxModelAsset from "@/assets/box.glb.asset.json";
 import { CAP_MODEL } from "@/lib/catalog";
 import { quality } from "@/lib/journey";
 
