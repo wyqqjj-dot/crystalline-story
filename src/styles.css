@@ -153,30 +153,38 @@
   }
 }
 
-/* ---- Chunqiu tokens: absolute black + warm gold ---- */
+/* ---- Chunqiu tokens: ink black + champagne gold ---- */
 :root {
   --radius: 0.25rem;
-  --background: oklch(0 0 0);
-  --foreground: oklch(0.97 0 0);
-  --card: oklch(0.08 0 0);
-  --card-foreground: oklch(1 0 0);
-  --popover: oklch(0.08 0 0);
-  --popover-foreground: oklch(1 0 0);
-  --primary: oklch(0.745 0.062 78);
-  --primary-foreground: oklch(0 0 0);
-  --secondary: oklch(0.14 0 0);
-  --secondary-foreground: oklch(1 0 0);
-  --muted: oklch(0.12 0 0);
-  --muted-foreground: oklch(0.68 0 0);
-  --accent: oklch(0.745 0.062 78);
-  --accent-foreground: oklch(0 0 0);
-  --border: oklch(1 0 0 / 18%);
-  --input: oklch(1 0 0 / 20%);
-  --ring: oklch(0.745 0.062 78);
-  --gradient-glass: linear-gradient(135deg, oklch(1 0 0) 0%, oklch(0.745 0.062 78) 100%);
-  --shadow-glow: 0 0 0 1px color-mix(in oklab, var(--accent) 45%, transparent),
-    0 18px 60px -18px color-mix(in oklab, var(--accent) 55%, transparent);
+  --background: oklch(0.03 0.004 60);
+  --foreground: oklch(0.96 0.004 80);
+  --card: oklch(0.09 0.006 70);
+  --card-foreground: oklch(0.98 0.003 80);
+  --popover: oklch(0.08 0.006 70);
+  --popover-foreground: oklch(0.98 0.003 80);
+  --primary: oklch(0.82 0.052 84);
+  --primary-foreground: oklch(0.06 0.004 70);
+  --secondary: oklch(0.15 0.006 70);
+  --secondary-foreground: oklch(0.98 0.003 80);
+  --muted: oklch(0.13 0.005 70);
+  --muted-foreground: oklch(0.72 0.012 80);
+  --accent: oklch(0.82 0.052 84);
+  --accent-foreground: oklch(0.06 0.004 70);
+  --border: oklch(0.86 0.03 84 / 16%);
+  --input: oklch(0.86 0.03 84 / 20%);
+  --ring: oklch(0.82 0.052 84);
+  --gradient-glass: linear-gradient(135deg, oklch(0.99 0.004 90) 0%, oklch(0.82 0.052 84) 100%);
+  --shadow-glow: 0 0 0 1px color-mix(in oklab, var(--accent) 38%, transparent),
+    0 22px 70px -22px color-mix(in oklab, var(--accent) 48%, transparent);
 }
+
+/* product-matched tint: overridden inline per viewed product */
+@utility product-surface {
+  background:
+    radial-gradient(120% 90% at 50% 0%, var(--product-soft, transparent) 0%, transparent 62%),
+    color-mix(in oklab, var(--product-deep, var(--background)) 42%, var(--background));
+}
+
 
 html {
   scroll-behavior: smooth;
