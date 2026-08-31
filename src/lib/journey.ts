@@ -65,26 +65,3 @@ export function stationFor(p: number): Station {
   if (p < 0.93) return "box";
   return "final";
 }
-
-/* ------------------------------ opening ritual ------------------------------ */
-
-/**
- * The seven stages of the forge ritual, in scroll-up order. Every stage is a
- * window of the intro progress value (0..1) so the visuals, the labels and the
- * hairline meter always agree.
- */
-export const RITUAL = [
-  { n: 1, from: 0.0, to: 0.12, label: "Gold dust awakens" },
-  { n: 2, from: 0.12, to: 0.26, label: "Particles converge into a crystal" },
-  { n: 3, from: 0.26, to: 0.42, label: "The crystal melts in the furnace" },
-  { n: 4, from: 0.42, to: 0.56, label: "Molten glass runs down the pipe" },
-  { n: 5, from: 0.56, to: 0.7, label: "The mould fills" },
-  { n: 6, from: 0.7, to: 0.86, label: "The mould opens" },
-  { n: 7, from: 0.86, to: 1.0, label: "The bottle is released" },
-] as const;
-
-export function ritualStage(t: number) {
-  const p = clamp01(t);
-  for (const s of RITUAL) if (p < s.to) return s;
-  return RITUAL[RITUAL.length - 1]!;
-}
