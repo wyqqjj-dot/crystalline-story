@@ -229,7 +229,7 @@ function Lightbox({
   if (!item) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col bg-background/95 backdrop-blur-sm">
+    <div className="product-surface fixed inset-0 z-50 flex flex-col backdrop-blur-sm" style={tintStyle(tint)}>
       <div className="flex items-start justify-between gap-4 px-5 py-4 md:px-8">
         <div className="min-w-0">
           <p className="text-[10px] tracking-[0.4em] text-accent uppercase">{item.ref}</p>
