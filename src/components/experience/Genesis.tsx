@@ -5,21 +5,15 @@ import { useFrame } from "@react-three/fiber";
 import { clamp01, ease, lerp, range } from "@/lib/journey";
 
 /**
- * Stages 1 – 3 of the ritual.
+ * Stage 1 of the ritual: gold dust floating in a black void.
  *
- * 1. Gold dust drifting in a black void, waking as the visitor pushes upward.
- * 2. The cloud is pulled magnetically into a faceted crystal.
- * 3. The crystal sinks into the furnace glow, softens, slumps and turns molten
- *    before the pipe takes over.
- *
- * Nothing plays on its own — every value is a function of the intro progress.
+ * Nothing plays on its own. As the visitor pushes the page upward the cloud is
+ * pulled magnetically into a faceted crystal, which then hands over to the
+ * scrubbed forge film (melt -> pipe -> mould).
  */
 export function Genesis({ tRef, lite = false }: { tRef: { current: number }; lite?: boolean }) {
   const points = useRef<THREE.Points>(null);
   const crystal = useRef<THREE.Mesh>(null);
-  const molten = useRef<THREE.Mesh>(null);
-  const furnace = useRef<THREE.PointLight>(null);
-  const halo = useRef<THREE.Mesh>(null);
   const group = useRef<THREE.Group>(null);
   const clock = useRef(0);
 
@@ -29,6 +23,7 @@ export function Genesis({ tRef, lite = false }: { tRef: { current: number }; lit
     const scatter = new Float32Array(count * 3);
     const target = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
+      // wide drifting cloud
       const r = 2.6 + Math.random() * 3.6;
       const th = Math.random() * Math.PI * 2;
       const ph = Math.acos(2 * Math.random() - 1);
@@ -54,13 +49,10 @@ export function Genesis({ tRef, lite = false }: { tRef: { current: number }; lit
     clock.current += dt;
     const t = clamp01(tRef.current);
 
-    /* stage 1 -> 2: magnetic convergence, then the shard hardens */
-    const pull = ease(range(t, 0.02, 0.22));
-    const form = ease(range(t, 0.16, 0.28));
-    /* stage 3: the shard sags, glows and turns into a molten gather */
-    const heat = ease(range(t, 0.26, 0.4));
-    const melt = ease(range(t, 0.3, 0.44));
-    const fade = 1 - ease(range(t, 0.4, 0.48));
+    // magnetic convergence, then the shard forms, then the film takes over
+    const pull = ease(range(t, 0.04, 0.34));
+    const form = ease(range(t, 0.26, 0.4));
+    const fade = 1 - ease(range(t, 0.36, 0.5));
 
     const attr = geometry.getAttribute("position") as THREE.BufferAttribute;
     const arr = attr.array as Float32Array;
@@ -73,58 +65,23 @@ export function Genesis({ tRef, lite = false }: { tRef: { current: number }; lit
       const ty = target[i3 + 1] ?? 0;
       const tz = target[i3 + 2] ?? 0;
       const drift = Math.sin(clock.current * 0.35 + i * 0.7) * 0.22 * (1 - pull);
-      // once molten, the dust that is left slides down toward the gather
-      const sink = melt * (0.6 + ((i % 7) / 7) * 0.5);
-      arr[i3] = lerp(sx + drift, tx * (1 - melt * 0.55), pull);
-      arr[i3 + 1] =
-        lerp(sy + Math.cos(clock.current * 0.3 + i) * 0.28 * (1 - pull), ty, pull) - sink * 0.9;
-      arr[i3 + 2] = lerp(sz - drift, tz * (1 - melt * 0.55), pull);
+      arr[i3] = lerp(sx + drift, tx, pull);
+      arr[i3 + 1] = lerp(sy + Math.cos(clock.current * 0.3 + i) * 0.28 * (1 - pull), ty, pull);
+      arr[i3 + 2] = lerp(sz - drift, tz, pull);
     }
     attr.needsUpdate = true;
 
     if (points.current) {
       const m = points.current.material as THREE.PointsMaterial;
-      m.opacity = 0.9 * (1 - ease(range(t, 0.26, 0.38))) * fade;
-      m.size = lerp(0.028, 0.014, pull);
+      m.opacity = 0.9 * fade;
+      m.size = lerp(0.028, 0.016, pull);
     }
-
     if (crystal.current) {
-      const mesh = crystal.current;
-      const m = mesh.material as THREE.MeshPhysicalMaterial;
-      const alive = form * (1 - melt);
-      m.opacity = alive * fade;
-      m.emissiveIntensity = 0.28 + heat * 2.4;
-      m.roughness = lerp(0.06, 0.34, heat);
-      mesh.visible = m.opacity > 0.01;
-      // it slumps: taller-than-wide shard collapsing into a soft gather
-      mesh.scale.set(lerp(0.4, 1, form) * (1 + melt * 0.5), lerp(0.4, 1, form) * (1 - melt * 0.7), lerp(0.4, 1, form) * (1 + melt * 0.5));
-      mesh.position.y = -melt * 0.42;
-      mesh.rotation.z = Math.sin(clock.current * 0.6) * 0.05 * melt;
+      const m = crystal.current.material as THREE.MeshPhysicalMaterial;
+      m.opacity = form * fade;
+      crystal.current.visible = m.opacity > 0.01;
+      crystal.current.scale.setScalar(lerp(0.4, 1, form));
     }
-
-    if (molten.current) {
-      const mesh = molten.current;
-      const m = mesh.material as THREE.MeshPhysicalMaterial;
-      m.opacity = melt * fade;
-      m.emissiveIntensity = 1.4 + Math.sin(clock.current * 3.1) * 0.35 * melt;
-      mesh.visible = m.opacity > 0.02;
-      const wobble = 1 + Math.sin(clock.current * 2.4) * 0.05 * melt;
-      mesh.scale.set(0.46 * melt * wobble, 0.34 * melt, 0.46 * melt * wobble);
-      mesh.position.y = -0.5 - melt * 0.18;
-    }
-
-    if (halo.current) {
-      const m = halo.current.material as THREE.MeshBasicMaterial;
-      m.opacity = 0.14 * heat * fade;
-      halo.current.scale.setScalar(lerp(1.4, 2.6, heat));
-      halo.current.visible = m.opacity > 0.01;
-    }
-
-    if (furnace.current) {
-      furnace.current.intensity = 6 + heat * 22 + Math.sin(clock.current * 5) * heat * 3;
-      furnace.current.color.setHex(heat > 0.2 ? 0xffb45a : 0xc5a572);
-    }
-
     if (group.current) {
       group.current.rotation.y = clock.current * 0.12 + t * 1.4;
       group.current.visible = fade > 0.01;
@@ -160,35 +117,7 @@ export function Genesis({ tRef, lite = false }: { tRef: { current: number }; lit
           emissiveIntensity={0.28}
         />
       </mesh>
-
-      {/* the molten gather that the pipe will draw from */}
-      <mesh ref={molten} visible={false} position={[0, -0.5, 0]}>
-        <sphereGeometry args={[1, lite ? 16 : 28, lite ? 12 : 20]} />
-        <meshPhysicalMaterial
-          transparent
-          opacity={0}
-          color="#ffd79a"
-          emissive="#ff9a3c"
-          emissiveIntensity={1.4}
-          transmission={0.5}
-          thickness={0.5}
-          roughness={0.22}
-        />
-      </mesh>
-
-      {/* furnace bloom */}
-      <mesh ref={halo} visible={false} position={[0, -0.45, -0.4]}>
-        <circleGeometry args={[1, 32]} />
-        <meshBasicMaterial
-          color="#ff9a3c"
-          transparent
-          opacity={0}
-          depthWrite={false}
-          blending={THREE.AdditiveBlending}
-        />
-      </mesh>
-
-      <pointLight ref={furnace} position={[0, -0.3, 1.9]} color="#c5a572" intensity={6} distance={9} />
+      <pointLight position={[0, 0, 2]} color="#c5a572" intensity={6} distance={7} />
     </group>
   );
 }
