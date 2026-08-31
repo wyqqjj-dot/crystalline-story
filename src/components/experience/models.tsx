@@ -43,38 +43,59 @@ function lathe(points: [number, number][], segments = 96) {
 }
 
 /* ---------------------------------- bottle --------------------------------- */
-/** CQ-68 — the uploaded production STL, finished as high-transmission glass. */
+/** CQ-100 — the reference-photo bottle geometry, finished as super-flint glass. */
 export const Bottle = forwardRef<THREE.Group, { opacity?: number }>(function Bottle(
   { opacity = 1 },
   ref,
 ) {
-  const geometry = useLoader(STLLoader, bottleAsset.url);
-  const material = useMemo(
-    () =>
-      new THREE.MeshPhysicalMaterial({
-        transmission: 1,
-        thickness: 0.32,
-        ior: 1.52,
-        roughness: 0.018,
-        clearcoat: 1,
-        clearcoatRoughness: 0.03,
-        attenuationDistance: 6,
-        attenuationColor: new THREE.Color("#fffaf0"),
-        color: new THREE.Color("#fffdf7"),
-        envMapIntensity: 3.4,
-        transparent: opacity < 1,
-        opacity,
-      }),
-    [opacity],
-  );
+  const gltf = useGLTF(bottleModel.url);
+
+  const geometry = useMemo(() => {
+    let found: THREE.BufferGeometry | null = null;
+    gltf.scene.traverse((o) => {
+      const m = o as THREE.Mesh;
+      if (!found && m.isMesh && m.geometry) found = m.geometry;
+    });
+    return found;
+  }, [gltf]);
+
+  if (!geometry) return <group ref={ref} />;
 
   return (
     <group ref={ref}>
-      {/* source STL is 257 units tall; this normalises it to a 2.3-unit bottle */}
-      <mesh geometry={geometry} material={material} scale={0.009} position={[0, -1.15, 0]} castShadow />
+      {/* model is normalised to height 1 with its base at y = 0 */}
+      <group scale={2.3} position={[0, -0.85, 0]}>
+        <mesh geometry={geometry} castShadow>
+          <MeshTransmissionMaterial
+            samples={quality.lite ? 3 : 6}
+            resolution={quality.lite ? 128 : 256}
+            transmission={1}
+            thickness={0.32}
+            ior={1.52}
+            chromaticAberration={0.045}
+            anisotropicBlur={0.1}
+            distortion={0.12}
+            distortionScale={0.28}
+            temporalDistortion={0.06}
+            roughness={0.02}
+            clearcoat={1}
+            clearcoatRoughness={0.03}
+            attenuationDistance={6}
+            attenuationColor="#fffaf0"
+            color="#fffdf7"
+            backside
+            backsideThickness={0.18}
+            transparent={opacity < 1}
+            opacity={opacity}
+            envMapIntensity={3.4}
+          />
+        </mesh>
+      </group>
     </group>
   );
 });
+
+useGLTF.preload(bottleModel.url);
 
 /* --------------------------------- stopper --------------------------------- */
 /**
