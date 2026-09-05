@@ -57,3 +57,14 @@ Packing, stacking and ship stages load only when you get near them; nothing beyo
 5. Packing, palletising, container, ship sweep, transition into the company section.
 6. Made in Jining scene strip, product library clean-up and PDF removal, brand name and copy pass.
 7. Mobile pass, WebGL fallback, final performance verification on desktop and phone.
+
+## Added in this round
+
+- **Detail page for every catalogue item** — real product photo(s), only the specifications that can be confirmed, the manufacturing-process video, an inquiry form, and a link through to the Company page.
+- **Catalogue cover previews** — a low-resolution cover image is generated for each source catalogue and used as card thumbnail and preview cover; the cover shows instantly and the full content fills in progressively behind it (no large file opened automatically).
+- **Real process copy** — the home page's closing "Ready for the world" block and the Capabilities section are rewritten from your company profile as concrete manufacturing and export steps, with no filler claims.
+- **Full drag-through verification** — I drive the whole opening on both desktop and phone sizes in the browser (particles → crystal → molten flow → mould open → bottle drop → boxing → Ready for the world) and confirm no stutter, blank frame or clipping before reporting done.
+
+One note: the company profile PDF is not in the project yet, so the rewritten Capabilities / closing copy needs it — please upload it (the two product catalogues are already here). Until it arrives I keep the existing wording rather than invent facts.
+
+Also, your earlier instruction was to remove the PDF entry points once the catalogue is on the site. I am reading the new request as: no large PDF loads automatically, but each item keeps a light cover image and an optional "view source page" link. Say the word if you want the source PDFs gone entirely.
