@@ -27,7 +27,7 @@ export function IntroGate({ progress, done }: { progress: number; done: boolean 
               transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
               className="mt-5 text-3xl font-extralight uppercase md:text-6xl"
             >
-              Chunqiu
+              Jining Chunqiu
             </motion.h1>
           </div>
 
@@ -36,7 +36,7 @@ export function IntroGate({ progress, done }: { progress: number; done: boolean 
             transition={{ duration: 0.5 }}
             className="text-[10px] tracking-[0.44em] text-muted-foreground uppercase"
           >
-            Drag or scroll to forge
+            Scroll or drag to continue
           </motion.span>
         </motion.div>
       )}
