@@ -25,7 +25,7 @@ export function Nav() {
     >
       <nav className="flex items-center justify-between px-6 py-5 md:px-14">
         <a href="#top" className="text-xs tracking-[0.42em] uppercase">
-          Chunqiu
+          Jining Chunqiu
         </a>
         <div className="flex gap-6 text-[10px] tracking-[0.34em] text-muted-foreground uppercase md:gap-10">
           {links.map((l) => (

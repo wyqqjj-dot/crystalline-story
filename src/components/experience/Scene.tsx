@@ -188,7 +188,16 @@ export function Scene({ introRef, lite = false }: { introRef: { current: number 
     camera.position.x = lerp(0, HOME_X * 0.35, closeUp) * (1 - pullOut);
     camera.position.y = lerp(0, 0.35, closeUp);
     camera.position.z = lerp(6.2 - closeUp * 1.7, 7.6, pullOut);
-    camera.lookAt(lerp(HOME_X * 0.55, 0, pullOut), lerp(0, 0.1, pullOut), 0);
+    // during the opening the crystal owns the centre of frame; the camera only
+    // drifts towards the bottle's home once the forge is under way
+    const framed = ease(range(p, 0.24, 0.42));
+    camera.position.x *= framed;
+    camera.position.z = lerp(7.1, camera.position.z, framed);
+    camera.lookAt(
+      lerp(0, lerp(HOME_X * 0.55, 0, pullOut), framed),
+      lerp(0, 0.1, pullOut),
+      0,
+    );
 
     if (root.current) {
       root.current.scale.setScalar(lerp(1, 0.82, pullOut));

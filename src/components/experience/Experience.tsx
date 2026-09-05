@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, Suspense } from "react";
+import { useEffect, useRef, useState, Suspense, lazy } from "react";
 import { Canvas } from "@react-three/fiber";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -12,6 +12,11 @@ import { journey, pointer, quality, stationFor, type Station } from "@/lib/journ
 
 /** how much drag/wheel travel (in px) completes the forge ritual */
 const RITUAL_TRAVEL = 2600;
+/** the opening plays itself this far — dust condensing into the crystal — then waits */
+const AUTO_STOP = 0.3;
+
+const Voyage = lazy(() => import("./Voyage").then((m) => ({ default: m.Voyage })));
+
 
 
 export function Experience() {
@@ -67,6 +72,7 @@ export function Experience() {
 
     let raf = 0;
     let last = performance.now();
+    const begun = last;
     let locked = true;
 
     const lock = () => {
@@ -82,14 +88,21 @@ export function Experience() {
       setIntroDone(true);
     };
 
+    let touched = false;
     /** positive px = forward through the ritual, negative = rewind */
     const push = (px: number) => {
+      touched = true;
       introTarget.current = Math.min(1, Math.max(0, introTarget.current + px / RITUAL_TRAVEL));
     };
 
     const loop = (now: number) => {
       const dt = Math.min((now - last) / 1000, 0.05);
       last = now;
+      // the opening condenses itself into the crystal, then hands over to the visitor.
+      // wall-clock driven, so a slow first frame never stalls the reveal.
+      if (!touched && introTarget.current < AUTO_STOP) {
+        introTarget.current = Math.min(AUTO_STOP, (now - begun) / 4600 * AUTO_STOP);
+      }
       // critically damped follow: light inertia, always able to rest anywhere
       introRef.current += (introTarget.current - introRef.current) * (1 - Math.exp(-7 * dt));
       const shown = Math.round(introRef.current * 1000) / 1000;
@@ -265,6 +278,11 @@ export function Experience() {
             {!introDone && <ForgeSequence tRef={introRef} lite={mobile || lowPower} />}
           </Suspense>
           <Scene introRef={introRef} lite={mobile || lowPower} />
+          {introDone && progress > 0.82 && (
+            <Suspense fallback={null}>
+              <Voyage lite={mobile || lowPower} />
+            </Suspense>
+          )}
         </Canvas>
       </div>
 
@@ -297,7 +315,7 @@ export function Experience() {
           >
             <h2 className="text-3xl font-light tracking-tight md:text-6xl">Ready for the world.</h2>
             <p className="mt-4 text-[10px] tracking-[0.42em] text-muted-foreground uppercase md:text-[11px] md:tracking-[0.5em]">
-              Jining Chunqiu Import &amp; Export Co., Ltd.
+              Jining Chunqiu Import &amp; Export Co., Ltd. · Export packing · Ocean freight
             </p>
           </motion.div>
         </div>

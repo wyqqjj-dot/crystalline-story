@@ -248,7 +248,7 @@ export function Content() {
             >
               Company · address · contact
             </Link>
-            <p className="mt-4">© {new Date().getFullYear()} Chunqiu. All rights reserved.</p>
+            <p className="mt-4">© {new Date().getFullYear()} Jining Chunqiu Import &amp; Export Co., Ltd. All rights reserved.</p>
           </div>
 
         </div>

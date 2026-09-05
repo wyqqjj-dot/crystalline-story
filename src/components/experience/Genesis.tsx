@@ -4,21 +4,51 @@ import { useFrame, useThree } from "@react-three/fiber";
 
 import { clamp01, ease, lerp, pointer, range } from "@/lib/journey";
 
+/** half-height / half-width of the triangular crystal the dust condenses into */
+const CRY_R = 0.82;
+const CRY_H = 1.3;
+
+/** radius of a 3-sided polygon cross-section at a given angle */
+function triRadius(angle: number) {
+  const sector = ((angle % ((Math.PI * 2) / 3)) + (Math.PI * 2) / 3) % ((Math.PI * 2) / 3);
+  return 1 / Math.cos(sector - Math.PI / 3);
+}
+
 /**
- * Stage 1-3 of the ritual: layered gold dust in a black void that reacts to the
- * pointer (attraction, close-range repulsion, light vortex), then condenses
- * into a crystal and softens into molten glass — all driven purely by `tRef`,
- * so the whole thing plays backwards just as smoothly as forwards.
+ * Opening of the ritual: layered warm-gold dust in a black void that reacts to
+ * the pointer (attraction, close-range repulsion, light vortex), condenses into
+ * one large triangular glass crystal, then heats, softens and stretches into a
+ * viscous molten mass. Everything is a pure function of `tRef`, so the whole
+ * thing plays backwards exactly as smoothly as it plays forwards.
  */
 export function Genesis({ tRef, lite = false }: { tRef: { current: number }; lite?: boolean }) {
   const points = useRef<THREE.Points>(null);
-  const crystal = useRef<THREE.Mesh>(null);
+  const crystal = useRef<THREE.Group>(null);
   const melt = useRef<THREE.Mesh>(null);
   const group = useRef<THREE.Group>(null);
+  const heat = useRef<THREE.PointLight>(null);
   const clock = useRef(0);
   const { viewport } = useThree();
 
-  const count = lite ? 620 : 1800;
+  const count = lite ? 560 : 1500;
+
+  /** soft round falloff sprite — square points read as a starfield */
+  const sprite = useMemo(() => {
+    const size = 64;
+    const canvas = document.createElement("canvas");
+    canvas.width = size;
+    canvas.height = size;
+    const ctx = canvas.getContext("2d")!;
+    const g = ctx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
+    g.addColorStop(0, "rgba(255,244,214,1)");
+    g.addColorStop(0.35, "rgba(232,201,139,0.55)");
+    g.addColorStop(1, "rgba(232,201,139,0)");
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, size, size);
+    const tex = new THREE.CanvasTexture(canvas);
+    tex.colorSpace = THREE.SRGBColorSpace;
+    return tex;
+  }, []);
 
   const { scatter, target, perturb, vel, geometry } = useMemo(() => {
     const scatter = new Float32Array(count * 3);
@@ -28,20 +58,23 @@ export function Genesis({ tRef, lite = false }: { tRef: { current: number }; lit
     for (let i = 0; i < count; i++) {
       // wide drifting cloud with real depth layering
       const layer = i % 3;
-      const r = 2.4 + Math.random() * (3.2 + layer * 1.5);
+      // density falls off away from the centre so the cloud reads as a nebula,
+      // not as an even starfield
+      const r = 1.35 + Math.pow(Math.random(), 1.7) * (2.6 + layer * 1.1);
       const th = Math.random() * Math.PI * 2;
       const ph = Math.acos(2 * Math.random() - 1);
-      scatter[i * 3] = r * Math.sin(ph) * Math.cos(th);
-      scatter[i * 3 + 1] = (Math.random() - 0.5) * 6.8;
-      scatter[i * 3 + 2] = r * Math.cos(ph) * 0.8 - layer * 0.9;
+      scatter[i * 3] = r * Math.sin(ph) * Math.cos(th) * 1.15;
+      scatter[i * 3 + 1] = (Math.random() - 0.5) * (3.4 + layer * 0.9);
+      scatter[i * 3 + 2] = r * Math.cos(ph) * 0.85 - layer * 0.8;
 
-      // crystal shell target — an elongated octahedral shard
-      const t2 = Math.random() * Math.PI * 2;
-      const p2 = Math.acos(2 * Math.random() - 1);
-      const rr = 0.62 * (0.85 + Math.random() * 0.2);
-      target[i * 3] = rr * Math.sin(p2) * Math.cos(t2);
-      target[i * 3 + 1] = rr * Math.cos(p2) * 1.9;
-      target[i * 3 + 2] = rr * Math.sin(p2) * Math.sin(t2);
+      // target: the shell of a triangular bipyramid — the crystal's own faces
+      const a = Math.random() * Math.PI * 2;
+      const h = Math.random() * 2 - 1; // -1 bottom tip .. 1 top tip
+      const taper = 1 - Math.abs(h);
+      const rr = CRY_R * taper * triRadius(a) * (0.94 + Math.random() * 0.08);
+      target[i * 3] = Math.cos(a) * rr;
+      target[i * 3 + 1] = h * CRY_H;
+      target[i * 3 + 2] = Math.sin(a) * rr;
     }
     const geometry = new THREE.BufferGeometry();
     geometry.setAttribute("position", new THREE.BufferAttribute(scatter.slice(), 3));
@@ -53,11 +86,12 @@ export function Genesis({ tRef, lite = false }: { tRef: { current: number }; lit
     clock.current += dt;
     const t = clamp01(tRef.current);
 
-    // gather -> shard -> molten softening -> hand over to the forge sequence
-    const pull = ease(range(t, 0.05, 0.34));
-    const form = ease(range(t, 0.24, 0.4));
-    const soften = ease(range(t, 0.36, 0.5));
-    const fade = 1 - ease(range(t, 0.42, 0.56));
+    // dust -> crystal is complete at t = 0.30 (the automatic opening stops there);
+    // from that point on the visitor drives the heat, the softening and the flow.
+    const pull = ease(range(t, 0.02, 0.24));
+    const form = ease(range(t, 0.13, 0.3));
+    const soften = ease(range(t, 0.34, 0.52));
+    const fade = 1 - ease(range(t, 0.46, 0.6));
 
     // pointer in world space (only meaningful while the cloud is still loose)
     const px = pointer.x * (viewport.width / 2);
@@ -116,83 +150,120 @@ export function Genesis({ tRef, lite = false }: { tRef: { current: number }; lit
 
     if (points.current) {
       const m = points.current.material as THREE.PointsMaterial;
-      m.opacity = 0.9 * fade;
-      m.size = lerp(0.03, 0.014, pull);
+      // the dust dims once the solid crystal has taken over the silhouette
+      m.opacity = 0.92 * fade * (1 - form * 0.72);
+      m.size = lerp(0.085, 0.03, pull);
     }
+
     if (crystal.current) {
-      const m = crystal.current.material as THREE.MeshPhysicalMaterial;
-      m.opacity = form * fade;
-      m.roughness = lerp(0.06, 0.34, soften);
-      m.emissiveIntensity = 0.28 + soften * 1.9;
-      crystal.current.visible = m.opacity > 0.01;
-      crystal.current.scale.set(
-        lerp(0.4, 1, form) * lerp(1, 1.22, soften),
-        lerp(0.4, 1, form) * lerp(1, 0.58, soften),
-        lerp(0.4, 1, form) * lerp(1, 1.22, soften),
-      );
-      crystal.current.rotation.x = soften * 0.3;
+      const shown = form * fade;
+      crystal.current.visible = shown > 0.01;
+      crystal.current.traverse((o) => {
+        const mesh = o as THREE.Mesh;
+        if (!mesh.isMesh) return;
+        const m = mesh.material as THREE.MeshPhysicalMaterial;
+        m.opacity = shown;
+        m.roughness = lerp(0.03, 0.36, soften);
+        m.thickness = lerp(1.35, 0.7, soften);
+        // cold glass -> amber hot glass
+        m.emissive.setRGB(lerp(0.42, 1, soften), lerp(0.34, 0.44, soften), lerp(0.24, 0.08, soften));
+        m.emissiveIntensity = 0.22 + soften * 2.6;
+      });
+      // grows into place, then heats: sags, widens and loses its sharp tips
+      const g = lerp(0.32, 1, form);
+      crystal.current.scale.set(g * lerp(1, 1.34, soften), g * lerp(1, 0.44, soften), g * lerp(1, 1.34, soften));
+      crystal.current.position.y = lerp(0, -0.34, soften);
+      crystal.current.rotation.y = clock.current * 0.16;
+      crystal.current.rotation.z = soften * 0.16 + Math.sin(clock.current * 1.6) * 0.02 * soften;
     }
+
     if (melt.current) {
       const m = melt.current.material as THREE.MeshPhysicalMaterial;
-      m.opacity = soften * fade * 0.95;
-      m.emissiveIntensity = 1.4 + Math.sin(clock.current * 3) * 0.3;
+      m.opacity = soften * fade * 0.96;
+      m.emissiveIntensity = 1.5 + Math.sin(clock.current * 3) * 0.35;
       melt.current.visible = m.opacity > 0.02;
-      const wob = 1 + Math.sin(clock.current * 2.4) * 0.04 * soften;
-      melt.current.scale.set(lerp(0.2, 0.78, soften) * wob, lerp(0.2, 0.5, soften), lerp(0.2, 0.78, soften) * wob);
-      melt.current.position.y = lerp(0, -0.42, soften);
+      // a heavy, wobbling gather that starts to draw down towards the pipe
+      const wob = 1 + Math.sin(clock.current * 2.2) * 0.05 * soften;
+      melt.current.scale.set(
+        lerp(0.24, 0.92, soften) * wob,
+        lerp(0.24, 0.5, soften),
+        lerp(0.24, 0.92, soften) * wob,
+      );
+      melt.current.position.y = lerp(0, -0.52, soften);
     }
+
+    if (heat.current) {
+      heat.current.intensity = 3 + soften * 26 * fade;
+      heat.current.color.setRGB(1, lerp(0.78, 0.52, soften), lerp(0.5, 0.16, soften));
+    }
+
     if (group.current) {
-      group.current.rotation.y = clock.current * 0.1 + t * 1.4;
       group.current.visible = fade > 0.01;
+      group.current.rotation.y = t * 0.9;
     }
   });
+
+  const glass = (
+    <meshPhysicalMaterial
+      transparent
+      opacity={0}
+      transmission={1}
+      thickness={1.35}
+      ior={1.55}
+      roughness={0.03}
+      metalness={0}
+      clearcoat={1}
+      clearcoatRoughness={0.04}
+      color="#f6ecd6"
+      emissive="#6b5738"
+      emissiveIntensity={0.22}
+      envMapIntensity={1.5}
+    />
+  );
 
   return (
     <group ref={group}>
       <points ref={points} geometry={geometry}>
         <pointsMaterial
-          size={0.028}
-          color="#e2c98f"
+          map={sprite}
+          size={0.075}
+          color="#e8c98b"
           transparent
-          opacity={0.9}
+          opacity={0.92}
           depthWrite={false}
           sizeAttenuation
           blending={THREE.AdditiveBlending}
         />
       </points>
 
-      <mesh ref={crystal} visible={false}>
-        <octahedronGeometry args={[0.72, 0]} />
-        <meshPhysicalMaterial
-          transparent
-          opacity={0}
-          transmission={0.9}
-          thickness={0.7}
-          ior={1.6}
-          roughness={0.06}
-          metalness={0}
-          color="#f3e6c6"
-          emissive="#c5a572"
-          emissiveIntensity={0.28}
-        />
-      </mesh>
+      {/* the crystal: a thick triangular bipyramid, real glass with visible mass */}
+      <group ref={crystal} visible={false}>
+        <mesh position={[0, CRY_H / 2, 0]}>
+          <coneGeometry args={[CRY_R, CRY_H, 3, 1]} />
+          {glass}
+        </mesh>
+        <mesh position={[0, -CRY_H / 2, 0]} rotation={[Math.PI, 0, 0]}>
+          <coneGeometry args={[CRY_R, CRY_H, 3, 1]} />
+          {glass}
+        </mesh>
+      </group>
 
       {/* the softened, high-viscosity gather that hands over to the pipe */}
       <mesh ref={melt} visible={false}>
-        <sphereGeometry args={[1, lite ? 16 : 28, lite ? 12 : 20]} />
+        <sphereGeometry args={[1, lite ? 16 : 30, lite ? 12 : 22]} />
         <meshPhysicalMaterial
           transparent
           opacity={0}
-          color="#ffe9b8"
-          emissive="#d59b3a"
-          emissiveIntensity={1.4}
-          transmission={0.55}
-          thickness={0.9}
-          roughness={0.25}
+          color="#ffdca2"
+          emissive="#e07a1c"
+          emissiveIntensity={1.5}
+          transmission={0.5}
+          thickness={1.1}
+          roughness={0.28}
         />
       </mesh>
 
-      <pointLight position={[0, 0, 2]} color="#c5a572" intensity={6} distance={7} />
+      <pointLight ref={heat} position={[0, -0.2, 1.6]} color="#ffb765" intensity={4} distance={9} />
     </group>
   );
 }
